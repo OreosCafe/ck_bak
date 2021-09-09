@@ -125,6 +125,35 @@ docker exec -it qinglong bash
 apk add gcc libffi-dev musl-dev openssl-dev python3-dev && pip3 install cryptography~=3.2.1 json5 requests rsa
 ```
 
+**依赖持久化配置**
+
+``` sh
+requirement_name="cryptography~=3.2.1 json5 requests rsa"
+install_requirements(){
+    for i in $requirement_name; do
+        case $i in
+            cryptography~=3.2.1)
+                cd /ql/scripts
+                if [[ "$(pip3 freeze)" =~ "cryptography==3.2.1" ]]; then
+                    echo "cryptography==3.2.1 已安装"
+                else
+                    apk add --no-cache gcc libffi-dev musl-dev openssl-dev python3-dev && pip3 install cryptography~=3.2.1
+                fi
+                ;;
+            *)
+                if [[ "$(pip3 freeze)" =~ $i ]]; then
+                    echo "$i 已安装"
+                else
+                    pip3 install $i
+                fi
+        esac
+    done
+}
+install_requirements
+```
+
+在 `extra.sh` 增加这段代码即可
+
 ### 3. 拉取仓库
 
 ```
