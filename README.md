@@ -58,9 +58,9 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 ### 3. 上传配置
 
-将 `check.sample.json` 或 `check.multiple.json` 重命名为 `check.json` 后放入 `script/Shell` 文件夹
+将 `check.sample.json` 或 `check.multiple.json` 重命名为 `check.json` 后放入 `script/Lists` 文件夹
 
-- OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Shell` -> 选择文件：`check.json` -> 开始上传
+- OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json` -> 开始上传
 
 ### 4. 配置通知
 
@@ -159,7 +159,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 - **如果你已经配置了 `config.sh`， 那么你可以不需要做任何改变。**
 - 如果使用环境变量，请在 qinglong 面板中配置。
-- 如果使用配置文件，请修改 `/ql/config/notify_config.json5` 文件。
+- 如果使用配置文件，请修改 `/ql/config/notify.json5` 文件。
 - 当然你也可以在 qinglong 面板中配置 `NOTIFY_CONFIG_PATH` 环境变量为配置文件指定其他位置。
 
 ### 6. 抓包配置
