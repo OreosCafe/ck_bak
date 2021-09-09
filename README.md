@@ -136,19 +136,19 @@ ql repo https://github.com/Oreomeow/checkinpanel.git "ck_|motto|weather" "checki
 **单账号**
 
 ``` sh
-cp /ql/repo/Oreomeow_checkinpanel/check.sample.json /ql/config/check.json
+cp /ql/repo/Oreomeow_checkinpanel_master/check.sample.json /ql/config/check.json
 ```
 
 *多账号（和单账号二选一即可）*
 
 ``` sh
-cp /ql/repo/Oreomeow_checkinpanel/check.multiple.json /ql/config/check.json
+cp /ql/repo/Oreomeow_checkinpanel_master/check.multiple.json /ql/config/check.json
 ```
 
 *通知配置文件（可选）*
 
 ~~~shell
-cp /ql/repo/Oreomeow_checkinpanel/notify.json5 /ql/config/notify.json5
+cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 ~~~
 
 ### 5. 配置通知
