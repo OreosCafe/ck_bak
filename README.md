@@ -128,7 +128,7 @@ apk add gcc libffi-dev musl-dev openssl-dev python3-dev && pip3 install cryptogr
 ### 3. 拉取仓库
 
 ```
-ql repo https://github.com/Oreomeow/checkinpanel.git "ck_|motto|weather" "checkin|checkinsh" "checksendNotify|env_utils|utils" "master"
+ql repo https://github.com/Oreomeow/checkinpanel.git "ck_|motto|weather" "^checkin" "checksendNotify|$utils" "master"
 ```
 
 ### 4. 拷贝文件
@@ -182,7 +182,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 登录后抓取签到请求（一般请求的请求头也有这个字段）
 
-[![fMdyEq.png](https://z3.ax1x.com/2021/08/07/fMdyEq.png)](https://imgtu.com/i/fMdyEq)
+![game163headers.png](https://pic.imgdb.cn/item/6139e89144eaada739205b34.png)
 
 ### 3. **添加了两种机场签到**
 
