@@ -29,6 +29,8 @@ def get_env_str() -> str:
     else:
         print('失败！请检查环境。')
         env = ''
+
+    print('环境检查结束。\n')
     return env
 
 
@@ -57,6 +59,7 @@ def get_file_path(file_name: str) -> str:
     :return: 如果有面板，返回面板默认配置文件夹，否则返回当前目录下文件。 <br/> 如果路径下文件不存在，返回空串。
     """
     env_i = get_env_int()
+    print(f'配置文件 ({file_name}) 检查开始...')
     paths = [file_name, file_name, file_name,
              file_name,
              f'/usr/local/app/script/Lists/{file_name}',
@@ -70,4 +73,5 @@ def get_file_path(file_name: str) -> str:
         print(f'未找到配置文件，路径为: {paths[env_i]}。')
         return ''
     print(f'在 {paths[env_i]} 发现配置文件。')
+    print('配置文件检查结束。\n')
     return paths[env_i]

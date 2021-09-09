@@ -29,4 +29,4 @@ def get_data() -> object:
     try:
         return json.load(open(check_config, "r", encoding="utf-8"))
     except ValueError:
-        print('错误：配置文件格式不对，请在 https://verytoolz.com/json5-validator.html 中检查格式')
+        print(f'错误：配置文件 {check_config} 格式不对，请在 https://verytoolz.com/json5-validator.html 中检查格式')
