@@ -182,7 +182,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 登录后抓取签到请求（一般请求的请求头也有这个字段）
 
-![game163headers.png](https://pic.imgdb.cn/item/6139e89144eaada739205b34.png)
+[![hLvtfO.png](https://z3.ax1x.com/2021/09/09/hLvtfO.png)](https://imgtu.com/i/hLvtfO)
 
 ### 3. **添加了两种机场签到**
 
@@ -194,7 +194,7 @@ Shell 版本将 `env.example` 配置好后改名为 `.env` 后放入 `script/She
 
 2. elecV2P 运行 `手动更新` 任务可强制同步本仓库
 
-3. 大部分脚本移植于 [Sitoi](https://github.com/Sitoi/dailycheckin)，Sitoi 于 2021 年 9 月 3 日 [dailycheckin-0.1.7](https://files.pythonhosted.org/packages/ee/8d/b49624a4d11c51f4e3dfb98f622d0c1ffe5d6315ad39452859ea8703206f/dailycheckin-0.1.7.tar.gz)  版本适配了青龙，[使用教程](https://sitoi.gitee.io/dailycheckin/qinglong/)，与本仓库教程不相同，切勿使用本仓库 [checkinpanel](https://github.com/Oreomeow/checkinpanel) 的同时去问大佬
+3. 大部分脚本移植于 [Sitoi](https://github.com/Sitoi/dailycheckin)，Sitoi 于 2021 年 9 月 3 日 [dailycheckin-0.1.7](https://files.pythonhosted.org/packages/ee/8d/b49624a4d11c51f4e3dfb98f622d0c1ffe5d6315ad39452859ea8703206f/dailycheckin-0.1.7.tar.gz)  版本适配了青龙，[使用教程](https://sitoi.gitee.io/dailycheckin/qinglong/)与本仓库教程不相同，切勿使用本仓库 [checkinpanel](https://github.com/Oreomeow/checkinpanel) 的同时去问大佬
 
 ## 计划说明
 
