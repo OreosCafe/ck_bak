@@ -58,7 +58,7 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 ### 3. 上传配置
 
-将 `check.sample.json` 或 `check.multiple.json` 重命名为 `check.json` 后放入 `script/Lists` 文件夹
+将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹
 
 - OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json` -> 开始上传
 
@@ -162,16 +162,8 @@ ql repo https://github.com/Oreomeow/checkinpanel.git "ck_|motto|weather" "^check
 
 ### 4. 拷贝文件
 
-**单账号**
-
 ``` sh
-cp /ql/repo/Oreomeow_checkinpanel_master/check.sample.json /ql/config/check.json
-```
-
-*多账号（和单账号二选一即可）*
-
-``` sh
-cp /ql/repo/Oreomeow_checkinpanel_master/check.multiple.json /ql/config/check.json
+cp /ql/repo/Oreomeow_checkinpanel_master/check.sample.json5 /ql/config/check.json5
 ```
 
 *通知配置文件（可选）*
