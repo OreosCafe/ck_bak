@@ -5,7 +5,7 @@ new Env('哔咔漫画');
 """
 
 import hashlib, hmac, json, os, random, requests, string, time
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -79,7 +79,7 @@ class PicacomicCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _picacomic_account_list = data.get("PICACOMIC_ACCOUNT_LIST", [])
     res = PicacomicCheckIn(picacomic_account_list=_picacomic_account_list).main()
     print(res)

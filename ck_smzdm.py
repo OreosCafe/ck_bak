@@ -6,7 +6,7 @@ new Env('什么值得买');
 
 import json, os, requests
 from requests import utils
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -68,7 +68,7 @@ class SmzdmCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _smzdm_cookie_list = data.get("SMZDM_COOKIE_LIST", [])
     res = SmzdmCheckIn(smzdm_cookie_list=_smzdm_cookie_list).main()
     print(res)

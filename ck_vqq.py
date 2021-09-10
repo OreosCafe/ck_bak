@@ -7,7 +7,7 @@ new Env('腾讯视频');
 import json, os, re, requests, time
 from urllib import parse
 from requests import utils
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -120,7 +120,7 @@ class VQQCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _vqq_cookie_list = data.get("VQQ_COOKIE_LIST", [])
     res = VQQCheckIn(vqq_cookie_list=_vqq_cookie_list).main()
     print(res)

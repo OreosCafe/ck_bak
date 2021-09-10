@@ -6,7 +6,7 @@ new Env('爱奇艺');
 
 import json, os, re, requests, time
 from urllib.parse import unquote
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -202,7 +202,7 @@ class IQIYICheckIn:
 
 
 def start():
-    data = getdata()
+    data = get_data()
     _iqiyi_cookie_list = data.get("IQIYI_COOKIE_LIST", [])
     res = IQIYICheckIn(iqiyi_cookie_list=_iqiyi_cookie_list).main()
     print(res)

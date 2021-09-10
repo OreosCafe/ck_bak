@@ -6,7 +6,7 @@ new Env('百度贴吧');
 
 import hashlib, json, os, re, requests
 from requests import utils
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -94,7 +94,7 @@ class TiebaCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _tieba_cookie_list = data.get("TIEBA_COOKIE_LIST", [])
     res = TiebaCheckIn(tieba_cookie_list=_tieba_cookie_list).main()
     print(res)

@@ -5,7 +5,7 @@ new Env('全民K歌');
 """
 
 import json, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -133,7 +133,7 @@ class KGQQCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _kgqq_cookie_list = data.get("KGQQ_COOKIE_LIST", [])
     res = KGQQCheckIn(kgqq_cookie_list=_kgqq_cookie_list).main()
     print(res)

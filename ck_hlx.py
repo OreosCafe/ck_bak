@@ -5,7 +5,7 @@ new Env('葫芦侠');
 """
 
 import json, os, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -111,7 +111,7 @@ class HLXCheckIn:
 
 
 def start():
-    data = getdata()
+    data = get_data()
     _hlx_account_list = data.get("HLX_ACCOUNT_LIST", [])
     res = HLXCheckIn(hlx_account_list=_hlx_account_list).main()
     print(res)

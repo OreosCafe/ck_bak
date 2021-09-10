@@ -6,7 +6,7 @@ new Env('一加手机社区官方论坛');
 
 import json, os, re, requests, time
 from urllib import parse
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -108,7 +108,7 @@ class OnePlusBBSCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _oneplusbbs_cookie_list = data.get("ONEPLUSBBS_COOKIE_LIST", [])
     res = OnePlusBBSCheckIn(oneplusbbs_cookie_list=_oneplusbbs_cookie_list).main()
     print(res)

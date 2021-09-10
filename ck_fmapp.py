@@ -5,7 +5,7 @@ new Env('Fa米家');
 """
 
 import json, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -98,7 +98,7 @@ class FMAPPCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _fmapp_account_list = data.get("FMAPP_ACCOUNT_LIST", [])
     res = FMAPPCheckIn(fmapp_account_list=_fmapp_account_list).main()
     print(res)

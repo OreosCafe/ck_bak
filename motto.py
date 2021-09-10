@@ -5,7 +5,7 @@ new Env('每日一句');
 """
 
 import json, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -28,7 +28,7 @@ class Motto:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     try:
         motto = data.get("MOTTO")
     except Exception as e:

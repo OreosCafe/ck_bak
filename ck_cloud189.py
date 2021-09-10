@@ -6,7 +6,7 @@ new Env('天翼云盘');
 """
 
 import base64, json, os, re, requests, rsa, time
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -142,7 +142,7 @@ class Cloud189CheckIn:
 
 
 def start():
-    data = getdata()
+    data = get_data()
     _cloud189_account_list = data.get("CLOUD189_ACCOUNT_LIST", [])
     res = Cloud189CheckIn(cloud189_account_list=_cloud189_account_list).main()
     print(res)

@@ -8,7 +8,7 @@ import json
 import os
 import requests
 from requests import utils
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -339,7 +339,7 @@ class BiliBiliCheckIn(object):
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _bilibili_cookie_list = data.get("BILIBILI_COOKIE_LIST", [])
     res = BiliBiliCheckIn(bilibili_cookie_list=_bilibili_cookie_list).main()
     print(res)

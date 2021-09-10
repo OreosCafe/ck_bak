@@ -6,7 +6,7 @@ new Env('王者营地');
 
 import json, os, requests
 from urllib import parse
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -43,7 +43,7 @@ class WZYDCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _wzyd_data_list = data.get("WZYD_DATA_LIST", [])
     res = WZYDCheckIn(wzyd_data_list=_wzyd_data_list).main()
     print(res)

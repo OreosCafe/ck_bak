@@ -5,7 +5,7 @@ new Env('CSDN');
 """
 
 import json, os, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -57,7 +57,7 @@ class CSDNCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _csdn_cookie_list = data.get("CSDN_COOKIE_LIST", [])
     res = CSDNCheckIn(csdn_cookie_list=_csdn_cookie_list).main()
     print(res)

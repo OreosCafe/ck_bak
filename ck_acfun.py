@@ -5,7 +5,7 @@ new Env('AcFun');
 """
 
 import json, os, requests, urllib3
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 urllib3.disable_warnings()
@@ -148,7 +148,7 @@ class AcFunCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _acfun_account_list = data.get("ACFUN_ACCOUNT_LIST", [])
     res = AcFunCheckIn(acfun_account_list=_acfun_account_list).main()
     print(res)

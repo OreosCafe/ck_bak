@@ -5,7 +5,7 @@ new Env('吾爱破解');
 """
 
 import json, os, re, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -55,7 +55,7 @@ class PojieCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _pojie_cookie_list = data.get("POJIE_COOKIE_LIST", [])
     res = PojieCheckIn(pojie_cookie_list=_pojie_cookie_list).main()
     print(res)

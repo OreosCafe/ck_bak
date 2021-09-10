@@ -1,6 +1,9 @@
 import os
 import platform
 
+# 缓存全局的环境
+ENV = ''
+
 
 def get_env_str() -> str:
     """
@@ -8,6 +11,9 @@ def get_env_str() -> str:
 
     :return: Windows / Linux / Mac / github / v2p / ql / 空
     """
+    global ENV
+    if ENV: return ENV
+
     v2p_file = '/usr/local/app/script/Lists/task.list'
     ql_file = '/ql/config/env.sh'
 
@@ -30,6 +36,7 @@ def get_env_str() -> str:
         print('失败！请检查环境。')
         env = ''
 
+    ENV = env
     print('环境检查结束。\n')
     return env
 
@@ -70,7 +77,8 @@ def get_file_path(file_name: str) -> str:
         print('无法判断环境，选择当前目录为配置文件夹目录。')
         env_i = 0
     if not os.path.exists(paths[env_i]):
-        print(f'未找到配置文件，路径为: {paths[env_i]}。')
+        print(f'未找到配置文件（不一定是错误），路径为: {paths[env_i]}。')
+        print('配置文件检查结束。\n')
         return ''
     print(f'在 {paths[env_i]} 发现配置文件。')
     print('配置文件检查结束。\n')

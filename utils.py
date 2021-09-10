@@ -5,11 +5,6 @@ import json5 as json
 import env_utils
 
 
-# 兼容，要是愿意全部文件改一遍也行。
-def getdata():
-    return get_data()
-
-
 def get_data() -> object:
     """
     获取签到的配置文件。

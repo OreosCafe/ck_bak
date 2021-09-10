@@ -8,7 +8,7 @@ import base64, hashlib, json, os, random, requests, urllib3
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from requests import utils
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 urllib3.disable_warnings()
@@ -170,7 +170,7 @@ class Music163CheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _music163_account_list = data.get("MUSIC163_ACCOUNT_LIST", [])
     res = Music163CheckIn(music163_account_list=_music163_account_list).main()
     print(res)

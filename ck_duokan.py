@@ -5,7 +5,7 @@ new Env('多看阅读');
 """
 
 import json, requests, time 
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -361,7 +361,7 @@ class DuoKanCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _duokan_cookie_list = data.get("DUOKAN_COOKIE_LIST", [])
     res = DuoKanCheckIn(duokan_cookie_list=_duokan_cookie_list).main()
     print(res)

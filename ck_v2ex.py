@@ -6,7 +6,7 @@ new Env('V2EX');
 
 import json, os, re, requests, urllib3
 from requests import utils
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 urllib3.disable_warnings()
@@ -76,7 +76,7 @@ class V2exCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _v2ex_cookie_list = data.get("V2EX_COOKIE_LIST", [])
     res = WZYDCheckIn(v2ex_cookie_list=_v2ex_cookie_list).main()
     print(res)

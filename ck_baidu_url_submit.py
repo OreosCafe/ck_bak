@@ -6,7 +6,7 @@ new Env('百度搜索资源平台');
 
 import json, os, requests
 from urllib import parse
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -53,7 +53,7 @@ class BaiduUrlSubmit:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _baidu_url_submit_list = data.get("BAIDU_URL_SUBMIT_LIST", [])
     res = BaiduUrlSubmit(baidu_url_submit_list=_baidu_url_submit_list).main()
     print(res)

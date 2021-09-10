@@ -5,7 +5,7 @@ new Env('联通沃邮箱');
 """
 
 import json, os, re, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -247,7 +247,7 @@ class WoMailCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _womail_url_list = data.get("WOMAIL_URL_LIST", [])
     res = WoMailCheckIn(womail_url_list=_womail_url_list).main()
     print(res)

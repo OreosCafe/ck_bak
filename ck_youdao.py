@@ -5,7 +5,7 @@ new Env('有道云笔记');
 """
 
 import json, os, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -59,7 +59,7 @@ class YouDaoCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _youdao_cookie_list = data.get("YOUDAO_COOKIE_LIST", [])
     res = YouDaoCheckIn(youdao_cookie_list=_youdao_cookie_list).main()
     print(res)

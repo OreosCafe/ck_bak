@@ -6,7 +6,7 @@ new Env('智友邦');
 
 import json, os, re, requests, urllib3
 from requests import utils
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 urllib3.disable_warnings()
@@ -63,7 +63,7 @@ class ZhiyooCheckIn:
 
 
 if __name__ == "__main__":
-    getdata()
+    get_data()
     _zhiyoo_cookie_list = data.get("ZHIYOO_COOKIE_LIST", [])
     res = ZhiyooCheckIn(zhiyoo_cookie_list=_zhiyoo_cookie_list).main()
     print(res)

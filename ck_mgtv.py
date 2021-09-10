@@ -6,7 +6,7 @@ new Env('芒果 TV');
 
 import json, os, requests, time
 from urllib import parse
-from utils import getdata
+from utils import get_data
 from checksendNotify import send 
 
 
@@ -60,7 +60,7 @@ class MgtvCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _mgtv_params_list = data.get("MGTV_PARAMS_LIST", [])
     res = MgtvCheckIn(mgtv_params_list=_mgtv_params_list).main()
     print(res)

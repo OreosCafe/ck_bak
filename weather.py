@@ -6,7 +6,7 @@ new Env('天气预报');
 
 import json, os, shutil, requests
 from datetime import datetime
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -48,7 +48,7 @@ class Weather:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _city_name_list = data.get("CITY_NAME_LIST", [])
     res = Weather(city_name_list=_city_name_list).main()
     print(res)

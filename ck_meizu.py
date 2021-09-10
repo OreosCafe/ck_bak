@@ -5,7 +5,7 @@ new Env('MEIZU 社区');
 """
 
 import json, requests, time
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -95,7 +95,7 @@ class MeizuCheckIn:
 
 
 if __name__ == "__main__":
-    data = getdata()
+    data = get_data()
     _meizu_cookie_list = data.get("MEIZU_COOKIE_LIST", [])
     res = MeizuCheckIn(meizu_cookie_list=_meizu_cookie_list).main()
     print(res)

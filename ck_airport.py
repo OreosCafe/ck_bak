@@ -9,7 +9,7 @@ new Env('机场签到');
 """
 
 import json, os, re, requests
-from utils import getdata
+from utils import get_data
 from checksendNotify import send
 
 
@@ -87,7 +87,7 @@ class SspanelQd(object):
         return msg_all
 
 def start():
-    data = getdata()
+    data = get_data()
     _airport_account_list = data.get("AIRPORT_ACCOUNT_LIST", [])
     res = SspanelQd(airport_account_list=_airport_account_list).main()
     print(res)
