@@ -54,7 +54,7 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 ### 2. 抓包配置
 
-单账号下载 [check.sample.json](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json)，多账号下载 [check.multiple.json](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.multiple.json)，根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
+下载 [check.sample.json5](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json5)，根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
 
 ### 3. 上传配置
 
