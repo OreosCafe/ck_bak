@@ -24,7 +24,7 @@
 
 - 本人对任何脚本问题概不负责，包括但不限于由任何脚本错误导致的任何损失或损害。
 
-- 间接使用脚本的任何用户，包括但不限于建立 VPS 或在某些行为违反国家/地区法律或相关法规的情况下进行传播, 本人对于由此引起的任何隐私泄漏或其他后果概不负责。
+- 间接使用脚本的任何用户，包括但不限于建立 VPS 或在某些行为违反国家/地区法律或相关法规的情况下进行传播，本人对于由此引起的任何隐私泄漏或其他后果概不负责。
 
 - 请勿将本仓库的任何内容用于商业或非法目的，否则后果自负。
 
@@ -54,11 +54,11 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 ### 2. 抓包配置
 
-下载 [check.sample.json5](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json5)，根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
+单账号下载 [check.sample.json](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json)，多账号下载 [check.multiple.json](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.multiple.json)，根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
 
 ### 3. 上传配置
 
-将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹
+将 `check.sample.json` 或 `check.multiple.json` 重命名为 `check.json` 后放入 `script/Lists` 文件夹
 
 - OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json` -> 开始上传
 
@@ -146,6 +146,7 @@ install_requirements(){
                 else
                     pip3 install $i
                 fi
+                ;;
         esac
     done
 }
