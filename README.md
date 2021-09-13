@@ -163,9 +163,20 @@ install_requirements
 
 ### 3. 拉取仓库
 
+可添加定时任务，名称、时间自定
+
 ```
 ql repo https://github.com/Oreomeow/checkinpanel.git "ck_|motto|weather" "^checkin" "$notify|$utils" "master"
 ```
+
+**解决 Shell 脚本无法拉取问题**
+
+``` sh
+## ql repo命令拉取脚本时需要拉取的文件后缀，直接写文件后缀名即可
+RepoFileExtensions="js py sh ts"
+```
+
+将以上代码在 `config.sh` 相应位置替换
 
 ### 4. 拷贝文件
 
