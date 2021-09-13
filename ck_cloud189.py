@@ -7,7 +7,7 @@ new Env('天翼云盘');
 
 import base64, json, os, re, requests, rsa, time
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class Cloud189CheckIn:

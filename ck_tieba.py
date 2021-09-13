@@ -7,7 +7,7 @@ new Env('百度贴吧');
 import hashlib, json, os, re, requests
 from requests import utils
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class TiebaCheckIn:

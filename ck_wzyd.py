@@ -7,7 +7,7 @@ new Env('王者营地');
 import json, os, requests
 from urllib import parse
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class WZYDCheckIn:

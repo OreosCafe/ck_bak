@@ -6,7 +6,7 @@ new Env('葫芦侠');
 
 import json, os, requests
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 r = requests.Session()

@@ -9,7 +9,7 @@ import os
 import requests
 from requests import utils
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class BiliBiliCheckIn(object):

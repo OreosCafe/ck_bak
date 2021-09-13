@@ -6,7 +6,7 @@ new Env('小米运动');
 
 import json, os, random, re, requests, time
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class MiMotion:

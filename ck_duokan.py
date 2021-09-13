@@ -6,7 +6,7 @@ new Env('多看阅读');
 
 import json, requests, time 
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class DuoKanCheckIn:

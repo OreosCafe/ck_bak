@@ -56,11 +56,17 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 单账号下载 [check.sample.json](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json)，多账号下载 [check.multiple.json](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.multiple.json)，根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
 
+**愿意尝试的可以下载 [check.sample.json5](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json5) 进行抓包并配置**
+
 ### 3. 上传配置
 
 将 `check.sample.json` 或 `check.multiple.json` 重命名为 `check.json` 后放入 `script/Lists` 文件夹
 
+**愿意尝试的可以将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹**
+
 - OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json` -> 开始上传
+
+- elecV2P 3.4.6 已支持在线编辑，右键文件即可
 
 ### 4. 配置通知
 
@@ -104,11 +110,11 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 #### 4.3 通知说明
 
-本通知调用了项目中的 [𝒄𝒉𝒆𝒄𝒌𝒔𝒆𝒏𝒅𝑵𝒐𝒕𝒊𝒇𝒚.𝒑𝒚](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/checksendNotify.py) 。如果你想在**你自己的项目中**使用这个通知脚本，将它拷贝并调用对应的通知函数即可。
+本通知调用了项目中的 [𝒎𝒕𝒓_𝒏𝒐𝒕𝒊𝒇𝒚.𝒑𝒚](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/mtr_notify.py) 。如果你想在**你自己的项目中**使用这个通知脚本，将它拷贝并调用对应的通知函数即可。
 
 在非容器环境中，通知环境变量使用 系统的环境变量 或者 **你通过 `NOTIFY_CONFIG_PATH` 环境变量指定的配置文件** 进行配置。
 
-特别的，如果你想要创建一个基于 python 的 elecV2P 或者 qinglong 项目，强烈建议你拷贝 [此文件](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/checksendNotify.py)，如此可以大幅度降低用户脚本的配置难度和升级难度。
+特别的，如果你想要创建一个基于 python 的 elecV2P 或者 qinglong 项目，强烈建议你拷贝 [此文件](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/mtr_notify.py)，如此可以大幅度降低用户脚本的配置难度和升级难度。
 
 ## 𝐪𝐢𝐧𝐠𝐥𝐨𝐧𝐠 使用方法
 
@@ -158,7 +164,7 @@ install_requirements
 ### 3. 拉取仓库
 
 ```
-ql repo https://github.com/Oreomeow/checkinpanel.git "ck_|motto|weather" "^checkin" "checksendNotify|$utils" "master"
+ql repo https://github.com/Oreomeow/checkinpanel.git "ck_|motto|weather" "^checkin" "$notify|$utils" "master"
 ```
 
 ### 4. 拷贝文件
@@ -227,7 +233,6 @@ Shell 版本将 `env.example` 配置好后改名为 `.env` 后放入 `script/She
 - [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | AcFun | 百度搜索资源平台 | Bilibili | 天翼云盘 | CSDN | 多看阅读 | Fa米家 | 网易云游戏 | 葫芦侠 | 爱奇艺 | 全民K歌 | MEIZU 社区 | 芒果 TV | 小米运动 | 网易云音乐 | 一加手机社区官方论坛 | 哔咔漫画 | 吾爱破解 | 什么值得买 | 百度贴吧 | V2EX | 腾讯视频 | 微博 | 联通沃邮箱 | 哔咔网单 | 王者营地 | 有道云笔记 | 智友邦
 - [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到
 - [x] 𝑺𝒉𝒆𝒍𝒍 | 多账号 | SSPanel 签到
-- [ ] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | Epic 周免 
 
 ### 测试情况
 

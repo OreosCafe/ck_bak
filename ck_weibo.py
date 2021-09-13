@@ -7,7 +7,7 @@ new Env('微博');
 import json, os, requests, urllib3
 from urllib import parse
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 urllib3.disable_warnings()
 

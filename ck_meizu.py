@@ -6,7 +6,7 @@ new Env('MEIZU 社区');
 
 import json, requests, time
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class MeizuCheckIn:

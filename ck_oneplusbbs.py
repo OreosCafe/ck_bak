@@ -7,7 +7,7 @@ new Env('一加手机社区官方论坛');
 import json, os, re, requests, time
 from urllib import parse
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class OnePlusBBSCheckIn:

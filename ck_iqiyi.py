@@ -7,7 +7,7 @@ new Env('爱奇艺');
 import json, os, re, requests, time
 from urllib.parse import unquote
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class IQIYICheckIn:

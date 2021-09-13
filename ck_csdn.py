@@ -6,7 +6,7 @@ new Env('CSDN');
 
 import json, os, requests
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class CSDNCheckIn:

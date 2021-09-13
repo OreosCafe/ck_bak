@@ -10,7 +10,7 @@ new Env('机场签到');
 
 import json, os, re, requests
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 requests.packages.urllib3.disable_warnings()

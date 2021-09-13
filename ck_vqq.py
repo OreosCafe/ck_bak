@@ -8,7 +8,7 @@ import json, os, re, requests, time
 from urllib import parse
 from requests import utils
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class VQQCheckIn:

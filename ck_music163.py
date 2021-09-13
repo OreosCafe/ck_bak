@@ -9,7 +9,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from requests import utils
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 urllib3.disable_warnings()
 

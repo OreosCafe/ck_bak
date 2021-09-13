@@ -6,7 +6,7 @@ new Env('全民K歌');
 
 import json, requests
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class KGQQCheckIn:

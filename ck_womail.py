@@ -6,7 +6,7 @@ new Env('联通沃邮箱');
 
 import json, os, re, requests
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 
 class WoMailCheckIn:

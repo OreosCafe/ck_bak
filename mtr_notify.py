@@ -5,6 +5,7 @@ import hashlib
 import hmac
 import os
 import re
+import threading
 import time
 import urllib.parse
 
@@ -16,6 +17,20 @@ from env_utils import get_file_path
 # cur_path = os.path.abspath(os.path.dirname(__file__))
 # root_path = os.path.split(cur_path)[0]
 # sys.path.append(root_path)
+
+# 原先的 print 函数和主线程的锁
+_print = print
+mutex = threading.Lock()
+
+
+# 定义新的 print 函数
+def print(text, *args, **kw):
+    '''
+    使输出有序进行，不出现多线程同一时间输出导致错乱的问题。
+    '''
+    with mutex:
+        _print(text, *args, **kw)
+
 
 # 通知服务
 push_config = {
@@ -51,7 +66,7 @@ push_config = {
 }
 notify_function = []
 
-#  首先读取 面板变量 或者 github action 运行变量
+# 首先读取 面板变量 或者 github action 运行变量
 for k in push_config:
     if v := os.getenv(k):
         push_config[k] = v
@@ -73,8 +88,7 @@ elif CONFIG_PATH:
 def bark(title: str, content: str) -> None:
     """
     使用 bark 推送消息。
-    """
-    print('\n')
+    """    
     if not push_config.get('BARK'):
         print('bark 服务的 bark_token 未设置!!\n取消推送')
         return
@@ -95,8 +109,7 @@ def bark(title: str, content: str) -> None:
 def go_cqhttp(title: str, content: str) -> None:
     """
     使用 go_cqhttp 推送一条消息
-    """
-    print('\n')
+    """   
     if not push_config.get('GOBOT_URL') or not push_config.get('GOBOT_QQ'):
         print('go-cqhttp 服务的 GOBOT_URL 或 GOBOT_QQ 未设置!!\n取消推送')
         return
@@ -115,7 +128,6 @@ def serverJ(title: str, content: str) -> None:
     """
     通过 ServerJ 发送一条消息。
     """
-    print('\n')
     if not push_config.get('PUSH_KEY'):
         print('server 酱服务的 PUSH_KEY 未设置!!\n取消推送')
         return
@@ -141,7 +153,6 @@ def telegram_bot(title: str, content: str) -> None:
     """
     通过 telegram 发送一条通知。
     """
-    print("\n")
     if not push_config.get('TG_BOT_TOKEN') or not push_config.get('TG_USER_ID'):
         print("tg 服务的 bot_token 或者 user_id 未设置!!\n取消推送")
         return
@@ -169,11 +180,7 @@ def telegram_bot(title: str, content: str) -> None:
 def dingding_bot(title: str, content: str) -> None:
     """
     使用 钉钉机器人 发送一条通知。
-    :param title:
-    :param content:
-    :return:
     """
-    print("\n")
     if not push_config.get('DD_BOT_SECRET') or not push_config.get('DD_BOT_TOKEN'):
         print("钉钉机器人 服务的 DD_BOT_SECRET 或者 DD_BOT_TOKEN 未设置!!\n取消推送")
         return
@@ -202,8 +209,7 @@ def dingding_bot(title: str, content: str) -> None:
 def coolpush_bot(title: str, content: str) -> None:
     """
     使用 qmsg 发送一条消息。
-    """
-    print('\n')
+    """   
     if not push_config.get('QQ_SKEY') or not push_config.get('QQ_MODE'):
         print('qmsg 的 QQ_SKEY 或者 QQ_MODE 未设置!!\n取消推送')
         return
@@ -222,8 +228,7 @@ def coolpush_bot(title: str, content: str) -> None:
 def pushplus_bot(title: str, content: str) -> None:
     """
     通过 push+ 发送一条推送。
-    """
-    print('\n')
+    """    
     if not push_config.get('PUSH_PLUS_TOKEN'):
         print('PUSHPLUS 服务的token未设置!!\n取消推送')
         return
@@ -248,8 +253,7 @@ def pushplus_bot(title: str, content: str) -> None:
 def wecom_app(title: str, content: str) -> None:
     """
     通过 企业微信 APP 发送推送。
-    """
-    print('\n')
+    """   
     if not push_config.get('QYWX_AM'):
         print('QYWX_AM 未设置！！\n取消推送')
         return
@@ -364,17 +368,27 @@ if push_config.get('QYWX_AM'):
     notify_function.append(wecom_app)
 
 
+def excepthook(args, /):
+    if issubclass(args.exc_type, requests.exceptions.RequestException):
+        print(f'网络异常，请检查你的网络连接、推送服务器和代理配置，该错误和账号配置无关。信息：{str(args.exc_type)}, {args.thread.name}')
+    else:
+        global default_hook
+        default_hook(args)
+
+
+default_hook = threading.excepthook
+threading.excepthook = excepthook
+
+
 def send(title: str, content: str) -> None:
     hitokoto = push_config.get('HITOKOTO')
 
     text = one() if hitokoto else ''
     content += '\n\n' + text
 
-    for mode in notify_function:
-        try:
-            mode(title=title, content=content)
-        except requests.exceptions.RequestException as e:
-            print(f'网络请求失败： {str(e)}, {mode.__name__}')
+    ts = [threading.Thread(target=mode, args=(title, content), name=mode.__name__) for mode in notify_function]
+    [t.start() for t in ts]
+    [t.join() for t in ts]
 
 
 def main():

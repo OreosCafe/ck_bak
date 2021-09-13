@@ -6,7 +6,7 @@ new Env('AcFun');
 
 import json, os, requests, urllib3
 from utils import get_data
-from checksendNotify import send
+from mtr_notify import send
 
 urllib3.disable_warnings()
 
