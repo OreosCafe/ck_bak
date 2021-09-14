@@ -131,6 +131,20 @@
 //     },
    ],
 
+// 欢太商城
+   HEYTAP_COOKIE_LIST: [
+      {
+        'cookies': 'source_type=XXX;sa_distinct_id=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;s_channel=XXX_oppostore;s_version=XXXXXX;app_utm={\"utm_source_app\":\"direct\",\"utm_campaign_app\":\"direct\",\"utm_term_app\":\"direct\",\"utm_medium_app\":\"direct\"};",
+        'User-Agent': '',
+        'if_draw': false,
+      },
+//      {
+//        'cookies': '',     // 转义后填入
+//        'User-Agent': '',
+//        'if_draw': false,  // 抽奖总开关，设置为 false 将不参与任何抽奖，应对一些抽奖黑号
+//      },
+   ],
+
 // 葫芦侠
    HLX_ACCOUNT_LIST: [
      {

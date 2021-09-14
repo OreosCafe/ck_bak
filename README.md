@@ -54,15 +54,11 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 ### 2. 抓包配置
 
-单账号下载 [check.sample.json](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json)，多账号下载 [check.multiple.json](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.multiple.json)，根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
-
-**愿意尝试的可以下载 [check.sample.json5](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json5) 进行抓包并配置**
+下载 [check.sample.json5](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json5)，根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
 
 ### 3. 上传配置
 
-将 `check.sample.json` 或 `check.multiple.json` 重命名为 `check.json` 后放入 `script/Lists` 文件夹
-
-**愿意尝试的可以将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹**
+将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹**
 
 - OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json` -> 开始上传
 
@@ -203,7 +199,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 ### 6. 抓包配置
 
-不出意外的话可以在青龙面板的配置文件下找到 `check.json` 文件
+不出意外的话可以在青龙面板的配置文件下找到 `check.json5` 文件
 
 根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
 
@@ -227,6 +223,12 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 Shell 版本将 `env.example` 配置好后改名为 `.env` 后放入 `script/Shell/checkinpanel` 文件夹
 
+### 4. **添加了欢太商城的签到配置**
+
+- [欢太商城 HttpCanary 抓包教程](https://github.com/hwkxk/HeytapTask/wiki/%E6%AC%A2%E5%A4%AA%E5%95%86%E5%9F%8EHttpCanary%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B)
+- 部分域名屏蔽境外IP访问，所以本项目不适于在 非中国IP代理网络下 / Github Actions / 境外VPS 上运行!
+- 从未在欢太商城做过任务，请先手动进入任务中心完成一下任务再使用，否则可能无法获取到任务列表数据导致出错！@YYplus
+
 ## 其他说明
 
 1. 请自行修改执行时间
@@ -242,15 +244,15 @@ Shell 版本将 `env.example` 配置好后改名为 `.env` 后放入 `script/She
 - [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多城市 | 天气预报
 - [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 每日一句
 - [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | AcFun | 百度搜索资源平台 | Bilibili | 天翼云盘 | CSDN | 多看阅读 | Fa米家 | 网易云游戏 | 葫芦侠 | 爱奇艺 | 全民K歌 | MEIZU 社区 | 芒果 TV | 小米运动 | 网易云音乐 | 一加手机社区官方论坛 | 哔咔漫画 | 吾爱破解 | 什么值得买 | 百度贴吧 | V2EX | 腾讯视频 | 微博 | 联通沃邮箱 | 哔咔网单 | 王者营地 | 有道云笔记 | 智友邦
-- [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到
+- [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到 | 欢太商城
 - [x] 𝑺𝒉𝒆𝒍𝒍 | 多账号 | SSPanel 签到
 
 ### 测试情况
 
 | 状态 | 名称 |
 | --- | --- |
-| ✅ | 天气预报 \| 每日一句 \| AcFun \| Bilibili \| 天翼云盘 \| CSDN \| 多看阅读 \| 爱奇艺 \| 全民K歌 \| MEIZU 社区 \| 网易云音乐 \| 吾爱破解 \| 什么值得买 \| 微博 \| 王者营地 \| 有道云笔记 |
-| ❔ | 百度搜索资源平台 \| Fa米家 \| 网易云游戏 \| 葫芦侠 \| 芒果 TV \| 小米运动 \| 一加手机社区官方论坛 \| 哔咔漫画 \| 百度贴吧 \| V2EX \| 联通沃邮箱 \| 哔咔网单 \| 智友邦 |
+| ✅ | 天气预报 \| 每日一句 \| AcFun \| 机场签到 \| Bilibili \| 天翼云盘 \| CSDN \| 多看阅读 \| 爱奇艺 \| 全民K歌 \| MEIZU 社区 \| 网易云音乐 \| 吾爱破解 \| 什么值得买 \| SSPanel 签到 \| 微博 \| 王者营地 \| 有道云笔记 |
+| ❔ | 百度搜索资源平台 \| Fa米家 \| 网易云游戏 \| 葫芦侠 \| 芒果 TV \| 小米运动 \| 一加手机社区官方论坛 \| 哔咔漫画 \| 百度贴吧 \| V2EX \| 联通沃邮箱 \| 哔咔网单 \| 智友邦 \| 欢太商城 |
 | 💨 | 腾讯视频 |
 
 ## 致谢
@@ -262,6 +264,8 @@ Shell 版本将 `env.example` 配置好后改名为 `.env` 后放入 `script/She
 [@𝐲𝐮𝐱𝐢𝐚𝐧𝟏𝟓𝟖](https://github.com/yuxian158)
 
 [@𝐢𝐬𝐞𝐜𝐫𝐞𝐭](https://github.com/isecret)
+
+[@𝐡𝐰𝐤𝐱𝐤](https://github.com/hwkxk)
 
 ## 历史 Star 数
 
