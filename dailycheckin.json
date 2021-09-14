@@ -185,6 +185,16 @@
             "running":true
         },
         {
+            "name":"欢太商城",
+            "type":"cron",
+            "time":"19 8 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"checkin.js -env PYNAME=ck_heytap.py"
+            },
+            "running":true
+        },
+        {
             "name":"葫芦侠",
             "type":"cron",
             "time":"30 7 * * *",

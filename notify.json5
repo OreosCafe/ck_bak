@@ -45,5 +45,8 @@
     'GOBOT_TOKEN': '',
     // GOBOT_URL设置 /send_private_msg 填入 user_id=个人QQ
     //          设置 /send_group_msg   填入 group_id=QQ群
-    'GOBOT_QQ': ''
+    'GOBOT_QQ': '',
+
+    // 飞书机器人的 FSKEY
+    'FSKEY': '',
 }
