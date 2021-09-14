@@ -3,6 +3,7 @@ import os
 import json5 as json
 
 import env_utils
+from ver_utils import print_ver
 
 # 缓存全局的环境
 DATA = {}
@@ -14,6 +15,7 @@ def get_data() -> object:
 
     :return: 签到配置文件对象
     """
+    print_ver()
     global DATA
     if DATA: return DATA
 
