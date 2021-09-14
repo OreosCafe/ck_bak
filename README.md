@@ -87,6 +87,7 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 | GOBOT_URL | go-cqhttp | 例如：推送到个人QQ：`http://127.0.0.1/send_private_msg` 群：`http://127.0.0.1/send_group_msg` |
 | GOBOT_TOKEN | * go-cqhttp 的 access_token | go-cqhttp 文件设置的访问密钥 |
 | GOBOT_QQ | go-cqhttp 的推送群或者用户 | `GOBOT_URL` 设置 `/send_private_msg` 则需要填入 `user_id=个人QQ` 相反如果是 `/send_group_msg` 则需要填入 `group_id=QQ群` |
+| FSKEY | 飞书 | 飞书[官方文档](https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN)，只需 `https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx` 的 `xxxxxx` 部分 |
 
 *\*表示选填*
 

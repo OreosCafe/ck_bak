@@ -63,6 +63,8 @@ push_config = {
     'GOBOT_QQ': '',                     # go-cqhttp 的推送群或者用户
                                         # GOBOT_URL 设置 /send_private_msg 填入 user_id=个人QQ
                                         #               /send_group_msg   填入 group_id=QQ群
+
+    'FSKEY': '',                        # 飞书 的 FSKEY；https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx 的 xxxxxx 部分
 }
 notify_function = []
 
@@ -129,7 +131,7 @@ def serverJ(title: str, content: str) -> None:
     通过 ServerJ 发送一条消息。
     """
     if not push_config.get('PUSH_KEY'):
-        print('server 酱服务的 PUSH_KEY 未设置!!\n取消推送')
+        print('serverJ 服务的 PUSH_KEY 未设置!!\n取消推送')
         return
     print('serverJ 服务启动')
 
@@ -146,7 +148,7 @@ def serverJ(title: str, content: str) -> None:
     if response.get('errno') == 0 or response.get('code') == 0:
         print('serverJ 推送成功！')
     else:
-        print(f'serverJ 推送失败！ 错误码：{response["message"]}')
+        print(f'serverJ 推送失败！错误码：{response["message"]}')
 
 
 def telegram_bot(title: str, content: str) -> None:
@@ -222,7 +224,7 @@ def coolpush_bot(title: str, content: str) -> None:
     if response['code'] == 0:
         print('qmsg 推送成功！')
     else:
-        print(f'qmsg 推送失败！ {response["reason"]}')
+        print(f'qmsg 推送失败！{response["reason"]}')
 
 
 def pushplus_bot(title: str, content: str) -> None:
@@ -230,7 +232,7 @@ def pushplus_bot(title: str, content: str) -> None:
     通过 push+ 发送一条推送。
     """    
     if not push_config.get('PUSH_PLUS_TOKEN'):
-        print('PUSHPLUS 服务的token未设置!!\n取消推送')
+        print('PUSHPLUS 服务的 token 未设置!!\n取消推送')
         return
     print('PUSHPLUS 服务启动')
 
@@ -340,6 +342,27 @@ class WeCom:
         return respone['errmsg']
 
 
+def feishu(title: str, content: str) -> None:
+    """
+    通过 飞书 发送一条推送。
+    """ 
+    if not push_config.get('FSKEY'):
+        print('飞书 服务的 FSKEY 未设置!!\n取消推送')
+        return
+    print('飞书 服务启动')
+    url = f'https://open.feishu.cn/open-apis/bot/v2/hook/{push_config.get("FSKEY")}'
+    data = {
+        'msg_type': 'text', 
+        'content': {'text': f'{title}\n\n{content}'}
+    }
+    response = requests.post(url, data=json.dumps(data, quote_keys=True)).json()
+    # print(response)
+    if response.get('StatusCode') == 0:
+        print('飞书 推送成功！')
+    else:
+        print(f'飞书 推送失败！错误信息如下：\n', response)
+
+
 def one() -> str:
     """
     获取一条一言。
@@ -366,6 +389,8 @@ if push_config.get('PUSH_PLUS_TOKEN'):
     notify_function.append(pushplus_bot)
 if push_config.get('QYWX_AM'):
     notify_function.append(wecom_app)
+if push_config.get('FSKEY'):
+    notify_function.append(feishu)
 
 
 def excepthook(args, /):

@@ -22,6 +22,7 @@ $exec(`python3 https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/${
         GOBOT_URL: $store.get('GOBOT_URL', 'string'),                             // go-cqhttp 例如：推送到个人QQ: http://127.0.0.1/send_private_msg  群: http://127.0.0.1/send_group_msg
         GOBOT_TOKEN: $store.get('GOBOT_TOKEN', 'string'),                         // go-cqhttp 的 access_token 可不填
         GOBOT_QQ: $store.get('GOBOT_QQ', 'string'),                               // go-cqhttp 的推送群或者用户 GOBOT_URL设置 /send_private_msg 则需要填入 user_id=个人QQ 相反如果是 /send_group_msg 则需要填入 group_id=QQ群
+        FSKEY: $store.get('FSKEY', 'string')                                      // 飞书 的 FSKEY；https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx 的 xxxxxx 部分
     },
     cb(data, error) {
         error ? console.error(error) : console.log(data)
