@@ -79,7 +79,7 @@ class NGACheckIn:
             else:
                 N_coin_get_stat = data[2]['30']
         except Exception as e:
-            N_coin_get_stat = e
+            N_coin_get_stat = str(e)
         return N_coin_get_stat
 
 
@@ -92,26 +92,29 @@ class NGACheckIn:
                 "__lib": "mission",
                 "__output": "11"
                 }
-        res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
-        res = json.loads(res)
-        # print(res)
+        ids = ('157', '157', '158', '158')
+        success_sum = 0
+        failure_sum = 0
+        failure_msg = ''
+        failure_msg_all = ''
         code = {}
-        try:
-            ids = ('157', '158')
-            success_sum = 0
-            failure_sum = 0
-            for i in range(len(ids)):
-                for times in range(2):
-                    code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
-                    time.sleep(30)
-                    if code[i] == 1:
-                        success_sum += 1
-                    else:
-                        failure_sum += 1
-            video_coin = success_sum // 2 * 1
-            video_view_stat = f'观看视频成功次数：{success_sum}，共获得N币：{video_coin}' if failure_sum == 0 else f'观看视频成功次数：{success_sum}，共获得N币：{video_coin}；观看视频失败次数：{failure_sum}'
-        except Exception as e:
-            video_view_stat = e
+        for i in range(len(ids)):
+            try:
+                res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
+                res = json.loads(res)
+                print(res)
+                time.sleep(30)
+                code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
+                if  code[i] == 1:
+                    success_sum += 1
+                else:
+                    failure_sum += 1
+            except Exception as e:
+                failure_msg = str(e)
+                failure_sum += 1
+            failure_msg_all += failure_msg + '\n'
+        video_coin = success_sum // 2 * 1
+        video_view_stat = f'观看任务成功次数：{success_sum}，共获得N币：{video_coin}' if failure_sum == 0 else f'观看任务成功次数：{success_sum}，共获得N币：{video_coin}；\n观看视频失败次数：{failure_sum}；\n错误信息：{failure_msg_all}'
         return video_view_stat
 
 
@@ -124,18 +127,17 @@ class NGACheckIn:
                 "__lib": "mission",
                 "__output": "11"
                 }
-        res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
-        res = json.loads(res)
-        # print(res)
         try:
-            code = res['data'][1][0]['141']['raw_stat']['6']
+            res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
+            res = json.loads(res)
             time.sleep(30)
+            code = res['data'][1][0]['141']['raw_stat']['6']
             if code == 1:
                 adfree_24h_stat = '已获得免广告状态：24h'
             else:
                 adfree_24h_stat = '观看视频失败！'
         except Exception as e:
-            adfree_24h_stat = e
+            adfree_24h_stat = str(e)
         return adfree_24h_stat
     
 
@@ -148,25 +150,28 @@ class NGACheckIn:
                 "__lib": "mission",
                 "__output": "11"
                 }
-        res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
-        res = json.loads(res)
-        # print(res)
+        ids = ('142', '143', '144', '145')
+        success_sum = 0
+        failure_sum = 0
+        failure_msg = ''
+        failure_msg_all = ''
         code = {}
-        try:
-            ids = ('142', '143', '144', '145')
-            success_sum = 0
-            failure_sum = 0            
-            for i in range(len(ids)):
-                code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
+        for i in range(len(ids)):
+            try:
+                res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
+                res = json.loads(res)
                 time.sleep(30)
+                code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
                 if code[i] == 1:
                     success_sum += 1
                 else:
                     failure_sum += 1
-            adfree_time = success_sum * 6
-            adfree_stat = f'观看视频成功次数：{success_sum}，共获得免广告时长：{adfree_time}h' if failure_sum == 0 else f'观看视频成功次数：{success_sum}，共获得免广告时长：{adfree_time}h；观看视频失败次数：{failure_sum}'
-        except Exception as e:
-            adfree_stat = e
+            except Exception as e:
+                failure_msg = str(e)
+                failure_sum += 1
+            failure_msg_all += failure_msg + '\n'
+        adfree_time = success_sum * 6
+        adfree_stat = f'观看视频成功次数：{success_sum}，共获得免广告时长：{adfree_time}h' if failure_sum == 0 else f'观看视频成功次数：{success_sum}，共获得免广告时长：{adfree_time}h；\n观看视频失败次数：{failure_sum}；\n错误信息：{failure_msg_all}'
         return adfree_stat
 
 
