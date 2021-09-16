@@ -97,17 +97,19 @@ class NGACheckIn:
         failure_sum = 0
         failure_msg = ''
         failure_msg_all = ''
-        code = {}
+        task_code = {}
+        time_code = {}
         for i in range(len(ids)):
             try:
                 res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
                 res = json.loads(res)
                 time.sleep(30)
-                code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
-                if  code[i] == 1:
+                task_code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
+                time_code[i] = res['data'][1][0][ids[i]]['raw_stat']['5']
+                if  task_code[i] == 1:
                     success_sum += 1
-                else:
-                    failure_sum += 1
+                elif task_code[i] == 0 and time_code == 1:
+                    success_sum += 1
             except Exception as e:
                 failure_msg = str(e)
                 failure_sum += 1
