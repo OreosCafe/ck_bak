@@ -165,6 +165,16 @@
             "running":true
         },
         {
+            "name":"恩山论坛",
+            "type":"cron",
+            "time":"1 15 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"checkin.js -env PYNAME=ck_enshan.py"
+            },
+            "running":true
+        },
+        {
             "name":"Fa米家",
             "type":"cron",
             "time":"30 14 * * *",
