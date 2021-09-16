@@ -215,6 +215,16 @@
             "running":true
         },
         {
+            "name":"掘金",
+            "type":"cron",
+            "time":"7 11 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"checkin.js -env PYNAME=ck_juejin.py"
+            },
+            "running":true
+        },
+        {
             "name":"全民K歌",
             "type":"cron",
             "time":"55 14 * * *",
