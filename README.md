@@ -60,7 +60,7 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹**
 
-- OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json` -> 开始上传
+- OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json5` -> 开始上传
 
 - elecV2P 3.4.6 已支持在线编辑，右键文件即可
 
@@ -237,6 +237,20 @@ Shell 版本将 `env.example` 配置好后改名为 `.env` 后放入 `script/She
 2. elecV2P 运行 `手动更新` 任务可强制同步本仓库
 
 3. 大部分脚本移植于 [Sitoi](https://github.com/Sitoi/dailycheckin)，Sitoi 于 2021 年 9 月 3 日 [dailycheckin-0.1.7](https://files.pythonhosted.org/packages/ee/8d/b49624a4d11c51f4e3dfb98f622d0c1ffe5d6315ad39452859ea8703206f/dailycheckin-0.1.7.tar.gz)  版本适配了青龙，[使用教程](https://sitoi.gitee.io/dailycheckin/qinglong/)与本仓库教程不相同，切勿使用本仓库 [checkinpanel](https://github.com/Oreomeow/checkinpanel) 的同时去问大佬
+
+4. 2021 年 9 月 13 日起不再更新 `.json` 后缀的配置文件
+
+5. 项目完成情况
+
+- [x] 多账号不全
+- [x] 配置文件由严格的 `.json` 向支持注释的 `.json5` 过渡
+- [x] 双平台适配 -> 更多环境适配
+- [x] 配置文件支持自定义路径
+- [x] 通知多线程
+- [x] 通知输出优化
+- [x] 通知方式增加，如飞书
+- [ ] cron 随机
+- [ ] 自动更新 elecV2P 任务列表
 
 ## 计划说明
 
