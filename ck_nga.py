@@ -102,7 +102,6 @@ class NGACheckIn:
             try:
                 res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
                 res = json.loads(res)
-                print(res)
                 time.sleep(30)
                 code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
                 if  code[i] == 1:
