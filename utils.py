@@ -34,3 +34,4 @@ def get_data() -> object:
         return DATA
     except ValueError:
         print(f'错误：配置文件 {check_config} 格式不对，请在 https://verytoolz.com/json5-validator.html 中检查格式')
+        exit(1)
