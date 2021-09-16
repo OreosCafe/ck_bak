@@ -265,6 +265,16 @@
             "running":true
         },
         {
+            "name":"NGA",
+            "type":"cron",
+            "time":"6 13 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"checkin.js -env PYNAME=ck_nga.py"
+            },
+            "running":true
+        },
+        {
             "name":"一加手机社区官方论坛",
             "type":"cron",
             "time":"3 0 * * *",

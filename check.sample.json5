@@ -54,7 +54,7 @@
 // Bilibili
    BILIBILI_COOKIE_LIST: [
      {
-       bilibili_cookie: '_uuid=xxxxxx; rpdid=xxxxxx; LIVE_BUVID=xxxxxx; PVID=xxxxxx; blackside_state=xxxxxx; CURRENT_FNVAL=xxxxxx; buvid3=xxxxxx; fingerprint3=xxxxxx; fingerprint=xxxxxx; buivd_fp=xxxxxx; buvid_fp_plain=xxxxxx; DedeUserID=xxxxxx; DedeUserID__ckMd5=xxxxxx; SESSDATA=xxxxxx; bili_jct=xxxxxx; bsource=xxxxxx; finger=xxxxxx; fingerprint_s=xxxxxx;',
+       bilibili_cookie: "_uuid=xxxxxx; rpdid=xxxxxx; LIVE_BUVID=xxxxxx; PVID=xxxxxx; blackside_state=xxxxxx; CURRENT_FNVAL=xxxxxx; buvid3=xxxxxx; fingerprint3=xxxxxx; fingerprint=xxxxxx; buivd_fp=xxxxxx; buvid_fp_plain=xxxxxx; DedeUserID=xxxxxx; DedeUserID__ckMd5=xxxxxx; SESSDATA=xxxxxx; bili_jct=xxxxxx; bsource=xxxxxx; finger=xxxxxx; fingerprint_s=xxxxxx;",
        coin_num: 0,
        coin_type: 1,
        silver2coin: true,
@@ -224,6 +224,18 @@
 //     {
 //       music163_phone: '',
 //       music163_password: '',
+//     },
+   ],
+
+// NGA
+   NGA_COOKIE_LIST: [
+     {
+       token: 'X8xxxxghxxxxxxxxujxxxxxxxv9xxxxxxxxccxxx',
+       uid: 'xxxxx391',
+     },
+//     {
+//       token: '',  // POST https://ngabbs.com/nuke.php  请求主体 access_token
+//       uid: '',    // POST https://ngabbs.com/nuke.php  请求主体 access_uid，纯数字
 //     },
    ],
 
