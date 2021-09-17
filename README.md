@@ -58,7 +58,7 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 ### 3. 上传配置
 
-将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹**
+将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹
 
 - OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json5` -> 开始上传
 
@@ -132,7 +132,8 @@ apk add gcc libffi-dev musl-dev openssl-dev python3-dev && pip3 install cryptogr
 
 ``` sh
 requirement_name="cryptography~=3.2.1 json5 requests rsa"
-install_requirements(){
+
+install_requirements() {
     for i in $requirement_name; do
         case $i in
             cryptography~=3.2.1)
@@ -153,6 +154,7 @@ install_requirements(){
         esac
     done
 }
+
 install_requirements
 ```
 
@@ -227,7 +229,7 @@ Shell 版本将 `env.example` 配置好后改名为 `.env` 后放入 `script/She
 ### 4. **添加了欢太商城的签到配置**
 
 - [欢太商城 HttpCanary 抓包教程](https://github.com/hwkxk/HeytapTask/wiki/%E6%AC%A2%E5%A4%AA%E5%95%86%E5%9F%8EHttpCanary%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B)
-- 部分域名屏蔽境外IP访问，所以本项目不适于在 非中国IP代理网络下 / Github Actions / 境外VPS 上运行!
+- 部分域名屏蔽境外 IP 访问，所以本项目不适于在 非中国 IP 代理网络下 / Github Actions / 境外 VPS 上运行!
 - 从未在欢太商城做过任务，请先手动进入任务中心完成一下任务再使用，否则可能无法获取到任务列表数据导致出错！@YYplus
 
 ## 其他说明
