@@ -11,7 +11,7 @@ import requests
 import sys
 import time
 import traceback
-import act_utils
+import utils_act
 from utils import get_data
 from notify_mtr import send
 
@@ -31,7 +31,7 @@ class Heytap:
         self.sa_device_id = ''
         self.s_version = ''
         self.brand = 'iPhone'  # 初始化设置为iPhone，会从cookie获取实际机型
-        self.act_task = act_utils.act_list  # 修改为从文件获取，避免更新代码后丢失原有活动配置
+        self.act_task = utils_act.act_list  # 修改为从文件获取，避免更新代码后丢失原有活动配置
         self.if_draw = False  # 初始化设置为False，会从配置文件获取实际设置
 
 
