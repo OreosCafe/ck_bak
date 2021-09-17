@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-cron: 19 8 * * *
+cron: 19 5,21 * * *
 new Env('欢太商城');
 """
 
@@ -11,7 +11,7 @@ import requests
 import sys
 import time
 import traceback
-import act_list
+import act_utils
 from utils import get_data
 from mtr_notify import send
 
@@ -31,10 +31,11 @@ class Heytap:
         self.sa_device_id = ''
         self.s_version = ''
         self.brand = 'iPhone'  # 初始化设置为iPhone，会从cookie获取实际机型
-        self.act_task = act_list.act_list  # 修改为从文件获取，避免更新代码后丢失原有活动配置
+        self.act_task = act_utils.act_list  # 修改为从文件获取，避免更新代码后丢失原有活动配置
         self.if_draw = False  # 初始化设置为False，会从配置文件获取实际设置
 
-    # 获取cookie里的一些参数，部分请求需要使用到  hss修改
+
+    # 获取cookie里的一些参数，部分请求需要使用到————hss修改
     def get_cookie_data(self):
         try:
             app_param = re.findall('app_param=(.*?)}', self.HT_cookies)[0] + '}'
@@ -50,8 +51,9 @@ class Heytap:
             self.s_channel = 'ios_oppostore'
             self.source_type = '505'
 
+
     # 获取个人信息，判断登录状态
-    def get_infouser(self):
+    def get_user_info(self):
         flag = False
         headers = {
             'Host': 'www.heytap.com',
@@ -69,8 +71,8 @@ class Heytap:
             result = response.json()
             if result['code'] == 200:
                 self.log += f'======== {result["data"]["realName"]} ========\n'
-                self.log += '【登录成功】: ' + result['data']['realName'] + f'\n【抽奖开关】：{self.if_draw}\n'
-                print('【登录成功】: ' + result['data']['realName'] + f'\n【抽奖开关】：{self.if_draw}\n')
+                self.log += '【登录成功】：' + result['data']['realName'] + f'\n【抽奖开关】：{self.if_draw}\n'
+                print('【登录成功】：' + result['data']['realName'] + f'\n【抽奖开关】：{self.if_draw}\n')
                 flag = True
             else:
                 self.log += '【登录失败】: ' + result['errorMessage'] + '\n'
@@ -85,6 +87,7 @@ class Heytap:
             return self.session
         else:
             return False
+
 
     # 任务中心列表，获取任务及任务状态
     def taskCenter(self):
@@ -103,9 +106,10 @@ class Heytap:
         res1 = res1.json()
         return res1
 
+
     # 每日签到
     # 位置: APP → 我的 → 签到
-    def daySign_task(self):
+    def daily_bonus(self):
         try:
             dated = time.strftime("%Y-%m-%d")
             headers = {
@@ -156,13 +160,14 @@ class Heytap:
                                 self.log += '【每日签到失败】: ' + str(res1) + '\n'
                                 print('【每日签到失败】: ' + str(res1) + '\n')
             else:
-                self.log += '【每日签到】: 已经签到过了！\n'
-                print('【每日签到】: 已经签到过了！\n')
+                self.log += '【每日签到】：已经签到过了！\n'
+                print('【每日签到】：已经签到过了！\n')
             time.sleep(1)
         except Exception as e:
             print(traceback.format_exc())
-            self.log += '【每日签到】: 错误，原因为: ' + str(e) + '\n'
-            print('【每日签到】: 错误，原因为: ' + str(e) + '\n')
+            self.log += '【每日签到】：错误，原因为: ' + str(e) + '\n'
+            print('【每日签到】：错误，原因为: ' + str(e) + '\n')
+
 
     # 浏览商品 10个sku +20 分
     # 位置: APP → 我的 → 签到 → 每日任务 → 浏览商品
@@ -199,29 +204,30 @@ class Heytap:
                                 time.sleep(5)
                             res2 = self.cashingCredits(data['marking'], data['type'], data['credits'])
                             if res2:
-                                self.log += '【每日浏览商品】: ' + '任务完成！积分领取+' + str(data['credits']) + '\n'
-                                print('【每日浏览商品】: ' + '任务完成！积分领取+' + str(data['credits']) + '\n')
+                                self.log += '【每日浏览商品】：' + '任务完成！积分领取+' + str(data['credits']) + '\n'
+                                print('【每日浏览商品】：' + '任务完成！积分领取+' + str(data['credits']) + '\n')
                             else:
-                                self.log += '【每日浏览商品】: ' + "领取积分奖励出错！\n"
-                                print('【每日浏览商品】: ' + "领取积分奖励出错！\n")
+                                self.log += '【每日浏览商品】：' + "领取积分奖励出错！\n"
+                                print('【每日浏览商品】：' + "领取积分奖励出错！\n")
                         else:
-                            self.log += '【每日浏览商品】: 错误，获取商品列表失败\n'
-                            print('【每日浏览商品】: 错误，获取商品列表失败\n')
+                            self.log += '【每日浏览商品】：错误，获取商品列表失败\n'
+                            print('【每日浏览商品】：错误，获取商品列表失败\n')
                     elif data['completeStatus'] == 1:
                         res2 = self.cashingCredits(data['marking'], data['type'], data['credits'])
                         if res2:
-                            self.log += '【每日浏览商品】: ' + '任务完成！积分领取+' + str(data['credits']) + '\n'
-                            print('【每日浏览商品】: ' + '任务完成！积分领取+' + str(data['credits']) + '\n')
+                            self.log += '【每日浏览商品】：' + '任务完成！积分领取+' + str(data['credits']) + '\n'
+                            print('【每日浏览商品】：' + '任务完成！积分领取+' + str(data['credits']) + '\n')
                         else:
-                            self.log += '【每日浏览商品】: ' + '领取积分奖励出错！\n'
-                            print('【每日浏览商品】: ' + '领取积分奖励出错！\n')
+                            self.log += '【每日浏览商品】：' + '领取积分奖励出错！\n'
+                            print('【每日浏览商品】：' + '领取积分奖励出错！\n')
                     else:
-                        self.log += '【每日浏览商品】: ' + '任务已完成！\n'
-                        print('【每日浏览商品】: ' + '任务已完成！\n')
+                        self.log += '【每日浏览商品】：' + '任务已完成！\n'
+                        print('【每日浏览商品】：' + '任务已完成！\n')
         except Exception as e:
             print(traceback.format_exc())
             self.log += '【每日浏览任务】: 错误，原因为: ' + str(e) + '\n'
             print('【每日浏览任务】: 错误，原因为: ' + str(e) + '\n')
+
 
     def daily_sharegoods(self):
         try:
@@ -250,26 +256,27 @@ class Heytap:
                     count += 1
                 res2 = self.cashingCredits(qd['marking'], qd['type'], qd['credits'])
                 if res2:
-                    self.log += '【每日分享商品】: ' + '任务完成！积分领取+' + str(qd['credits']) + '\n'
-                    print('【每日分享商品】: ' + '任务完成！积分领取+' + str(qd['credits']) + '\n')
+                    self.log += '【每日分享商品】：' + '任务完成！积分领取+' + str(qd['credits']) + '\n'
+                    print('【每日分享商品】：' + '任务完成！积分领取+' + str(qd['credits']) + '\n')
                 else:
-                    self.log += '【每日分享商品】: ' + '领取积分奖励出错！\n'
-                    print('【每日分享商品】: ' + '领取积分奖励出错！\n')
+                    self.log += '【每日分享商品】：' + '领取积分奖励出错！\n'
+                    print('【每日分享商品】：' + '领取积分奖励出错！\n')
             elif qd['completeStatus'] == 1:
                 res2 = self.cashingCredits(qd['marking'], qd['type'], qd['credits'])
                 if res2:
-                    self.log += '【每日分享商品】: ' + '任务完成！积分领取+' + str(qd['credits']) + '\n'
-                    print('【每日分享商品】: ' + '任务完成！积分领取+' + str(qd['credits']) + '\n')
+                    self.log += '【每日分享商品】：' + '任务完成！积分领取+' + str(qd['credits']) + '\n'
+                    print('【每日分享商品】：' + '任务完成！积分领取+' + str(qd['credits']) + '\n')
                 else:
-                    self.log += '【每日分享商品】: ' + '领取积分奖励出错！\n'
-                    print('【每日分享商品】: ' + '领取积分奖励出错！\n')
+                    self.log += '【每日分享商品】：' + '领取积分奖励出错！\n'
+                    print('【每日分享商品】：' + '领取积分奖励出错！\n')
             else:
-                self.log += '【每日分享商品】: ' + '任务已完成！\n'
-                print('【每日分享商品】: ' + '任务已完成！\n')
+                self.log += '【每日分享商品】：' + '任务已完成！\n'
+                print('【每日分享商品】：' + '任务已完成！\n')
         except Exception as e:
             print(traceback.format_exc())
-            self.log += '【每日分享商品】: 错误，原因为: ' + str(e) + '\n'
-            print('【每日分享商品】: 错误，原因为: ' + str(e) + '\n')
+            self.log += '【每日分享商品】：错误，原因为: ' + str(e) + '\n'
+            print('【每日分享商品】：错误，原因为: ' + str(e) + '\n')
+
 
     def daily_viewpush(self):
         try:
@@ -319,6 +326,7 @@ class Heytap:
             self.log += '【每日推送消息】: 错误，原因为: ' + str(e) + '\n'
             print('【每日推送消息】: 错误，原因为: ' + str(e) + '\n')
 
+
     # 执行完成任务领取奖励
     def cashingCredits(self, info_marking, info_type, info_credits):
         headers = {
@@ -335,18 +343,14 @@ class Heytap:
             'X-Requested-With': 'com.oppo.store',
             'referer': 'https://store.oppo.com/cn/app/taskCenter/index?us=gerenzhongxin&um=hudongleyuan&uc=renwuzhongxin'
         }
-
         data = "marking=" + str(info_marking) + "&type=" + str(info_type) + "&amount=" + str(info_credits)
-
-        res = self.client.post('https://store.oppo.com/cn/oapi/credits/web/credits/cashingCredits', data=data,
-                               headers=headers)
-
+        res = self.client.post('https://store.oppo.com/cn/oapi/credits/web/credits/cashingCredits', data=data, headers=headers)
         res = res.json()
-
         if res['code'] == 200:
             return True
         else:
             return False
+
 
     # 活动平台抽奖通用接口
     def lottery(self, datas, referer='', extra_draw_cookie=''):
@@ -361,6 +365,7 @@ class Heytap:
         res = self.client.post('https://hd.oppo.com/platform/lottery', data=datas, headers=headers)
         res = res.json()
         return res
+
 
     # 活动平台完成任务接口
     def task_finish(self, aid, t_index):
@@ -379,6 +384,7 @@ class Heytap:
         res = res.json()
         return res
 
+
     # 活动平台领取任务奖励接口
     def task_award(self, aid, t_index):
         headers = {
@@ -396,7 +402,8 @@ class Heytap:
         res = res.json()
         return res
 
-    # 做活动任务和抽奖通用接口  hss修改
+
+    # 做活动任务和抽奖通用接口————hss修改
     def doTask_and_draw(self):
         for act_list in self.act_task:
             act_name = act_list['act_name']
@@ -473,6 +480,7 @@ class Heytap:
                 self.log += f'【{act_name}】：活动已结束，不再执行\n'
                 print(f'【{act_name}】：活动已结束，不再执行\n')
 
+
     # 暂时保留，aid和我抓取的不一致
     # realme宠粉计划-幸运抽奖-转盘
     def realme_lottery(self):
@@ -488,9 +496,9 @@ class Heytap:
         print('【realme宠粉计划转盘】获得：' + str(goods_name) + '\n')
         time.sleep(3)
 
+
     # 早睡打卡
     def zaoshui_task(self):
-
         try:
             headers = {
                 'Host': 'store.oppo.com',
@@ -553,7 +561,6 @@ class Heytap:
                     i += 1
                     if i == 4:  # 最多显示最近2条记录
                         break
-
         except Exception as e:
             print(traceback.format_exc())
             self.log += '【早睡打卡】\n错误，原因为: ' + str(e) + '\n'
@@ -565,15 +572,15 @@ class Heytap:
         i = 1
         for config in self.login:
             self.HT_cookies = config['cookies']
-            self.HT_UserAgent = config['User-Agent']
+            self.HT_UserAgent = config['UserAgent']
             self.if_draw = config['if_draw']
-            self.client = self.get_infouser()
+            self.client = self.get_user_info()
             if self.client:
                 try:
-                    self.daySign_task()  # 执行每日签到
+                    self.daily_bonus()  # 执行每日签到
                     self.daily_viewgoods()  # 执行每日商品浏览任务
                     self.daily_sharegoods()  # 执行每日商品分享任务
-                    self.daily_viewpush()  # 执行每日点推送任务
+                    # self.daily_viewpush()  # 执行每日点推送任务（已下架）
                     self.doTask_and_draw()  # 自己修改的接口，针对活动任务及抽奖，新增及删除活动请修改self.act_task
                     self.zaoshui_task()  # 早睡报名
                 except Exception as e:

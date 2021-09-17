@@ -1,15 +1,4 @@
-act_list = [
-    {'act_name': '赚积分', 'aid': 1418,
-     'if_task': True,  # 是否有任务
-     'referer': 'https://hd.oppo.com/act/m/2021/jifenzhuanpan/index.html?us=gerenzhongxin&um=hudongleyuan&uc=yingjifen',
-     'if_draw': True,  # 是否有抽奖活动，已修复抽奖，如不需要抽奖请自行修改为False
-     'extra_draw_cookie': 'app_innerutm={"uc":"yingjifen","um":"hudongleyuan","ut":"direct","us":"gerenzhongxin"};app_utm={"utm_source_app":"direct","utm_campaign_app":"direct","utm_term_app":"direct","utm_medium_app":"direct"};',
-     # 抽奖必要的额外cookie信息，请勿随意修改，否则可能导致不中奖
-     'lid': 1307,  # 抽奖参数
-     'draw_times': 3,  # 控制抽奖次数
-     'end_time': '2033-8-18 23:59:59',  # 长期任务
-     'text':'每次扣取0积分'
-     },
+expired_act_list = [
     {'act_name': '818周年庆', 'aid': 1506,
      'if_task': True,
      'referer': 'https://hd.oppo.com/act/m/2021/huantai618jifenpengz/index.html?us=shouye&um=youshangjiao&uc=zhounianqing',
@@ -39,7 +28,6 @@ act_list = [
      'draw_times': 3,
      'end_time': '2021-8-31 23:59:59',
      'text':'每次扣取10积分'
-
      },
     {'act_name': 'realme宠粉计划1', 'aid': 1182,
      'if_task': False,  # 该活动没有任务
@@ -98,6 +86,21 @@ act_list = [
      'lid': 1514,
      'draw_times': 3,
      'end_time': '2021-8-18 23:59:59',  # 活动8-5结束，实际还能玩
+     'text':'每次扣取0积分'
+     },
+]
+
+
+act_list = [
+    {'act_name': '赚积分', 'aid': 1418,
+     'if_task': True,  # 是否有任务
+     'referer': 'https://hd.oppo.com/act/m/2021/jifenzhuanpan/index.html?us=gerenzhongxin&um=hudongleyuan&uc=yingjifen',
+     'if_draw': True,  # 是否有抽奖活动，已修复抽奖，如不需要抽奖请自行修改为False
+     'extra_draw_cookie': 'app_innerutm={"uc":"yingjifen","um":"hudongleyuan","ut":"direct","us":"gerenzhongxin"};app_utm={"utm_source_app":"direct","utm_campaign_app":"direct","utm_term_app":"direct","utm_medium_app":"direct"};',
+     # 抽奖必要的额外cookie信息，请勿随意修改，否则可能导致不中奖
+     'lid': 1307,  # 抽奖参数
+     'draw_times': 3,  # 控制抽奖次数
+     'end_time': '2033-8-18 23:59:59',  # 长期任务
      'text':'每次扣取0积分'
      },
 ]

@@ -197,7 +197,7 @@
         {
             "name":"欢太商城",
             "type":"cron",
-            "time":"19 8 * * *",
+            "time":"19 5,21 * * *",
             "job":{
                 "type":"runjs",
                 "target":"checkin.js -env PYNAME=ck_heytap.py"
