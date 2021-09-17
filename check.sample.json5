@@ -141,6 +141,16 @@
 //     },
    ],
 
+// GLaDOS
+   GLADOS_COOKIE_LIST: [
+     {
+       glados_cookie: 'koa:sess=xxxxxx; koa:sess.sig=xxxxxx',
+     },
+//     {
+//       glados_cookie: 'koa:sess=xxxxxx; koa:sess.sig=xxxxxx',
+//     },
+   ],
+
 // 欢太商城
    HEYTAP_COOKIE_LIST: [
       {
@@ -180,7 +190,7 @@
 // 掘金
    JUEJIN_COOKIE_LIST: [
      {
-       juejin_cookie:"ttcid=xxxxxx; MONITOR_WEB_ID=xxxxxx; passport_csrf_token_default=xxxxxx; passport_csrf_token=xxxxxx; s_v_web_id=xxxxxx; MONITOR_DEVICE_ID=xxxxxx; n_mh=xxxxxx; passport_auth_status=xxxxxx; passport_auth_status_ss=xxxxxx; sid_guard=xxxxxx; uid_tt=xxxxxx; uid_tt_ss=xxxxxx; sid_tt=xxxxxx; sessionid=xxxxxx; sessionid_ss=xxxxxx; sid_ucp_v1=xxxxxx; ssid_ucp_v1=xxxxxx; odin_tt=xxxxxx; tt_scid=xxxxxx"
+       juejin_cookie:'ttcid=xxxxxx; MONITOR_WEB_ID=xxxxxx; passport_csrf_token_default=xxxxxx; passport_csrf_token=xxxxxx; s_v_web_id=xxxxxx; MONITOR_DEVICE_ID=xxxxxx; n_mh=xxxxxx; passport_auth_status=xxxxxx; passport_auth_status_ss=xxxxxx; sid_guard=xxxxxx; uid_tt=xxxxxx; uid_tt_ss=xxxxxx; sid_tt=xxxxxx; sessionid=xxxxxx; sessionid_ss=xxxxxx; sid_ucp_v1=xxxxxx; ssid_ucp_v1=xxxxxx; odin_tt=xxxxxx; tt_scid=xxxxxx'
      },
 //     {
 //       juejin_cookie: '',

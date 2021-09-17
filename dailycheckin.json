@@ -195,6 +195,16 @@
             "running":true
         },
         {
+            "name":"GLaDOS",
+            "type":"cron",
+            "time":"11 6 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"checkin.js -env PYNAME=ck_glados.py"
+            },
+            "running":true
+        },
+        {
             "name":"欢太商城",
             "type":"cron",
             "time":"19 5,21 * * *",
