@@ -7,7 +7,10 @@
      '上海',
 //     '朝阳区',
    ],
- 
+
+// LeetCode 每日一题
+   LEETCODE: false,
+
 // 每日一句
    MOTTO: true,
  
@@ -184,6 +187,16 @@
      },
 //     {
 //       iqiyi_cookie: '',
+//     },
+   ],
+
+// HiFiNi
+   HIFINI_COOKIE_LIST: [
+     {
+       hifini_cookie:'bbs_sid=xxxxxx; bbs_token=xxxxxx'
+     },
+//     {
+//       hifini_cookie: '',
 //     },
    ],
 

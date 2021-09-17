@@ -75,6 +75,16 @@
             "running":true
         },
         {
+            "name":"LeetCode 每日一题",
+            "type":"cron",
+            "time":"10 10 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"checkin.js -env PYNAME=api_leetcode.py"
+            },
+            "running":true
+        },
+        {
             "name":"每日一句",
             "type":"cron",
             "time":"30 7 * * *",
@@ -211,6 +221,16 @@
             "job":{
                 "type":"runjs",
                 "target":"checkin.js -env PYNAME=ck_heytap.py"
+            },
+            "running":true
+        },
+        {
+            "name":"HiFiNi",
+            "type":"cron",
+            "time":"0 0 0 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"checkin.js -env PYNAME=ck_hifini.py"
             },
             "running":true
         },
