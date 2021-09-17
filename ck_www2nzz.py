@@ -7,7 +7,7 @@ new Env('咔叽网单');
 import json, os, re, requests, urllib3
 from requests import utils
 from utils import get_data
-from mtr_notify import send
+from notify_mtr import send
 
 urllib3.disable_warnings()
 

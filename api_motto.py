@@ -6,7 +6,7 @@ new Env('每日一句');
 
 import json, requests
 from utils import get_data
-from mtr_notify import send
+from notify_mtr import send
 
 
 class Motto:

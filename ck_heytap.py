@@ -13,7 +13,7 @@ import time
 import traceback
 import act_utils
 from utils import get_data
-from mtr_notify import send
+from notify_mtr import send
 
 
 class Heytap:

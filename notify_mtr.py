@@ -12,7 +12,7 @@ import urllib.parse
 import json5 as json
 import requests
 
-from env_utils import get_file_path
+from utils_env import get_file_path
 
 # cur_path = os.path.abspath(os.path.dirname(__file__))
 # root_path = os.path.split(cur_path)[0]

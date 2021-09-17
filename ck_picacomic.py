@@ -6,7 +6,7 @@ new Env('哔咔漫画');
 
 import hashlib, hmac, json, os, random, requests, string, time
 from utils import get_data
-from mtr_notify import send
+from notify_mtr import send
 
 
 class PicacomicCheckIn:

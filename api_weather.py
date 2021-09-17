@@ -7,7 +7,7 @@ new Env('天气预报');
 import json, os, shutil, requests
 from datetime import datetime
 from utils import get_data
-from mtr_notify import send
+from notify_mtr import send
 
 
 class Weather:

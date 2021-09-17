@@ -107,11 +107,11 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 #### 4.3 通知说明
 
-本通知调用了项目中的 [𝒎𝒕𝒓_𝒏𝒐𝒕𝒊𝒇𝒚.𝒑𝒚](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/mtr_notify.py) 。如果你想在**你自己的项目中**使用这个通知脚本，将它拷贝并调用对应的通知函数即可。
+本通知调用了项目中的 [𝒏𝒐𝒕𝒊𝒇𝒚_𝒎𝒕𝒓.𝒑𝒚](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/notify_mtr.py) 。如果你想在**你自己的项目中**使用这个通知脚本，将它拷贝并调用对应的通知函数即可。
 
 在非容器环境中，通知环境变量使用 系统的环境变量 或者 **你通过 `NOTIFY_CONFIG_PATH` 环境变量指定的配置文件** 进行配置。
 
-特别的，如果你想要创建一个基于 python 的 elecV2P 或者 qinglong 项目，强烈建议你拷贝 [此文件](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/mtr_notify.py)，如此可以大幅度降低用户脚本的配置难度和升级难度。
+特别的，如果你想要创建一个基于 python 的 elecV2P 或者 qinglong 项目，强烈建议你拷贝 [此文件](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/notify_mtr.py)，如此可以大幅度降低用户脚本的配置难度和升级难度。
 
 ## 𝐪𝐢𝐧𝐠𝐥𝐨𝐧𝐠 使用方法
 
@@ -165,7 +165,7 @@ install_requirements
 可添加定时任务，名称、时间自定
 
 ```
-ql repo https://github.com/Oreomeow/checkinpanel.git "api_|ck_" "^checkin" "$notify|$utils" "master"
+ql repo https://github.com/Oreomeow/checkinpanel.git "api_|ck_" "^checkin" "^notify|^utils" "master"
 ```
 
 **解决 Shell 脚本无法拉取问题**

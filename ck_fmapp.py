@@ -6,7 +6,7 @@ new Env('Fa米家');
 
 import json, requests
 from utils import get_data
-from mtr_notify import send
+from notify_mtr import send
 
 
 class FMAPPCheckIn:

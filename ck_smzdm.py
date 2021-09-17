@@ -7,7 +7,7 @@ new Env('什么值得买');
 import json, os, requests
 from requests import utils
 from utils import get_data
-from mtr_notify import send
+from notify_mtr import send
 
 
 class SmzdmCheckIn:

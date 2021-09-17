@@ -7,7 +7,7 @@ new Env('百度搜索资源平台');
 import json, os, requests
 from urllib import parse
 from utils import get_data
-from mtr_notify import send
+from notify_mtr import send
 
 
 class BaiduUrlSubmit:
