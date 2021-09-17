@@ -165,7 +165,7 @@ install_requirements
 可添加定时任务，名称、时间自定
 
 ```
-ql repo https://github.com/Oreomeow/checkinpanel.git "ck_|motto|weather" "^checkin" "$notify|$utils" "master"
+ql repo https://github.com/Oreomeow/checkinpanel.git "api_|ck_" "^checkin" "$notify|$utils" "master"
 ```
 
 **解决 Shell 脚本无法拉取问题**

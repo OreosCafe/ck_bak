@@ -75,22 +75,22 @@
             "running":true
         },
         {
-            "name":"天气预报",
-            "type":"cron",
-            "time":"30 7 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=weather.py"
-            },
-            "running":true
-        },
-        {
             "name":"每日一句",
             "type":"cron",
             "time":"30 7 * * *",
             "job":{
                 "type":"runjs",
-                "target":"checkin.js -env PYNAME=motto.py"
+                "target":"checkin.js -env PYNAME=api_motto.py"
+            },
+            "running":true
+        },
+        {
+            "name":"天气预报",
+            "type":"cron",
+            "time":"30 7 * * *",
+            "job":{
+                "type":"runjs",
+                "target":"checkin.js -env PYNAME=api_weather.py"
             },
             "running":true
         },
