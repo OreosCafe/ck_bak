@@ -11,7 +11,6 @@ class KJWJCheckIn:
 
 
     def login(self, usr, pwd):
-        session = requests.Session()
         login_url = 'https://www.kejiwanjia.com/wp-json/jwt-auth/v1/token'
         headers = {
             'user-agent': 'Mozilla/5.0 (Linux; Android 10; PBEM00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.52 Mobile Safari/537.36'
@@ -29,7 +28,7 @@ class KJWJCheckIn:
             'confirmPassword': '',
             'loginType': ''
         }
-        res = session.post(login_url, headers=headers, data=data)
+        res = requests.post(login_url, headers=headers, data=data)
         if res.status_code == 200:
             status = res.json()
             login_stat = f"账号：{status.get('name')} 登陆成功"
@@ -43,9 +42,8 @@ class KJWJCheckIn:
                 'origin': 'https://www.kejiwanjia.com',
                 'referer': 'https://www.kejiwanjia.com/task',
                 'user-agent': 'Mozilla/5.0 (Linux; Android 10; PBEM00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.52 Mobile Safari/537.36'
-
             }
-            resp = session.post(check_url, headers=check_head)
+            resp = requests.post(check_url, headers=check_head)
             if resp.status_code == 200:
                 info = resp.json()
                 # print(info)

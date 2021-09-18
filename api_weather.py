@@ -14,6 +14,7 @@ class Weather:
     def __init__(self, city_name_list):
         self.city_name_list = city_name_list
 
+
     def main(self):
         """
         获取天气信息。网址：https://www.sojson.com/blog/305.html
