@@ -4,8 +4,8 @@ import requests
 __version__ = '20210918-133'
 
 def get_present_ver():
-	ver_msg = f'checkinpanel 当前版本：{__version__}'
-	return ver_msg
+    ver_msg = f'checkinpanel 当前版本：{__version__}'
+    return ver_msg
 
 def get_latest_ver():
     url = "https://ghproxy.com/https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/utils_ver.py"
@@ -20,4 +20,4 @@ def get_latest_ver():
     return ver_msg
 
 def print_ver():
-	print(f'{get_present_ver()}，{get_latest_ver()}\n')
+    print(f'{get_present_ver()}，{get_latest_ver()}\n')
