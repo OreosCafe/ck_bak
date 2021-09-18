@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-cron: 6 13 * * *
+cron: 6,26 13 * * *
 new Env('NGA');
 '''
 import json, os, requests, time
