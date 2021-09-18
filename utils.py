@@ -9,7 +9,7 @@ from utils_ver import print_ver
 DATA = {}
 
 
-def get_data() -> object:
+def get_data() -> dict:
     """
     获取签到的配置文件。
 

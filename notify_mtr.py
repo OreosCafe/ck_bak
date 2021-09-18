@@ -14,10 +14,6 @@ import requests
 
 from utils_env import get_file_path
 
-# cur_path = os.path.abspath(os.path.dirname(__file__))
-# root_path = os.path.split(cur_path)[0]
-# sys.path.append(root_path)
-
 # 原先的 print 函数和主线程的锁
 _print = print
 mutex = threading.Lock()
@@ -90,7 +86,7 @@ elif CONFIG_PATH:
 def bark(title: str, content: str) -> None:
     """
     使用 bark 推送消息。
-    """    
+    """
     if not push_config.get('BARK'):
         print('bark 服务的 bark_token 未设置!!\n取消推送')
         return
@@ -111,7 +107,7 @@ def bark(title: str, content: str) -> None:
 def go_cqhttp(title: str, content: str) -> None:
     """
     使用 go_cqhttp 推送一条消息
-    """   
+    """
     if not push_config.get('GOBOT_URL') or not push_config.get('GOBOT_QQ'):
         print('go-cqhttp 服务的 GOBOT_URL 或 GOBOT_QQ 未设置!!\n取消推送')
         return
@@ -211,7 +207,7 @@ def dingding_bot(title: str, content: str) -> None:
 def coolpush_bot(title: str, content: str) -> None:
     """
     使用 qmsg 发送一条消息。
-    """   
+    """
     if not push_config.get('QQ_SKEY') or not push_config.get('QQ_MODE'):
         print('qmsg 的 QQ_SKEY 或者 QQ_MODE 未设置!!\n取消推送')
         return
@@ -230,7 +226,7 @@ def coolpush_bot(title: str, content: str) -> None:
 def pushplus_bot(title: str, content: str) -> None:
     """
     通过 push+ 发送一条推送。
-    """    
+    """
     if not push_config.get('PUSH_PLUS_TOKEN'):
         print('PUSHPLUS 服务的 token 未设置!!\n取消推送')
         return
@@ -255,7 +251,7 @@ def pushplus_bot(title: str, content: str) -> None:
 def wecom_app(title: str, content: str) -> None:
     """
     通过 企业微信 APP 发送推送。
-    """   
+    """
     if not push_config.get('QYWX_AM'):
         print('QYWX_AM 未设置！！\n取消推送')
         return
@@ -345,18 +341,19 @@ class WeCom:
 def feishu(title: str, content: str) -> None:
     """
     通过 飞书 发送一条推送。
-    """ 
+    """
     if not push_config.get('FSKEY'):
         print('飞书 服务的 FSKEY 未设置!!\n取消推送')
         return
     print('飞书 服务启动')
+
     url = f'https://open.feishu.cn/open-apis/bot/v2/hook/{push_config.get("FSKEY")}'
     data = {
-        'msg_type': 'text', 
+        'msg_type': 'text',
         'content': {'text': f'{title}\n\n{content}'}
     }
     response = requests.post(url, data=json.dumps(data, quote_keys=True)).json()
-    # print(response)
+
     if response.get('StatusCode') == 0:
         print('飞书 推送成功！')
     else:
