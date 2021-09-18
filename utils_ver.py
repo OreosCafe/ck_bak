@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import requests
 
-__version__ = '20210918-123'
+__version__ = '20210918-133'
+
 def get_present_ver():
 	ver_msg = f'checkinpanel 当前版本：{__version__}'
 	return ver_msg
@@ -14,7 +15,7 @@ def get_latest_ver():
         ver_msg = f'获取最新版本失败，错误信息如下：\n{e}'
     else:
         raw = r.text
-        latest_ver = raw.split("\n")[1].split("'")[1]
+        latest_ver = raw.split("\n\n")[1].split("'")[1]
         ver_msg = f'最新版本：{latest_ver}'
     return ver_msg
 
