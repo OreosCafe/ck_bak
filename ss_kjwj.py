@@ -48,10 +48,11 @@ class KJWJCheckIn:
             resp = session.post(check_url, headers=check_head)
             if resp.status_code == 200:
                 info = resp.json()
-                if type(info) == str:
-                    sign_info = f"已经签到：{info} 金币"
-                else:
+                # print(info)
+                if 'date' in info:
                     sign_info = f"签到成功：{info.get('credit')} 金币"
+                else:
+                    sign_info = f"已经签到：{info}金币"
         else:
             sign_info = '账号登陆失败: 账号或密码错误'
         return login_stat, id, coin, level, sign_info
