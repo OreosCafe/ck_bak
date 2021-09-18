@@ -115,7 +115,7 @@ class NGACheckIn:
                 failure_sum += 1
             failure_msg_all += failure_msg + '\n'
         video_coin = success_sum // 2 * 1
-        video_view_stat = f'观看任务成功次数：{success_sum}，共获得N币：{video_coin}' if failure_sum == 0 else f'观看任务成功次数：{success_sum}，共获得N币：{video_coin}；\n观看视频失败次数：{failure_sum}；\n错误信息：{failure_msg_all}'
+        video_view_stat = f'观看视频成功次数：{success_sum}，共获得N币：{video_coin}' if failure_sum == 0 else f'观看视频成功次数：{success_sum}，共获得N币：{video_coin}；\n观看视频失败次数：{failure_sum}；\n错误信息：{failure_msg_all}'
         return video_view_stat
 
 
