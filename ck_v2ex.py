@@ -78,6 +78,6 @@ class V2exCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _v2ex_cookie_list = data.get("V2EX_COOKIE_LIST", [])
-    res = WZYDCheckIn(v2ex_cookie_list=_v2ex_cookie_list).main()
+    res = V2exCheckIn(v2ex_cookie_list=_v2ex_cookie_list).main()
     print(res)
     send('V2EX', res)
