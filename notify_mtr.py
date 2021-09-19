@@ -45,8 +45,8 @@ push_config = {
     'DD_BOT_TOKEN': '',                 # 钉钉机器人的 DD_BOT_TOKEN
     'DD_BOT_SECRET': '',                # 钉钉机器人的 DD_BOT_SECRET
 
-    'QQ_MODE': '',                      # qq 机器人的 QQ_MODE
-    'QQ_SKEY': '',                      # qq 机器人的 QQ_SKEY
+    'QMSG_TYPE': '',                      # qq 机器人的 QMSG_TYPE
+    'QMSG_KEY': '',                      # qq 机器人的 QMSG_KEY
 
     'QYWX_AM': '',                      # 企业微信
 
@@ -204,16 +204,16 @@ def dingding_bot(title: str, content: str) -> None:
         print('钉钉机器人 推送失败！')
 
 
-def coolpush_bot(title: str, content: str) -> None:
+def qmsg_bot(title: str, content: str) -> None:
     """
     使用 qmsg 发送一条消息。
     """
-    if not push_config.get('QQ_SKEY') or not push_config.get('QQ_MODE'):
-        print('qmsg 的 QQ_SKEY 或者 QQ_MODE 未设置!!\n取消推送')
+    if not push_config.get('QMSG_KEY') or not push_config.get('QMSG_TYPE'):
+        print('qmsg 的 QMSG_KEY 或者 QMSG_TYPE 未设置!!\n取消推送')
         return
     print('qmsg 启动')
 
-    url = f'https://qmsg.zendee.cn/{push_config.get("QQ_MODE")}/{push_config.get("QQ_SKEY")}'
+    url = f'https://qmsg.zendee.cn/{push_config.get("QMSG_TYPE")}/{push_config.get("QMSG_KEY")}'
     payload = {'msg': f'{title}\n\n{content.replace("----", "-")}'.encode('utf-8')}
     response = requests.post(url=url, params=payload).json()
 
@@ -380,8 +380,8 @@ if push_config.get('TG_BOT_TOKEN') and push_config.get('TG_USER_ID'):
     notify_function.append(telegram_bot)
 if push_config.get('DD_BOT_TOKEN') and push_config.get('DD_BOT_SECRET'):
     notify_function.append(dingding_bot)
-if push_config.get('QQ_SKEY') and push_config.get('QQ_MODE'):
-    notify_function.append(coolpush_bot)
+if push_config.get('QMSG_KEY') and push_config.get('QMSG_TYPE'):
+    notify_function.append(qmsg_bot)
 if push_config.get('PUSH_PLUS_TOKEN'):
     notify_function.append(pushplus_bot)
 if push_config.get('QYWX_AM'):
