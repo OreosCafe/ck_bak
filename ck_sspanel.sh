@@ -12,7 +12,6 @@ check_jq_installed_status
 
 # 版本、初始化变量
 VERSION="2.2.2"
-IS_DISPLAY_CONTEXT=1
 TITLE="🚀SSPanel Auto Checkin v${VERSION}"
 users_array=""
 log_text=""
