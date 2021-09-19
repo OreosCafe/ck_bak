@@ -254,8 +254,10 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 - [x] 通知多线程
 - [x] 通知输出优化
 - [x] 通知方式增加，如飞书
+- [x] Shell 消息推送、环境检查单列
 - [ ] cron 随机
-- [ ] 自动更新 elecV2P 任务列表
+- [ ] elecV2P 任务列表自动更新
+- [ ] 任务多合一执行
 
 ## 计划说明
 

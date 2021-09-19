@@ -12,8 +12,8 @@ import sys
 import time
 import traceback
 import utils_tmp
-from utils import get_data
-from notify_mtr import send
+from utils import get_data   # 云函数删除该行
+from notify_mtr import send  # 云函数采用青龙 notify.py，改为 import notify
 
 
 class Heytap:
@@ -594,9 +594,24 @@ class Heytap:
         return self.log
 
 
-# 主函数入口
+def main_handler(event, context):
+    # 读取 src 目录下 check.json 配置文件
+    with open(os.path.join(os.path.dirname(__file__), "check.json"), "r", encoding="utf-8") as f:
+        cf = json.loads(f.read())
+    cf = get_data()
+    res = Heytap(cf).main()
+    print(res)
+    notify.send('欢太商城', res)
+
+
 if __name__ == '__main__':
     cf = get_data()
     res = Heytap(cf).main()
     print(res)
     send('欢太商城', res)
+
+"""
+# 云函数请将上方替换成下方代码，并将 py 改名为 index.py
+if __name__ == '__main__':
+    main_handler('', '')
+"""
