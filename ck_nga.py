@@ -103,9 +103,14 @@ class NGACheckIn:
             try:
                 res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
                 res = json.loads(res)
+                # print(res)
                 time.sleep(30)
-                task_code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
-                time_code[i] = res['data'][1][0][ids[i]]['raw_stat']['5']
+                if str(res['data'][1][0]) == '{}':
+                    task_code[i] = res['data'][1][1][ids[i]]['raw_stat']['6']
+                    time_code[i] = res['data'][1][1][ids[i]]['raw_stat']['5']
+                else:
+                    task_code[i] = res['data'][1][0][ids[i]]['raw_stat']['6']
+                    time_code[i] = res['data'][1][0][ids[i]]['raw_stat']['5']
                 if  task_code[i] == 1:
                     success_sum += 1
                 elif task_code[i] == 0 and time_code == 1:
@@ -131,8 +136,12 @@ class NGACheckIn:
         try:
             res = requests.post(self.url, headers=self.headers, data=data, verify=False).content
             res = json.loads(res)
+            # print(res)
             time.sleep(30)
-            code = res['data'][1][0]['141']['raw_stat']['6']
+            if str(res['data'][1][0]) == '{}':
+                code = res['data'][1][1]['141']['raw_stat']['6']
+            else:
+                code = res['data'][1][0]['141']['raw_stat']['6']
             if code == 1:
                 adfree_24h_stat = '已获得免广告状态：24h'
             else:
@@ -214,30 +223,27 @@ class NGACheckIn:
         for nga_cookie in self.nga_cookie_list:
             token = nga_cookie.get("token")
             uid = nga_cookie.get("uid")
-            signin = self.signin(token=token, uid=uid)
+            signin_res = self.signin(token=token, uid=uid)
             try:
-                if '先登录' in signin["msg"]:
-                    msg = '签到失败，token 已失效或 uid 与 token 不对应'
-                else:
-                    continued, total = self.get_signin_stat(token=token, uid=uid)
-                    username = self.get_user(token=token, uid=uid)
-                    if '已经' in signin["msg"]:
-                        signin_stat = f'用户：{username}\n统计信息：今日已签，连续签到{continued}天，累计签到{total}天'
-                    elif signin["code"] == 0:
-                        signin_stat = f'用户：{username}\n统计信息：签到成功，连续签到{continued}天，累计签到{total}天'
-                    time.sleep(1)
-                    silver_coin_get_stat = self.silver_coin_get(token=token, uid=uid)
-                    N_coin_get_stat = self.N_coin_get(token=token, uid=uid)
-                    video_view_stat = self.view_video(token=token, uid=uid)
-                    adfree_24h_stat = self.view_video_for_adfree_24h(token=token, uid=uid)
-                    # adfree_stat = self.view_video_for_adfree(token=token, uid=uid)
-                    msg = (
-                        f"{signin_stat}\n"
-                        f"------【每日签到得银币】------\n{silver_coin_get_stat}\n"
-                        f"------【每日签到得N币】------\n{N_coin_get_stat}\n"
-                        f"------【每天看两次视频】------\n{video_view_stat}\n"
-                        f"------【看视频免广告(限时任务)】------\n{adfree_24h_stat}\n"
-                    )
+                continued, total = self.get_signin_stat(token=token, uid=uid)
+                username = self.get_user(token=token, uid=uid)
+                if signin_res["code"] == 0:
+                    signin_stat = f'用户：{username}\n统计信息：签到成功，连续签到{continued}天，累计签到{total}天'
+                elif signin_res["code"] == 1:
+                    signin_stat = f'用户：{username}\n统计信息：今日已签，连续签到{continued}天，累计签到{total}天'
+                time.sleep(1)
+                silver_coin_get_stat = self.silver_coin_get(token=token, uid=uid)
+                N_coin_get_stat = self.N_coin_get(token=token, uid=uid)
+                video_view_stat = self.view_video(token=token, uid=uid)
+                adfree_24h_stat = self.view_video_for_adfree_24h(token=token, uid=uid)
+                # adfree_stat = self.view_video_for_adfree(token=token, uid=uid)
+                msg = (
+                    f"{signin_stat}\n"
+                    f"------【每日签到得银币】------\n{silver_coin_get_stat}\n"
+                    f"------【每日签到得N币】------\n{N_coin_get_stat}\n"
+                    f"------【每天看两次视频】------\n{video_view_stat}\n"
+                    f"------【看视频免广告(限时任务)】------\n{adfree_24h_stat}\n"
+                )
             except Exception as e:
                 msg = str(e)
             msg_all += msg + '\n\n'
