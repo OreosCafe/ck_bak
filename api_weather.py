@@ -34,7 +34,7 @@ class Weather:
                       encoding="utf-8") as city_file:
                 city_map = json.loads(city_file.read())
         msg_all = ""
-        for city_name in self.city_name_list:
+        for city_name in self.check_items:
             city_code = city_map.get(city_name, "101020100")
             weather_url = f"http://t.weather.itboy.net/api/weather/city/{city_code}"
             today_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
