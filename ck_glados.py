@@ -77,7 +77,7 @@ class GLaDOSCheckIn(object):
         user_budgets = [
             i for i in budget_info
             if (vip_level is not None and 'vip' in i and i['vip'] == vip_level)
-            or (vip_level is None and 'vip' not in i)
+               or (vip_level is None and 'vip' not in i)
         ]
         if len(user_budgets) > 0:
             return user_budgets[0]

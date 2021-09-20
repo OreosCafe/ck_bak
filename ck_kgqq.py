@@ -97,9 +97,9 @@ class KGQQCheckIn:
                     .json()["data"]["vip.get_vip_info"]["stVipCoreInfo"]["uStatus"]
                 if vip_status == 1:
                     vipurl = (
-                        "https://node.kg.qq.com/webapp/proxy?t_uUid=" +
-                        t_uuid +
-                        "&ns=proto_vip_webapp&cmd=vip.get_vip_day_reward&ns_inbuf=&nocache=1613719349184&mapExt=JTdCJTIyY21kTmFtZSUyMiUzQSUyMkdldFZpcERheVJld2FyZCUyMiU3RA%3D%3D&g_tk_openkey=642424811"
+                            "https://node.kg.qq.com/webapp/proxy?t_uUid=" +
+                            t_uuid +
+                            "&ns=proto_vip_webapp&cmd=vip.get_vip_day_reward&ns_inbuf=&nocache=1613719349184&mapExt=JTdCJTIyY21kTmFtZSUyMiUzQSUyMkdldFZpcERheVJld2FyZCUyMiU3RA%3D%3D&g_tk_openkey=642424811"
                     )
                     viprequest = requests.get(url=vipurl, headers=headers)
                     str_tips = viprequest.json()["data"]["vip.get_vip_day_reward"]["strTips"]

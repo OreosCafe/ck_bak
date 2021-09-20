@@ -15,7 +15,7 @@ class CSDNCheckIn:
         self.check_items = check_items
         self.headers = {
             "user-agent":
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko)"
                 "Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74"
         }
 
