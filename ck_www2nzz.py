@@ -68,15 +68,15 @@ class WWW2nzzCheckIn:
                                                  cookie)
             session.headers.update({
                 "Origin":
-                "http://www.2nzz.com",
+                    "http://www.2nzz.com",
                 "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
                 "Accept":
-                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                    "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                 "Referer":
-                "http://www.2nzz.com/index.php",
+                    "http://www.2nzz.com/index.php",
                 "Accept-Language":
-                "zh-CN,zh;q=0.9,en;q=0.8",
+                    "zh-CN,zh;q=0.9,en;q=0.8",
             })
             msg = self.sign(session=session)
             msg_all += msg + '\n\n'

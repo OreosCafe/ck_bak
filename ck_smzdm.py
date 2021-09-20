@@ -57,25 +57,25 @@ class SmzdmCheckIn:
             requests.utils.add_dict_to_cookiejar(session.cookies, cookie)
             session.headers.update({
                 "Accept":
-                "*/*",
+                    "*/*",
                 "Accept-Encoding":
-                "gzip, deflate, br",
+                    "gzip, deflate, br",
                 "Accept-Language":
-                "zh-CN,zh;q=0.9",
+                    "zh-CN,zh;q=0.9",
                 "Connection":
-                "keep-alive",
+                    "keep-alive",
                 "Host":
-                "zhiyou.smzdm.com",
+                    "zhiyou.smzdm.com",
                 "Referer":
-                "https://www.smzdm.com/",
+                    "https://www.smzdm.com/",
                 "Sec-Fetch-Dest":
-                "script",
+                    "script",
                 "Sec-Fetch-Mode":
-                "no-cors",
+                    "no-cors",
                 "Sec-Fetch-Site":
-                "same-site",
+                    "same-site",
                 "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36",
             })
             sign_msg = self.sign(session=session)
             msg = f"{sign_msg}"

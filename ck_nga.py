@@ -20,7 +20,7 @@ class NGACheckIn:
         self.url = 'https://ngabbs.com/nuke.php'
         self.headers = {
             "User-Agent":
-            "Mozilla/5.0 (Linux; Android 10; NOH-AN00 Build/HUAWEINOH-AN00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.106 Mobile Safari/537.36 Nga_Official/90021",
+                "Mozilla/5.0 (Linux; Android 10; NOH-AN00 Build/HUAWEINOH-AN00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/83.0.4103.106 Mobile Safari/537.36 Nga_Official/90021",
             "X-Requested-With": "gov.pianzong.androidnga",
             "X-USER-AGENT": "Nga_Official/90021(HUAWEI NOH-AN00;Android 10)"
         }

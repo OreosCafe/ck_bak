@@ -18,7 +18,7 @@ class Game163CheckIn:
     def game163(authorization):
         headers = {
             'user-agent':
-            'Mozilla/5.0 (Linux; Android 10; Redmi K30 Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/85.0.4183.127 Mobile Safari/537.36',
+                'Mozilla/5.0 (Linux; Android 10; Redmi K30 Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/85.0.4183.127 Mobile Safari/537.36',
             'authorization': authorization
         }
         url = 'http://n.cg.163.com/api/v2/sign-today'

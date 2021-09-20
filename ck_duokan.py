@@ -4,7 +4,6 @@ cron: 30 20 * * *
 new Env('多看阅读');
 """
 
-from http import cookiejar
 import time
 
 import requests
@@ -258,7 +257,7 @@ class DuoKanCheckIn:
         result = response.json()
         if "尚未登录" not in result.get("msg"):
             coin = sum([one.get('coin')
-                       for one in result.get("data", {}).get("award")])
+                        for one in result.get("data", {}).get("award")])
             msg = f"当前书豆: {coin}\n" + "\n".join(
                 [f"{one.get('expire')} 到期，{one.get('coin')} 书豆" for one in result.get("data", {}).get("award")])
             return msg

@@ -14,7 +14,7 @@ class KJWJCheckIn:
         login_url = 'https://www.kejiwanjia.com/wp-json/jwt-auth/v1/token'
         headers = {
             'user-agent':
-            'Mozilla/5.0 (Linux; Android 10; PBEM00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.52 Mobile Safari/537.36'
+                'Mozilla/5.0 (Linux; Android 10; PBEM00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.52 Mobile Safari/537.36'
         }
         data = {
             'nickname': '',
@@ -40,13 +40,13 @@ class KJWJCheckIn:
             check_url = 'https://www.kejiwanjia.com/wp-json/b2/v1/userMission'
             check_head = {
                 'authorization':
-                f'Bearer {token}',
+                    f'Bearer {token}',
                 'origin':
-                'https://www.kejiwanjia.com',
+                    'https://www.kejiwanjia.com',
                 'referer':
-                'https://www.kejiwanjia.com/task',
+                    'https://www.kejiwanjia.com/task',
                 'user-agent':
-                'Mozilla/5.0 (Linux; Android 10; PBEM00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.52 Mobile Safari/537.36'
+                    'Mozilla/5.0 (Linux; Android 10; PBEM00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.52 Mobile Safari/537.36'
             }
             resp = requests.post(check_url, headers=check_head)
             if resp.status_code == 200:

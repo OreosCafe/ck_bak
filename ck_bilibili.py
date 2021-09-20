@@ -256,7 +256,7 @@ class BiliBiliCheckIn(object):
         num int 获取视频数量
         """
         url = "https://api.bilibili.com/x/web-interface/dynamic/region?ps=" + \
-            str(num) + "&rid=" + str(rid)
+              str(num) + "&rid=" + str(rid)
         ret = session.get(url=url).json()
         data_list = [{
             "aid": one.get("aid"),
@@ -282,10 +282,10 @@ class BiliBiliCheckIn(object):
                                                  cookie)
             session.headers.update({
                 "user-agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.64",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.64",
                 "Referer": "https://www.bilibili.com/",
                 "accept-language":
-                "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+                    "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
                 "Connection": "keep-alive",
             })
             success_count = 0

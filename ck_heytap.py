@@ -62,7 +62,7 @@ class Heytap:
         headers = {
             'Host': 'www.heytap.com',
             'Accept':
-            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             'Content-Type': 'application/x-www-form-urlencoded',
             'Connection': 'keep-alive',
             'User-Agent': self.HT_UserAgent,
@@ -102,7 +102,7 @@ class Heytap:
         headers = {
             'Host': 'store.oppo.com',
             'Accept':
-            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             'Content-Type': 'application/x-www-form-urlencoded',
             'Connection': 'keep-alive',
             'User-Agent': self.HT_UserAgent,
@@ -125,7 +125,7 @@ class Heytap:
             headers = {
                 'Host': 'store.oppo.com',
                 'Accept':
-                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Connection': 'keep-alive',
                 'User-Agent': self.HT_UserAgent,
@@ -161,10 +161,9 @@ class Heytap:
                             if not qd['type']:
                                 data = "amount=" + str(qd['credits'])
                             else:
-                                data = "amount=" + str(
-                                    qd['credits']) + "&type=" + str(
-                                        qd['type']) + "&gift=" + str(
-                                            qd['gift'])
+                                data = "amount=" + str(qd['credits']) + \
+                                       "&type=" + str(qd['type']) + \
+                                       "&gift=" + str(qd['gift'])
                             res1 = self.client.post(
                                 'https://store.oppo.com/cn/oapi/credits/web/report/immediately',
                                 headers=headers,
@@ -195,7 +194,7 @@ class Heytap:
                 'self.clientPackage': 'com.oppo.store',
                 'Host': 'msec.opposhop.cn',
                 'Accept':
-                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Connection': 'keep-alive',
                 'User-Agent': 'okhttp/3.12.12.200sp1',
@@ -265,7 +264,7 @@ class Heytap:
                 'self.clientPackage': 'com.oppo.store',
                 'Host': 'msec.opposhop.cn',
                 'Accept':
-                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Connection': 'keep-alive',
                 'User-Agent': 'okhttp/3.12.12.200sp1',
@@ -321,7 +320,7 @@ class Heytap:
                 'self.clientPackage': 'com.oppo.store',
                 'Host': 'msec.opposhop.cn',
                 'Accept':
-                'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Connection': 'keep-alive',
                 'User-Agent': 'okhttp/3.12.12.200sp1',
@@ -375,29 +374,29 @@ class Heytap:
     def cashingCredits(self, info_marking, info_type, info_credits):
         headers = {
             'Host':
-            'store.oppo.com',
+                'store.oppo.com',
             'self.clientPackage':
-            'com.oppo.store',
+                'com.oppo.store',
             'Accept':
-            'application/json, text/plain, */*',
+                'application/json, text/plain, */*',
             'Content-Type':
-            'application/x-www-form-urlencoded',
+                'application/x-www-form-urlencoded',
             'Connection':
-            'keep-alive',
+                'keep-alive',
             'User-Agent':
-            self.HT_UserAgent,
+                self.HT_UserAgent,
             'Accept-Language':
-            'zh-cn',
+                'zh-cn',
             'Accept-Encoding':
-            'gzip, deflate, br',
+                'gzip, deflate, br',
             'cookie':
-            self.HT_cookies,
+                self.HT_cookies,
             'Origin':
-            'https://store.oppo.com',
+                'https://store.oppo.com',
             'X-Requested-With':
-            'com.oppo.store',
+                'com.oppo.store',
             'referer':
-            'https://store.oppo.com/cn/app/taskCenter/index?us=gerenzhongxin&um=hudongleyuan&uc=renwuzhongxin'
+                'https://store.oppo.com/cn/app/taskCenter/index?us=gerenzhongxin&um=hudongleyuan&uc=renwuzhongxin'
         }
         data = "marking=" + str(info_marking) + "&type=" + str(
             info_type) + "&amount=" + str(info_credits)
@@ -593,7 +592,7 @@ class Heytap:
                 'appKey': '',
                 'X-Requested-With': 'com.oppo.store',
                 'Referer':
-                'https://store.oppo.com/cn/app/cardingActivities?utm_source=opposhop&utm_medium=task',
+                    'https://store.oppo.com/cn/app/cardingActivities?utm_source=opposhop&utm_medium=task',
                 'Accept-Encoding': 'gzip, deflate',
                 'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
                 'cookie': self.HT_cookies,

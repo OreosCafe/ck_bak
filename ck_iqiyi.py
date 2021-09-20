@@ -90,13 +90,13 @@ class IQIYICheckIn:
             for item in res["data"]["tasks"]["daily"]:
                 task_list.append({
                     "name":
-                    item["name"],
+                        item["name"],
                     "taskCode":
-                    item["taskCode"],
+                        item["taskCode"],
                     "status":
-                    item["status"],
+                        item["status"],
                     "taskReward":
-                    item["taskReward"]["task_reward_growth"],
+                        item["taskReward"]["task_reward_growth"],
                 })
         return task_list
 

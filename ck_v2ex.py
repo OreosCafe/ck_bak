@@ -80,11 +80,11 @@ class V2exCheckIn:
             requests.utils.add_dict_to_cookiejar(session.cookies, cookie)
             session.headers.update({
                 "user-agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66",
                 "accept":
-                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                    "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                 "accept-language":
-                "zh-CN,zh;q=0.9,en;q=0.8",
+                    "zh-CN,zh;q=0.9,en;q=0.8",
             })
             msg = self.sign(session=session)
             msg_all += msg + '\n\n'

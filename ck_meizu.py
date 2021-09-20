@@ -24,7 +24,7 @@ class MeizuCheckIn:
             "cache-control": "no-cache",
             "accept": "application/json, text/javascript, */*; q=0.01",
             "user-agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
             "origin": "https://bbs.meizu.cn",
             "referer": "https://bbs.meizu.cn/",
             "accept-language": "zh-CN,zh;q=0.9,en;q=0.8",
@@ -47,7 +47,7 @@ class MeizuCheckIn:
             "accept": "application/json, text/javascript, */*; q=0.01",
             "x-requested-with": "XMLHttpRequest",
             "user-agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
             "content-type": "application/x-www-form-urlencoded",
             "origin": "https://bbs-act.meizu.cn",
             "referer": "https://bbs-act.meizu.cn/2/index.html",

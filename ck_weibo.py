@@ -58,15 +58,15 @@ class WeiBoCheckIn:
     def pay(token):
         headers = {
             "Accept-Encoding":
-            "gzip, deflate",
+                "gzip, deflate",
             "Connection":
-            "keep-alive",
+                "keep-alive",
             "Content-Type":
-            "application/x-www-form-urlencoded",
+                "application/x-www-form-urlencoded",
             "Host":
-            "pay.sc.weibo.com",
+                "pay.sc.weibo.com",
             "User-Agent":
-            "Mozilla/5.0 (iPhone; CPU iPhone OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Weibo (iPhone10,1__weibo__11.2.1__iphone__os14.5)",
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Weibo (iPhone10,1__weibo__11.2.1__iphone__os14.5)",
         }
         data = token + "&lang=zh_CN&wm=3333_2001"
         response = requests.post(
