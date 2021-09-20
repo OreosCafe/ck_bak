@@ -35,7 +35,7 @@ class BiliBiliCheckIn(object):
         return ret
 
     @staticmethod
-    def live_sign(session) -> dict:
+    def live_sign(session) -> str:
         """B站直播签到"""
         try:
             url = "https://api.live.bilibili.com/xlive/web-ucenter/v1/sign/DoSign"
@@ -52,7 +52,7 @@ class BiliBiliCheckIn(object):
         return msg
 
     @staticmethod
-    def manga_sign(session, platform="android") -> dict:
+    def manga_sign(session, platform="android") -> str:
         """
         模拟B站漫画客户端签到
         """
@@ -158,7 +158,7 @@ class BiliBiliCheckIn(object):
                          ps: int = 100,
                          tid: int = 0,
                          order: str = "pubdate",
-                         keyword: str = "") -> dict:
+                         keyword: str = ""):
         """
         获取指定up主空间视频投稿信息
         uid int 账户uid，默认为本账户
@@ -229,7 +229,7 @@ class BiliBiliCheckIn(object):
         return ret
 
     @staticmethod
-    def live_status(session) -> dict:
+    def live_status(session) -> str:
         """B站直播获取金银瓜子状态"""
         url = "https://api.live.bilibili.com/pay/v1/Exchange/getStatus"
         ret = session.get(url=url).json()
@@ -249,7 +249,7 @@ class BiliBiliCheckIn(object):
         return ret
 
     @staticmethod
-    def get_region(session, rid=1, num=6) -> dict:
+    def get_region(session, rid=1, num=6):
         """
         获取 B站分区视频信息
         rid int 分区号

@@ -9,11 +9,12 @@ new Env('机场签到');
 import re
 
 import requests
+import urllib3
 
 from notify_mtr import send
 from utils import get_data
 
-requests.packages.urllib3.disable_warnings()
+urllib3.disable_warnings()
 
 
 class SspanelQd(object):
@@ -42,7 +43,7 @@ class SspanelQd(object):
         login_url = url + '/auth/login'
         headers = {
             'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+                'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         }
 
@@ -52,7 +53,7 @@ class SspanelQd(object):
 
         headers = {
             'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+                'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
             'Referer': url + '/user'
         }
 
@@ -72,9 +73,11 @@ class SspanelQd(object):
             day = re.findall(r'\["Class_Expire", "(.*)"],', response.text)[0]
             rest = re.findall(r'\["Unused_Traffic", "(.*?)"]',
                               response.text)[0]
-            msg = url + '\n' + "- 今日签到信息：" + \
-                str(msg) + "\n- 用户等级：" + str(level) + \
-                "\n- 到期时间：" + str(day) + "\n- 剩余流量：" + str(rest)
+            msg = url + '\n' + \
+                  "- 今日签到信息：" + str(msg) + \
+                  "\n- 用户等级：" + str(level) + \
+                  "\n- 到期时间：" + str(day) + \
+                  "\n- 剩余流量：" + str(rest)
             return msg
         except:
             return msg

@@ -34,12 +34,8 @@ if __name__ == "__main__":
     data = get_data()
     try:
         motto = data.get("MOTTO")
+        res = Motto().main()
+        print(res)
+        send('每日一句', res)
     except Exception as e:
-        raise e
-    if motto:
-        try:
-            res = Motto().main()
-            print(res)
-            send('每日一句', res)
-        except Exception as e:
-            print(e)
+        print(e)
