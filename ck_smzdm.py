@@ -4,10 +4,13 @@ cron: 51 9 * * *
 new Env('什么值得买');
 """
 
-import json, os, requests
+from urllib.parse import quote, unquote
+
+import requests
 from requests import utils
-from utils import get_data
+
 from notify_mtr import send
+from utils import get_data
 
 
 class SmzdmCheckIn:
@@ -41,9 +44,10 @@ class SmzdmCheckIn:
 
     def main(self):
         msg_all = ""
+
         for smzdm_cookie in self.smzdm_cookie_list:
             smzdm_cookie = {
-                item.split("=")[0]: item.split("=")[1] for item in smzdm_cookie.get("smzdm_cookie").split("; ")
+                item.split("=")[0]: quote(unquote(item.split("=")[1])) for item in smzdm_cookie.get("smzdm_cookie").split("; ")
             }
             session = requests.session()
             requests.utils.add_dict_to_cookiejar(session.cookies, smzdm_cookie)
