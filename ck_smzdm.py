@@ -39,7 +39,7 @@ class SmzdmCheckIn:
                     f"已经签到: {response.get('checkin_num', {})} 天"
                 )
         except Exception as e:
-            msg = f"签到状态: 签到失败\n错误信息: {e}"
+            msg = f"签到状态: 签到失败\n错误信息: {e}，请重新获取 cookie"
         return msg
 
     def main(self):
@@ -47,7 +47,9 @@ class SmzdmCheckIn:
 
         for smzdm_cookie in self.smzdm_cookie_list:
             smzdm_cookie = {
-                item.split("=")[0]: quote(unquote(item.split("=")[1])) for item in smzdm_cookie.get("smzdm_cookie").split("; ")
+                item.split("=")[0]: quote(unquote(item.split("=")[1]))
+                for item in smzdm_cookie.get("smzdm_cookie").split("; ")
+                if item.split("=")[0] == "sess"
             }
             session = requests.session()
             requests.utils.add_dict_to_cookiejar(session.cookies, smzdm_cookie)
