@@ -74,11 +74,15 @@ CONFIG_PATH = os.getenv('NOTIFY_CONFIG_PATH') or get_file_path('notify.json5')
 if os.path.exists(CONFIG_PATH):
     print(f'通知配置文件存在：{CONFIG_PATH}。')
     try:
-        for k, v in dict(json.load(open(CONFIG_PATH, mode='r', encoding='utf-8'))).items():
+        for k, v in dict(
+                json.load(open(CONFIG_PATH, mode='r',
+                               encoding='utf-8'))).items():
             if k in push_config:
                 push_config[k] = v
     except ValueError:
-        print(f'错误：配置文件 {CONFIG_PATH} 格式不对，请在 https://verytoolz.com/json5-validator.html 中检查格式')
+        print(
+            f'错误：配置文件 {CONFIG_PATH} 格式不对，请在 https://verytoolz.com/json5-validator.html 中检查格式'
+        )
 elif CONFIG_PATH:
     print(f'{CONFIG_PATH} 配置的通知文件不存在，请检查文件位置或删除对应环境变量！')
 
@@ -131,10 +135,7 @@ def serverJ(title: str, content: str) -> None:
         return
     print('serverJ 服务启动')
 
-    data = {
-        'text': title,
-        'desp': content.replace('\n', '\n\n')
-    }
+    data = {'text': title, 'desp': content.replace('\n', '\n\n')}
     if push_config.get('PUSH_KEY').index('SCT') != -1:
         url = f'https://sctapi.ftqq.com/{push_config.get("PUSH_KEY")}.send'
     else:
@@ -151,7 +152,8 @@ def telegram_bot(title: str, content: str) -> None:
     """
     通过 telegram 发送一条通知。
     """
-    if not push_config.get('TG_BOT_TOKEN') or not push_config.get('TG_USER_ID'):
+    if not push_config.get('TG_BOT_TOKEN') or not push_config.get(
+            'TG_USER_ID'):
         print("tg 服务的 bot_token 或者 user_id 未设置!!\n取消推送")
         return
     print("tg 服务启动")
@@ -161,13 +163,20 @@ def telegram_bot(title: str, content: str) -> None:
     else:
         url = f"https://api.telegram.org/bot{push_config.get('TG_BOT_TOKEN')}/sendMessage"
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-    payload = {'chat_id': str(push_config.get('TG_USER_ID')), 'text': f'{title}\n\n{content}',
-               'disable_web_page_preview': 'true'}
+    payload = {
+        'chat_id': str(push_config.get('TG_USER_ID')),
+        'text': f'{title}\n\n{content}',
+        'disable_web_page_preview': 'true'
+    }
     proxies = None
     if push_config.get('TG_PROXY_IP') and push_config.get('TG_PROXY_PORT'):
-        proxyStr = "http://{}:{}".format(push_config.get('TG_PROXY_IP'), push_config.get('TG_PROXY_PORT'))
+        proxyStr = "http://{}:{}".format(push_config.get('TG_PROXY_IP'),
+                                         push_config.get('TG_PROXY_PORT'))
         proxies = {"http": proxyStr, "https": proxyStr}
-    response = requests.post(url=url, headers=headers, params=payload, proxies=proxies).json()
+    response = requests.post(url=url,
+                             headers=headers,
+                             params=payload,
+                             proxies=proxies).json()
 
     if response['ok']:
         print('tg 推送成功！')
@@ -179,24 +188,28 @@ def dingding_bot(title: str, content: str) -> None:
     """
     使用 钉钉机器人 发送一条通知。
     """
-    if not push_config.get('DD_BOT_SECRET') or not push_config.get('DD_BOT_TOKEN'):
+    if not push_config.get('DD_BOT_SECRET') or not push_config.get(
+            'DD_BOT_TOKEN'):
         print("钉钉机器人 服务的 DD_BOT_SECRET 或者 DD_BOT_TOKEN 未设置!!\n取消推送")
         return
     print("钉钉机器人 服务启动")
 
     timestamp = str(round(time.time() * 1000))
     secret_enc = push_config.get('DD_BOT_SECRET').encode('utf-8')
-    string_to_sign = '{}\n{}'.format(timestamp, push_config.get('DD_BOT_SECRET'))
+    string_to_sign = '{}\n{}'.format(timestamp,
+                                     push_config.get('DD_BOT_SECRET'))
     string_to_sign_enc = string_to_sign.encode('utf-8')
-    hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+    hmac_code = hmac.new(secret_enc,
+                         string_to_sign_enc,
+                         digestmod=hashlib.sha256).digest()
     sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
     url = f'https://oapi.dingtalk.com/robot/send?access_token={push_config.get("DD_BOT_TOKEN")}&timestamp={timestamp}&sign={sign}'
     headers = {'Content-Type': 'application/json;charset=utf-8'}
-    data = {
-        'msgtype': 'text',
-        'text': {'content': f'{title}\n\n{content}'}
-    }
-    response = requests.post(url=url, data=json.dumps(data, quote_keys=True), headers=headers, timeout=15).json()
+    data = {'msgtype': 'text', 'text': {'content': f'{title}\n\n{content}'}}
+    response = requests.post(url=url,
+                             data=json.dumps(data, quote_keys=True),
+                             headers=headers,
+                             timeout=15).json()
 
     if not response['errcode']:
         print('钉钉机器人 推送成功！')
@@ -214,7 +227,9 @@ def qmsg_bot(title: str, content: str) -> None:
     print('qmsg 启动')
 
     url = f'https://qmsg.zendee.cn/{push_config.get("QMSG_TYPE")}/{push_config.get("QMSG_KEY")}'
-    payload = {'msg': f'{title}\n\n{content.replace("----", "-")}'.encode('utf-8')}
+    payload = {
+        'msg': f'{title}\n\n{content.replace("----", "-")}'.encode('utf-8')
+    }
     response = requests.post(url=url, params=payload).json()
 
     if response['code'] == 0:
@@ -290,15 +305,17 @@ class WeCom:
 
     def get_access_token(self):
         url = 'https://qyapi.weixin.qq.com/cgi-bin/gettoken'
-        values = {'corpid': self.CORPID,
-                  'corpsecret': self.CORPSECRET,
-                  }
+        values = {
+            'corpid': self.CORPID,
+            'corpsecret': self.CORPSECRET,
+        }
         req = requests.post(url, params=values)
         data = json.loads(req.text)
         return data['access_token']
 
     def send_text(self, message, touser='@all'):
-        send_url = 'https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=' + self.get_access_token()
+        send_url = 'https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=' + self.get_access_token(
+        )
         send_values = {
             'touser': touser,
             'msgtype': 'text',
@@ -314,22 +331,21 @@ class WeCom:
         return respone['errmsg']
 
     def send_mpnews(self, title, message, media_id, touser='@all'):
-        send_url = 'https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=' + self.get_access_token()
+        send_url = 'https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=' + self.get_access_token(
+        )
         send_values = {
             'touser': touser,
             'msgtype': 'mpnews',
             'agentid': self.AGENTID,
             'mpnews': {
-                'articles': [
-                    {
-                        'title': title,
-                        'thumb_media_id': media_id,
-                        'author': 'Author',
-                        'content_source_url': '',
-                        'content': message.replace('\n', '<br/>'),
-                        'digest': message
-                    }
-                ]
+                'articles': [{
+                    'title': title,
+                    'thumb_media_id': media_id,
+                    'author': 'Author',
+                    'content_source_url': '',
+                    'content': message.replace('\n', '<br/>'),
+                    'digest': message
+                }]
             }
         }
         send_msges = (bytes(json.dumps(send_values, quote_keys=True), 'utf-8'))
@@ -348,11 +364,9 @@ def feishu(title: str, content: str) -> None:
     print('飞书 服务启动')
 
     url = f'https://open.feishu.cn/open-apis/bot/v2/hook/{push_config.get("FSKEY")}'
-    data = {
-        'msg_type': 'text',
-        'content': {'text': f'{title}\n\n{content}'}
-    }
-    response = requests.post(url, data=json.dumps(data, quote_keys=True)).json()
+    data = {'msg_type': 'text', 'content': {'text': f'{title}\n\n{content}'}}
+    response = requests.post(url, data=json.dumps(data,
+                                                  quote_keys=True)).json()
 
     if response.get('StatusCode') == 0:
         print('飞书 推送成功！')
@@ -392,7 +406,9 @@ if push_config.get('FSKEY'):
 
 def excepthook(args, /):
     if issubclass(args.exc_type, requests.exceptions.RequestException):
-        print(f'网络异常，请检查你的网络连接、推送服务器和代理配置，该错误和账号配置无关。信息：{str(args.exc_type)}, {args.thread.name}')
+        print(
+            f'网络异常，请检查你的网络连接、推送服务器和代理配置，该错误和账号配置无关。信息：{str(args.exc_type)}, {args.thread.name}'
+        )
     else:
         global default_hook
         default_hook(args)
@@ -408,7 +424,11 @@ def send(title: str, content: str) -> None:
     text = one() if hitokoto else ''
     content += '\n\n' + text
 
-    ts = [threading.Thread(target=mode, args=(title, content), name=mode.__name__) for mode in notify_function]
+    ts = [
+        threading.Thread(target=mode,
+                         args=(title, content),
+                         name=mode.__name__) for mode in notify_function
+    ]
     [t.start() for t in ts]
     [t.join() for t in ts]
 

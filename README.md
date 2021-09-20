@@ -210,13 +210,13 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 ### 1. **添加了葫芦侠的签到配置**
 
-​	参数说明：`HLX.user`：用户名 `HLX.password`：密码的MD532位小写加密[生成](https://md5jiami.bmcx.com/)
+​	参数说明：`HLX.username`：用户名 `HLX.password`：密码的 MD5 32 位小写加密[生成](https://md5jiami.bmcx.com/)
 
 ### 2. **添加了网易云游戏的签到配置**
 
 [官网](https://cg.163.com/#/mobile)
 
-参数说明：`game163.Authorization`
+参数说明：`game163.authorization`
 
 登录后抓取签到请求（一般请求的请求头也有这个字段）
 

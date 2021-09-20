@@ -4,26 +4,23 @@ cron: 30 7 * * *
 new Env('葫芦侠');
 """
 
-import json, os, requests
-from utils import get_data
-from notify_mtr import send
+import requests
 
+from notify_mtr import send
+from utils import get_data
 
 r = requests.Session()
 
+
 class HLXCheckIn:
-    def __init__(self, hlx_account_list):
-        self.hlx_account_list = hlx_account_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
     def login(user, passwd):
         url = 'http://floor.huluxia.com/account/login/ANDROID/4.0?platform=2&gkey=000000&app_version=4.0.0.6.2' \
               '&versioncode=20141433&market_id=floor_baidu&_key=&device_code=%5Bw%5D02%3A00%3A00%3A00%3A00%3A00 '
-        params = {
-            'account': user,
-            'login_type': '2',
-            'password': passwd
-        }
+        params = {'account': user, 'login_type': '2', 'password': passwd}
         login_res = r.post(url=url, data=params)
         login_res = login_res.json()
         nick = login_res['user']['nick']
@@ -91,7 +88,8 @@ class HLXCheckIn:
                 'cat_id': IDS
             }
             try:
-                experienceVal = r.get(url=url, params=params).json()['experienceVal']
+                experienceVal = r.get(url=url,
+                                      params=params).json()['experienceVal']
             except:
                 experienceVal = 0
             finally:
@@ -100,10 +98,10 @@ class HLXCheckIn:
 
     def main(self):
         msg_all = ""
-        for hlx_account in self.hlx_account_list: 
-            user = hlx_account.get('user')
-            passwd = hlx_account.get('password')
-            nick, key, s_key = self.login(user, passwd)
+        for check_item in self.check_items:
+            username = check_item.get('username')
+            password = check_item.get('password')
+            nick, key, s_key = self.login(username, password)
             self.check(key)
             msg = "用户名：" + nick + self.category(key)
             msg_all += msg + '\n\n'
@@ -112,8 +110,8 @@ class HLXCheckIn:
 
 def start():
     data = get_data()
-    _hlx_account_list = data.get("HLX_ACCOUNT_LIST", [])
-    res = HLXCheckIn(hlx_account_list=_hlx_account_list).main()
+    _check_items = data.get("HLX", [])
+    res = HLXCheckIn(check_items=_check_items).main()
     print(res)
     send('葫芦侠', res)
 

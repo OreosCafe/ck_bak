@@ -67,11 +67,14 @@ def get_file_path(file_name: str) -> str:
     """
     env_i = get_env_int()
     print(f'配置文件 ({file_name}) 检查开始...')
-    paths = [file_name, file_name, file_name,
-             file_name,
-             f'/usr/local/app/script/Lists/{file_name}',
-             f'/ql/config/{file_name}',
-             ]
+    paths = [
+        file_name,
+        file_name,
+        file_name,
+        file_name,
+        f'/usr/local/app/script/Lists/{file_name}',
+        f'/ql/config/{file_name}',
+    ]
 
     if env_i < 0:
         print('无法判断环境，选择当前目录为配置文件夹目录。')

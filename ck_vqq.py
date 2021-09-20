@@ -4,16 +4,19 @@ cron: 55 10 * * *
 new Env('腾讯视频');
 """
 
-import json, os, re, requests, time
+import re
+import time
 from urllib import parse
-from requests import utils
-from utils import get_data
+
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class VQQCheckIn:
-    def __init__(self, vqq_cookie_list):
-        self.vqq_cookie_list = vqq_cookie_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
     def refresh_cookie(url, headers, cookies):
@@ -52,7 +55,8 @@ class VQQCheckIn:
     @staticmethod
     def sign_twice(headers, cookies):
         this_time = int(round(time.time() * 1000))
-        url = "https://vip.video.qq.com/fcgi-bin/comm_cgi?name=hierarchical_task_system&cmd=2&_=" + str(this_time)
+        url = "https://vip.video.qq.com/fcgi-bin/comm_cgi?name=hierarchical_task_system&cmd=2&_=" + str(
+            this_time)
         res = requests.get(url=url, headers=headers, cookies=cookies)
         res.encoding = "utf8"
         if "Account Verify Error" in res.text:
@@ -96,24 +100,31 @@ class VQQCheckIn:
 
     def main(self):
         msg_all = ""
-        for vqq_cookie in self.vqq_cookie_list:
-            auth_refresh = vqq_cookie.get("auth_refresh")
+        for check_item in self.check_items:
+            auth_refresh = check_item.get("auth_refresh")
             if not auth_refresh:
                 return "参数错误: 缺少 auth_refresh 参数，请查看配置文档"
-            vqq_cookie = {item.split("=")[0]: item.split("=")[1] for item in vqq_cookie.get("vqq_cookie").split("; ")}
-            headers = {
-                "Referer": "https://v.qq.com",
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.204 Safari/537.36",
+            cookie = {
+                item.split("=")[0]: item.split("=")[1]
+                for item in check_item.get("cookie").split("; ")
             }
-            login_cookie, nick = self.refresh_cookie(url=auth_refresh, headers=headers, cookies=vqq_cookie)
+            headers = {
+                "Referer":
+                "https://v.qq.com",
+                "User-Agent":
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.204 Safari/537.36",
+            }
+            login_cookie, nick = self.refresh_cookie(url=auth_refresh,
+                                                     headers=headers,
+                                                     cookies=cookie)
             if login_cookie.get("main_login") == "qq":
-                vqq_cookie["vqq_vusession"] = login_cookie.get("vqq_vusession")
+                cookie["vqq_vusession"] = login_cookie.get("vqq_vusession")
             else:
-                vqq_cookie["vusession"] = login_cookie.get("vusession")
-                vqq_cookie["access_token"] = login_cookie.get("access_token")
-            sign_once_msg = self.sign_once(headers=headers, cookies=vqq_cookie)
-            sign_twice_msg = self.sign_twice(headers=headers, cookies=vqq_cookie)
-            task_msg = self.tasks(headers=headers, cookies=vqq_cookie)
+                cookie["vusession"] = login_cookie.get("vusession")
+                cookie["access_token"] = login_cookie.get("access_token")
+            sign_once_msg = self.sign_once(headers=headers, cookies=cookie)
+            sign_twice_msg = self.sign_twice(headers=headers, cookies=cookie)
+            task_msg = self.tasks(headers=headers, cookies=cookie)
             msg = f"用户信息: {nick}\n签到奖励1: {sign_once_msg}\n签到奖励2: {sign_twice_msg}\n{task_msg}"
             msg_all += msg + '\n\n'
         return msg_all
@@ -121,7 +132,7 @@ class VQQCheckIn:
 
 if __name__ == "__main__":
     data = get_data()
-    _vqq_cookie_list = data.get("VQQ_COOKIE_LIST", [])
-    res = VQQCheckIn(vqq_cookie_list=_vqq_cookie_list).main()
+    _check_items = data.get("VQQ", [])
+    res = VQQCheckIn(check_items=_check_items).main()
     print(res)
     send('腾讯视频', res)

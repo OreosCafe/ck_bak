@@ -1,468 +1,468 @@
 {
-    "name":"签到项目",
-    "author":"Leon",
-    "desc":"该订阅适用于 elecV2P，与其他软件并不兼容。相关说明参考：https://github.com/elecV2/elecV2P-dei/tree/master/docs/06-task.md",
-    "date":"2021-09-02 22:00:00",
-    "list":[
+    "name": "签到项目",
+    "author": "Leon",
+    "desc": "该订阅适用于 elecV2P，与其他软件并不兼容。相关说明参考：https://github.com/elecV2/elecV2P-dei/tree/master/docs/06-task.md",
+    "date": "2021-09-20 15:30:00",
+    "list": [
         {
-            "name":"签到仓库",
-            "type":"schedule",
-            "time":"0",
-            "job":{
-                "type":"exec",
-                "target":"git clone https://github.com/Oreomeow/checkinpanel -cwd script/Shell"
+            "name": "签到仓库",
+            "type": "schedule",
+            "time": "0",
+            "job": {
+                "type": "exec",
+                "target": "git clone https://github.com/Oreomeow/checkinpanel -cwd script/Shell"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"手动更新",
-            "type":"schedule",
-            "time":"0",
-            "job":{
-                "type":"exec",
-                "target":"git checkout master && git fetch --all && git reset --hard origin/master && git pull -cwd script/Shell/checkinpanel"
+            "name": "手动更新",
+            "type": "schedule",
+            "time": "0",
+            "job": {
+                "type": "exec",
+                "target": "git checkout master && git fetch --all && git reset --hard origin/master && git pull -cwd script/Shell/checkinpanel"
             },
-            "running":false
+            "running": false
         },
         {
-            "name":"自动更新",
-            "type":"cron",
-            "time":"0 16 * * *",
-            "job":{
-                "type":"exec",
-                "target":"git checkout master && git fetch --all && git reset --hard origin/master && git pull -cwd script/Shell/checkinpanel"
+            "name": "自动更新",
+            "type": "cron",
+            "time": "0 16 * * *",
+            "job": {
+                "type": "exec",
+                "target": "git checkout master && git fetch --all && git reset --hard origin/master && git pull -cwd script/Shell/checkinpanel"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"签到依赖",
-            "type":"schedule",
-            "time":"5 3",
-            "job":{
-                "type":"exec",
-                "target":"apk add bash curl gcc git jq libffi-dev musl-dev openssl-dev python3 python3-dev py3-pip"
+            "name": "签到依赖",
+            "type": "schedule",
+            "time": "5 3",
+            "job": {
+                "type": "exec",
+                "target": "apk add bash curl gcc git jq libffi-dev musl-dev openssl-dev python3 python3-dev py3-pip"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"签到依赖 2",
-            "type":"schedule",
-            "time":"15 2",
-            "job":{
-                "type":"exec",
-                "target":"pip3 install cryptography~=3.2.1 json5 requests rsa && npm install got"
+            "name": "签到依赖 2",
+            "type": "schedule",
+            "time": "15 2",
+            "job": {
+                "type": "exec",
+                "target": "pip3 install cryptography~=3.2.1 json5 requests rsa && npm install got"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"PY-JS",
-            "type":"schedule",
-            "time":"0",
-            "job":{
-                "type":"exec",
-                "target":"wget https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/checkin.js -O checkin.js -cwd script/JSFile"
+            "name": "PY-JS",
+            "type": "schedule",
+            "time": "0",
+            "job": {
+                "type": "exec",
+                "target": "wget https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/checkin.js -O checkin.js -cwd script/JSFile"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"SH-JS",
-            "type":"schedule",
-            "time":"0",
-            "job":{
-                "type":"exec",
-                "target":"wget https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/checkinsh.js -O checkinsh.js -cwd script/JSFile"
+            "name": "SH-JS",
+            "type": "schedule",
+            "time": "0",
+            "job": {
+                "type": "exec",
+                "target": "wget https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/checkinsh.js -O checkinsh.js -cwd script/JSFile"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"LeetCode 每日一题",
-            "type":"cron",
-            "time":"10 10 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=api_leetcode.py"
+            "name": "LeetCode 每日一题",
+            "type": "cron",
+            "time": "10 10 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=api_leetcode.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"每日一句",
-            "type":"cron",
-            "time":"30 7 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=api_motto.py"
+            "name": "每日一句",
+            "type": "cron",
+            "time": "30 7 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=api_motto.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"天气预报",
-            "type":"cron",
-            "time":"30 7 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=api_weather.py"
+            "name": "天气预报",
+            "type": "cron",
+            "time": "30 7 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=api_weather.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"AcFun",
-            "type":"cron",
-            "time":"31 7 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_acfun.py"
+            "name": "AcFun",
+            "type": "cron",
+            "time": "31 7 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_acfun.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"机场签到",
-            "type":"cron",
-            "time":"28 11 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_airport.py"
+            "name": "机场签到",
+            "type": "cron",
+            "time": "28 11 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_airport.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"百度搜索资源平台",
-            "type":"cron",
-            "time":"32 7 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_baidu_url_submit.py"
+            "name": "百度搜索资源平台",
+            "type": "cron",
+            "time": "32 7 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_baidu_url_submit.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"Bilibili",
-            "type":"cron",
-            "time":"30 8 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_bilibili.py"
+            "name": "Bilibili",
+            "type": "cron",
+            "time": "30 8 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_bilibili.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"天翼云盘",
-            "type":"cron",
-            "time":"30 9 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_cloud189.py"
+            "name": "天翼云盘",
+            "type": "cron",
+            "time": "30 9 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_cloud189.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"CSDN",
-            "type":"cron",
-            "time":"30 10 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_csdn.py"
+            "name": "CSDN",
+            "type": "cron",
+            "time": "30 10 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_csdn.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"多看阅读",
-            "type":"cron",
-            "time":"30 20 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_duokan.py"
+            "name": "多看阅读",
+            "type": "cron",
+            "time": "30 20 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_duokan.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"恩山论坛",
-            "type":"cron",
-            "time":"1 15 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_enshan.py"
+            "name": "恩山论坛",
+            "type": "cron",
+            "time": "1 15 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_enshan.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"Fa米家",
-            "type":"cron",
-            "time":"30 14 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_fmapp.py"
+            "name": "Fa米家",
+            "type": "cron",
+            "time": "30 14 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_fmapp.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"网易云游戏",
-            "type":"cron",
-            "time":"20 8 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_game163.py"
+            "name": "网易云游戏",
+            "type": "cron",
+            "time": "20 8 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_game163.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"GLaDOS",
-            "type":"cron",
-            "time":"11 6 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_glados.py"
+            "name": "GLaDOS",
+            "type": "cron",
+            "time": "11 6 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_glados.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"欢太商城",
-            "type":"cron",
-            "time":"19 5,21 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_heytap.py"
+            "name": "欢太商城",
+            "type": "cron",
+            "time": "19 5,21 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_heytap.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"HiFiNi",
-            "type":"cron",
-            "time":"0 0 0 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_hifini.py"
+            "name": "HiFiNi",
+            "type": "cron",
+            "time": "0 0 0 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_hifini.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"葫芦侠",
-            "type":"cron",
-            "time":"30 7 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_hlx.py"
+            "name": "葫芦侠",
+            "type": "cron",
+            "time": "30 7 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_hlx.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"爱奇艺",
-            "type":"cron",
-            "time":"55 23 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_iqiyi.py"
+            "name": "爱奇艺",
+            "type": "cron",
+            "time": "55 23 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_iqiyi.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"掘金",
-            "type":"cron",
-            "time":"7 11 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_juejin.py"
+            "name": "掘金",
+            "type": "cron",
+            "time": "7 11 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_juejin.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"全民K歌",
-            "type":"cron",
-            "time":"55 14 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_kgqq.py"
+            "name": "全民K歌",
+            "type": "cron",
+            "time": "55 14 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_kgqq.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"MEIZU 社区",
-            "type":"cron",
-            "time":"55 15 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_meizu.py"
+            "name": "MEIZU 社区",
+            "type": "cron",
+            "time": "55 15 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_meizu.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"芒果 TV",
-            "type":"cron",
-            "time":"23 14 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_mgtv.py"
+            "name": "芒果 TV",
+            "type": "cron",
+            "time": "23 14 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_mgtv.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"小米运动",
-            "type":"cron",
-            "time":"25 20 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_mimotion.py"
+            "name": "小米运动",
+            "type": "cron",
+            "time": "25 20 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_mimotion.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"网易云音乐",
-            "type":"cron",
-            "time":"27 0 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_music163.py"
+            "name": "网易云音乐",
+            "type": "cron",
+            "time": "27 0 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_music163.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"NGA",
-            "type":"cron",
-            "time":"6,26 13 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_nga.py"
+            "name": "NGA",
+            "type": "cron",
+            "time": "6,26 13 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_nga.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"一加手机社区官方论坛",
-            "type":"cron",
-            "time":"3 0 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_oneplusbbs.py"
+            "name": "一加手机社区官方论坛",
+            "type": "cron",
+            "time": "3 0 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_oneplusbbs.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"哔咔漫画",
-            "type":"cron",
-            "time":"45 5 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_picacomic.py"
+            "name": "哔咔漫画",
+            "type": "cron",
+            "time": "45 5 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_picacomic.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"吾爱破解",
-            "type":"cron",
-            "time":"53 11 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_pojie.py"
+            "name": "吾爱破解",
+            "type": "cron",
+            "time": "53 11 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_pojie.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"什么值得买",
-            "type":"cron",
-            "time":"51 9 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_smzdm.py"
+            "name": "什么值得买",
+            "type": "cron",
+            "time": "51 9 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_smzdm.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"SSPanel 签到",
-            "type":"cron",
-            "time":"26 10 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkinsh.js -env SHNAME=ck_sspanel.sh"
+            "name": "SSPanel 签到",
+            "type": "cron",
+            "time": "26 10 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkinsh.js -env SHNAME=ck_sspanel.sh"
             },
-            "running":false
+            "running": false
         },
         {
-            "name":"百度贴吧",
-            "type":"cron",
-            "time":"12 16 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_tieba.py"
+            "name": "百度贴吧",
+            "type": "cron",
+            "time": "12 16 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_tieba.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"V2EX",
-            "type":"cron",
-            "time":"10 19 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_v2ex.py"
+            "name": "V2EX",
+            "type": "cron",
+            "time": "10 19 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_v2ex.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"腾讯视频",
-            "type":"cron",
-            "time":"55 10 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_vqq.py"
+            "name": "腾讯视频",
+            "type": "cron",
+            "time": "55 10 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_vqq.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"微博",
-            "type":"cron",
-            "time":"48 7 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_weibo.py"
+            "name": "微博",
+            "type": "cron",
+            "time": "48 7 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_weibo.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"联通沃邮箱",
-            "type":"cron",
-            "time":"56 13 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_womail.py"
+            "name": "联通沃邮箱",
+            "type": "cron",
+            "time": "56 13 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_womail.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"咔叽网单",
-            "type":"cron",
-            "time":"12 13 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_www2nzz.py"
+            "name": "咔叽网单",
+            "type": "cron",
+            "time": "12 13 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_www2nzz.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"王者营地",
-            "type":"cron",
-            "time":"0 8 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_wzyd.py"
+            "name": "王者营地",
+            "type": "cron",
+            "time": "0 8 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_wzyd.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"有道云笔记",
-            "type":"cron",
-            "time":"18 20 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_youdao.py"
+            "name": "有道云笔记",
+            "type": "cron",
+            "time": "18 20 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_youdao.py"
             },
-            "running":true
+            "running": true
         },
         {
-            "name":"智友邦",
-            "type":"cron",
-            "time":"7 21 * * *",
-            "job":{
-                "type":"runjs",
-                "target":"checkin.js -env PYNAME=ck_zhiyoo.py"
+            "name": "智友邦",
+            "type": "cron",
+            "time": "7 21 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_zhiyoo.py"
             },
-            "running":true
+            "running": true
         }
     ]
 }

@@ -4,20 +4,26 @@ cron: 55 23 * * *
 new Env('爱奇艺');
 """
 
-import json, os, re, requests, time
+import json
+import re
+import time
 from urllib.parse import unquote
-from utils import get_data
+
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class IQIYICheckIn:
-    def __init__(self, iqiyi_cookie_list):
-        self.iqiyi_cookie_list = iqiyi_cookie_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
     def parse_cookie(cookie):
         p00001 = re.findall(r"P00001=(.*?);", cookie)[0]
-        p00002 = re.findall(r"P00002=(.*?);", cookie)[0] if re.findall(r"P00002=(.*?);", cookie) else ""
+        p00002 = re.findall(r"P00002=(.*?);", cookie)[0] if re.findall(
+            r"P00002=(.*?);", cookie) else ""
         p00003 = re.findall(r"P00003=(.*?);", cookie)[0]
         return p00001, p00002, p00003
 
@@ -37,7 +43,8 @@ class IQIYICheckIn:
                 growthvalue = res_data.get("growthvalue", 0)  # 当前 VIP 成长值
                 distance = res_data.get("distance", 0)  # 升级需要成长值
                 deadline = res_data.get("deadline", "非 VIP 用户")  # VIP 到期时间
-                today_growth_value = res_data.get("todayGrowthValue", 0)  # 今日成长值
+                today_growth_value = res_data.get("todayGrowthValue",
+                                                  0)  # 今日成长值
                 msg = (
                     f"VIP 等级: {level}\n当前成长值: {growthvalue}\n"
                     f"升级需成长值: {distance}\n今日成长值: +{today_growth_value}\nVIP 到期时间: {deadline}"
@@ -60,7 +67,8 @@ class IQIYICheckIn:
         if res["code"] == "A00000":
             try:
                 growth = res["data"]["signInfo"]["data"]["rewardMap"]["growth"]
-                cumulate_sign_days_sum = res["data"]["signInfo"]["data"]["cumulateSignDaysSum"]
+                cumulate_sign_days_sum = res["data"]["signInfo"]["data"][
+                    "cumulateSignDaysSum"]
                 msg = f"+{growth}成长值\n当月签到: {cumulate_sign_days_sum}天"
             except Exception as e:
                 print(e)
@@ -80,14 +88,16 @@ class IQIYICheckIn:
         res = requests.get(url=url, params=params).json()
         if res["code"] == "A00000":
             for item in res["data"]["tasks"]["daily"]:
-                task_list.append(
-                    {
-                        "name": item["name"],
-                        "taskCode": item["taskCode"],
-                        "status": item["status"],
-                        "taskReward": item["taskReward"]["task_reward_growth"],
-                    }
-                )
+                task_list.append({
+                    "name":
+                    item["name"],
+                    "taskCode":
+                    item["taskCode"],
+                    "status":
+                    item["status"],
+                    "taskReward":
+                    item["taskReward"]["task_reward_growth"],
+                })
         return task_list
 
     @staticmethod
@@ -96,7 +106,12 @@ class IQIYICheckIn:
         遍历完成任务
         """
         url = "https://tc.vip.iqiyi.com/taskCenter/task/joinTask"
-        params = {"P00001": p00001, "taskCode": "", "platform": "bb136ff4276771f3", "lang": "zh_CN"}
+        params = {
+            "P00001": p00001,
+            "taskCode": "",
+            "platform": "bb136ff4276771f3",
+            "lang": "zh_CN"
+        }
         for item in task_list:
             if item["status"] == 2:
                 params["taskCode"] = item["taskCode"]
@@ -109,14 +124,21 @@ class IQIYICheckIn:
         :return: 返回信息
         """
         url = "https://tc.vip.iqiyi.com/taskCenter/task/getTaskRewards"
-        params = {"P00001": p00001, "taskCode": "", "platform": "bb136ff4276771f3", "lang": "zh_CN"}
+        params = {
+            "P00001": p00001,
+            "taskCode": "",
+            "platform": "bb136ff4276771f3",
+            "lang": "zh_CN"
+        }
         growth_task = 0
         for item in task_list:
             if item["status"] == 0:
                 params["taskCode"] = item.get("taskCode")
                 requests.get(url=url, params=params)
             elif item["status"] == 4:
-                requests.get(url="https://tc.vip.iqiyi.com/taskCenter/task/notify", params=params)
+                requests.get(
+                    url="https://tc.vip.iqiyi.com/taskCenter/task/notify",
+                    params=params)
                 params["taskCode"] = item.get("taskCode")
                 requests.get(url=url, params=params)
             elif item["status"] == 1:
@@ -167,8 +189,9 @@ class IQIYICheckIn:
 
     def main(self):
         msg_all = ""
-        for iqiyi_cookie in self.iqiyi_cookie_list:
-            p00001, p00002, p00003 = self.parse_cookie(iqiyi_cookie.get("iqiyi_cookie"))
+        for check_item in self.check_items:
+            p00001, p00002, p00003 = self.parse_cookie(
+                check_item.get("cookie"))
             sign_msg = self.sign(p00001=p00001)
             chance = self.draw(0, p00001=p00001, p00003=p00003)["chance"]
             if chance:
@@ -183,7 +206,8 @@ class IQIYICheckIn:
                 task_list = self.query_user_task(p00001=p00001)
                 self.join_task(p00001=p00001, task_list=task_list)
                 time.sleep(10)
-                task_msg = self.get_task_rewards(p00001=p00001, task_list=task_list)
+                task_msg = self.get_task_rewards(p00001=p00001,
+                                                 task_list=task_list)
             try:
                 user_info = json.loads(unquote(p00002, encoding="utf-8"))
                 user_name = user_info.get("user_name")
@@ -194,17 +218,16 @@ class IQIYICheckIn:
                 nickname = "未获取到，请检查 Cookie 中 P00002 字段"
                 user_name = "未获取到，请检查 Cookie 中 P00002 字段"
             user_msg = self.user_information(p00001=p00001)
-            msg = (
-                f"用户账号: {user_name}\n用户昵称: {nickname}\n{user_msg}\n" f"签到奖励: {sign_msg}\n任务奖励: {task_msg}\n抽奖奖励: {draw_msg}"
-            )
+            msg = (f"用户账号: {user_name}\n用户昵称: {nickname}\n{user_msg}\n"
+                   f"签到奖励: {sign_msg}\n任务奖励: {task_msg}\n抽奖奖励: {draw_msg}")
             msg_all += msg + '\n\n'
         return msg_all
 
 
 def start():
     data = get_data()
-    _iqiyi_cookie_list = data.get("IQIYI_COOKIE_LIST", [])
-    res = IQIYICheckIn(iqiyi_cookie_list=_iqiyi_cookie_list).main()
+    _check_items = data.get("IQIYI", [])
+    res = IQIYICheckIn(check_items=_check_items).main()
     print(res)
     send('爱奇艺', res)
 

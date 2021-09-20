@@ -4,19 +4,23 @@ cron: 00 8 * * *
 new Env('王者营地');
 """
 
-import json, os, requests
 from urllib import parse
-from utils import get_data
+
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class WZYDCheckIn:
-    def __init__(self, wzyd_data_list):
-        self.wzyd_data_list = wzyd_data_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
     def sign(data):
-        response = requests.post(url="https://ssl.kohsocialapp.qq.com:10001/play/h5sign", data=data).json()
+        response = requests.post(
+            url="https://ssl.kohsocialapp.qq.com:10001/play/h5sign",
+            data=data).json()
         try:
             if response["result"] == 0:
                 msg = "签到成功"
@@ -28,9 +32,9 @@ class WZYDCheckIn:
 
     def main(self):
         msg_all = ""
-        for wzyd_data in self.wzyd_data_list:
-            wzyd_data = wzyd_data.get("wzyd_data")
-            data = {k: v[0] for k, v in parse.parse_qs(wzyd_data).items()}
+        for check_item in self.check_items:
+            data = check_item.get("data")
+            data = {k: v[0] for k, v in parse.parse_qs(data).items()}
             try:
                 user_id = data.get("userId", "")
             except Exception as e:
@@ -44,7 +48,7 @@ class WZYDCheckIn:
 
 if __name__ == "__main__":
     data = get_data()
-    _wzyd_data_list = data.get("WZYD_DATA_LIST", [])
-    res = WZYDCheckIn(wzyd_data_list=_wzyd_data_list).main()
+    _check_items = data.get("WZYD", [])
+    res = WZYDCheckIn(check_items=_check_items).main()
     print(res)
     send('王者营地', res)

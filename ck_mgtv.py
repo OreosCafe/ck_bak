@@ -4,15 +4,19 @@ cron: 23 14 * * *
 new Env('芒果 TV');
 """
 
-import json, os, requests, time
+import json
+import time
 from urllib import parse
+
+import requests
+
+from notify_mtr import send
 from utils import get_data
-from notify_mtr import send 
 
 
 class MgtvCheckIn:
-    def __init__(self, mgtv_params_list):
-        self.mgtv_params_list = mgtv_params_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
     def sign(params):
@@ -32,13 +36,17 @@ class MgtvCheckIn:
             "uuid": params.get("uuid"),
         }
         try:
-            user_info = requests.get(url="https://homepage.bz.mgtv.com/v2/user/userInfo", params=user_params).json()
+            user_info = requests.get(
+                url="https://homepage.bz.mgtv.com/v2/user/userInfo",
+                params=user_params).json()
             username = user_info.get("data", {}).get("nickName")
         except Exception as e:
             print("获取用户信息失败", e)
             username = params.get("uuid")
         res = requests.get(url=url, params=params)
-        res_json = json.loads(res.text.replace(f"{params.get('callback')}(", "").replace(");", ""))
+        res_json = json.loads(
+            res.text.replace(f"{params.get('callback')}(",
+                             "").replace(");", ""))
         if res_json["code"] == 200:
             cur_day = res_json["data"]["curDay"]
             _credits = res_json["data"]["credits"]
@@ -49,9 +57,9 @@ class MgtvCheckIn:
 
     def main(self):
         msg_all = ""
-        for mgtv_cookie in self.mgtv_params_list:
-            mgtv_params = mgtv_cookie.get("mgtv_params")
-            params = parse.parse_qs(mgtv_params)
+        for check_item in self.check_items:
+            params = check_item.get("params")
+            params = parse.parse_qs(params)
             params["timestamp"] = [round(time.time())]
             params = {key: value[0] for key, value in params.items()}
             msg = self.sign(params=params)
@@ -61,7 +69,7 @@ class MgtvCheckIn:
 
 if __name__ == "__main__":
     data = get_data()
-    _mgtv_params_list = data.get("MGTV_PARAMS_LIST", [])
-    res = MgtvCheckIn(mgtv_params_list=_mgtv_params_list).main()
+    _check_items = data.get("MGTV", [])
+    res = MgtvCheckIn(check_items=_check_items).main()
     print(res)
     send("芒果 TV", res)

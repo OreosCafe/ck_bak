@@ -4,15 +4,19 @@ cron: 12 16 * * *
 new Env('百度贴吧');
 """
 
-import hashlib, json, os, re, requests
-from requests import utils
-from utils import get_data
+import hashlib
+import json
+import re
+
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class TiebaCheckIn:
-    def __init__(self, tieba_cookie_list):
-        self.tieba_cookie_list = tieba_cookie_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
     def login_info(session):
@@ -32,9 +36,13 @@ class TiebaCheckIn:
 
     @staticmethod
     def tieba_list_more(session):
-        content = session.get(url="http://tieba.baidu.com/f/like/mylike?&pn=1", timeout=(5, 20), allow_redirects=False)
+        content = session.get(url="http://tieba.baidu.com/f/like/mylike?&pn=1",
+                              timeout=(5, 20),
+                              allow_redirects=False)
         try:
-            pn = int(re.match(r".*/f/like/mylike\?&pn=(.*?)\">尾页.*", content.text, re.S | re.I).group(1))
+            pn = int(
+                re.match(r".*/f/like/mylike\?&pn=(.*?)\">尾页.*", content.text,
+                         re.S | re.I).group(1))
         except Exception as e:
             pn = 1
         next_page = 1
@@ -45,8 +53,9 @@ class TiebaCheckIn:
                 yield x
             next_page += 1
             content = session.get(
-                url=f"http://tieba.baidu.com/f/like/mylike?&pn={next_page}", timeout=(5, 20), allow_redirects=False
-            )
+                url=f"http://tieba.baidu.com/f/like/mylike?&pn={next_page}",
+                timeout=(5, 20),
+                allow_redirects=False)
 
     def get_tieba_list(self, session):
         tieba_list = list(self.tieba_list_more(session=session))
@@ -56,10 +65,13 @@ class TiebaCheckIn:
     def sign(session, tb_name_list, tbs):
         success_count, error_count, exist_count, shield_count = 0, 0, 0, 0
         for tb_name in tb_name_list:
-            md5 = hashlib.md5(f"kw={tb_name}tbs={tbs}tiebaclient!!!".encode("utf-8")).hexdigest()
+            md5 = hashlib.md5(f"kw={tb_name}tbs={tbs}tiebaclient!!!".encode(
+                "utf-8")).hexdigest()
             data = {"kw": tb_name, "tbs": tbs, "sign": md5}
             try:
-                response = session.post(url="http://c.tieba.baidu.com/c/c/forum/sign", data=data).json()
+                response = session.post(
+                    url="http://c.tieba.baidu.com/c/c/forum/sign",
+                    data=data).json()
                 if response["error_code"] == "0":
                     success_count += 1
                 elif response["error_code"] == "160002":
@@ -75,17 +87,20 @@ class TiebaCheckIn:
 
     def main(self):
         msg_all = ""
-        for tieba_cookie in self.tieba_cookie_list:
-            tieba_cookie = {
-                item.split("=")[0]: item.split("=")[1] for item in tieba_cookie.get("tieba_cookie").split("; ")
+        for check_item in self.check_items:
+            cookie = {
+                item.split("=")[0]: item.split("=")[1]
+                for item in check_item.get("cookie").split("; ")
             }
             session = requests.session()
-            requests.utils.add_dict_to_cookiejar(session.cookies, tieba_cookie)
+            requests.utils.add_dict_to_cookiejar(session.cookies, cookie)
             session.headers.update({"Referer": "https://www.baidu.com/"})
             tbs, user_name = self.valid(session=session)
             if tbs:
                 tb_name_list = self.get_tieba_list(session=session)
-                msg = self.sign(session=session, tb_name_list=tb_name_list, tbs=tbs)
+                msg = self.sign(session=session,
+                                tb_name_list=tb_name_list,
+                                tbs=tbs)
                 msg = f"帐号信息: {user_name}\n{msg}"
             else:
                 msg = f"帐号信息: {user_name}\n签到状态: Cookie 可能过期"
@@ -95,7 +110,7 @@ class TiebaCheckIn:
 
 if __name__ == "__main__":
     data = get_data()
-    _tieba_cookie_list = data.get("TIEBA_COOKIE_LIST", [])
-    res = TiebaCheckIn(tieba_cookie_list=_tieba_cookie_list).main()
+    _check_items = data.get("TIEBA", [])
+    res = TiebaCheckIn(check_items=_check_items).main()
     print(res)
     send('百度贴吧', res)

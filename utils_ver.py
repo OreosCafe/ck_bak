@@ -4,7 +4,7 @@ import time
 
 import requests
 
-__version__ = '20210920-1-030'
+__version__ = '20210920-2-130'
 ONLINE_VERSION = ''
 ver_re = re.compile('__version__ = .(\\d+-\\d+-...).')
 
@@ -26,7 +26,8 @@ def get_latest_ver() -> str:
     except Exception as e:
         ver_msg = f'获取最新版本失败，错误信息如下：\n{e}'
     else:
-        latest_ver = ver_re.findall(r.text)[0] if ver_re.findall(r.text) else '无效版本'
+        latest_ver = ver_re.findall(r.text)[0] if ver_re.findall(
+            r.text) else '无效版本'
         ver_msg = f'最新版本：{latest_ver}'
     return ver_msg
 

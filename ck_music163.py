@@ -4,21 +4,28 @@ cron: 27 0 * * *
 new Env('网易云音乐');
 """
 
-import base64, hashlib, json, os, random, requests, urllib3
+import base64
+import hashlib
+import json
+import random
+
+import requests
+import urllib3
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from requests import utils
-from utils import get_data
+
 from notify_mtr import send
+from utils import get_data
 
 urllib3.disable_warnings()
 
 
 class Music163CheckIn:
-    def __init__(self, music163_account_list):
-        self.music163_account_list = music163_account_list
+    def __init__(self, check_items):
+        self.check_items = check_items
         self.headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
             "Referer": "http://music.163.com/",
             "Accept-Encoding": "gzip, deflate",
         }
@@ -26,7 +33,9 @@ class Music163CheckIn:
     @staticmethod
     def _encrypt(key, text):
         backend = default_backend()
-        cipher = Cipher(algorithms.AES(key.encode("utf8")), modes.CBC(b"0102030405060708"), backend=backend)
+        cipher = Cipher(algorithms.AES(key.encode("utf8")),
+                        modes.CBC(b"0102030405060708"),
+                        backend=backend)
         encryptor = cipher.encryptor()
         length = 16
         count = len(text.encode("utf-8"))
@@ -36,36 +45,53 @@ class Music163CheckIn:
             add = 16
         pad = chr(add)
         text1 = text + (pad * add)
-        ciphertext = encryptor.update(text1.encode("utf-8")) + encryptor.finalize()
+        ciphertext = encryptor.update(
+            text1.encode("utf-8")) + encryptor.finalize()
         crypted_str = str(base64.b64encode(ciphertext), encoding="utf-8")
         return crypted_str
 
     def encrypt(self, text):
         return {
-            "params": self._encrypt("TA3YiYCfY2dDJQgg", self._encrypt("0CoJUm6Qyw8W8jud", text)),
-            "encSecKey": "84ca47bca10bad09a6b04c5c927ef077d9b9f1e37098aa3eac6ea70eb59df0aa28b691b7e75e4f1f9831754919ea784c8f74fbfadf2898b0be17849fd656060162857830e241aba44991601f137624094c114ea8d17bce815b0cd4e5b8e2fbaba978c6d1d14dc3d1faf852bdd28818031ccdaaa13a6018e1024e2aae98844210",
+            "params":
+            self._encrypt("TA3YiYCfY2dDJQgg",
+                          self._encrypt("0CoJUm6Qyw8W8jud", text)),
+            "encSecKey":
+            "84ca47bca10bad09a6b04c5c927ef077d9b9f1e37098aa3eac6ea70eb59df0aa28b691b7e75e4f1f9831754919ea784c8f74fbfadf2898b0be17849fd656060162857830e241aba44991601f137624094c114ea8d17bce815b0cd4e5b8e2fbaba978c6d1d14dc3d1faf852bdd28818031ccdaaa13a6018e1024e2aae98844210",
         }
 
     def login(self, session, phone, password):
         login_url = "https://music.163.com/weapi/login/cellphone"
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
-            "Referer": "http://music.163.com/",
-            "Accept-Encoding": "gzip, deflate",
-            "Cookie": "os=pc; osver=Microsoft-Windows-10-Professional-build-10586-64bit; appver=2.0.3.131777; channel=netease; __remember_me=true;",
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
+            "Referer":
+            "http://music.163.com/",
+            "Accept-Encoding":
+            "gzip, deflate",
+            "Cookie":
+            "os=pc; osver=Microsoft-Windows-10-Professional-build-10586-64bit; appver=2.0.3.131777; channel=netease; __remember_me=true;",
         }
         hl = hashlib.md5()
         hl.update(password.encode(encoding="utf-8"))
         md5_password = str(hl.hexdigest())
         login_data = self.encrypt(
-            json.dumps({"phone": phone, "countrycode": "86", "password": md5_password, "rememberLogin": "true"})
-        )
-        res = session.post(url=login_url, data=login_data, headers=headers, verify=False)
+            json.dumps({
+                "phone": phone,
+                "countrycode": "86",
+                "password": md5_password,
+                "rememberLogin": "true"
+            }))
+        res = session.post(url=login_url,
+                           data=login_data,
+                           headers=headers,
+                           verify=False)
         ret = res.json()
         if ret["code"] == 200:
             csrf = requests.utils.dict_from_cookiejar(res.cookies)["__csrf"]
             nickname = ret["profile"]["nickname"]
-            level_data = self.get_level(session=session, csrf=csrf, login_data=login_data)
+            level_data = self.get_level(session=session,
+                                        csrf=csrf,
+                                        login_data=login_data)
             level = level_data["level"]
             now_play_count = level_data["nowPlayCount"]
             next_play_count = level_data["nextPlayCount"]
@@ -77,7 +103,10 @@ class Music163CheckIn:
 
     def sign(self, session):
         sign_url = "https://music.163.com/weapi/point/dailyTask"
-        res = session.post(url=sign_url, data=self.encrypt('{"type":0}'), headers=self.headers, verify=False)
+        res = session.post(url=sign_url,
+                           data=self.encrypt('{"type":0}'),
+                           headers=self.headers,
+                           verify=False)
         ret = res.json()
         if ret["code"] == 200:
             return "签到成功，经验+ " + str(ret["point"])
@@ -90,9 +119,10 @@ class Music163CheckIn:
         url = "https://music.163.com/weapi/v6/playlist/detail?csrf_token=" + csrf
         recommend_url = "https://music.163.com/weapi/v1/discovery/recommend/resource"
         music_lists = []
-        res = session.post(
-            url=recommend_url, data=self.encrypt('{"csrf_token":"' + csrf + '"}'), headers=self.headers, verify=False
-        )
+        res = session.post(url=recommend_url,
+                           data=self.encrypt('{"csrf_token":"' + csrf + '"}'),
+                           headers=self.headers,
+                           verify=False)
         ret = res.json()
         if ret["code"] != 200:
             print("获取推荐歌曲失败: ", str(ret["code"]), ":", ret["message"])
@@ -103,37 +133,42 @@ class Music163CheckIn:
         for m in music_lists:
             res = session.post(
                 url=url,
-                data=self.encrypt(json.dumps({"id": m, "n": 1000, "csrf_token": csrf})),
+                data=self.encrypt(
+                    json.dumps({
+                        "id": m,
+                        "n": 1000,
+                        "csrf_token": csrf
+                    })),
                 headers=self.headers,
                 verify=False,
             )
             ret = json.loads(res.text)
             for i in ret["playlist"]["trackIds"]:
                 music_id.append(i["id"])
-        post_data = json.dumps(
-            {
-                "logs": json.dumps(
-                    list(
-                        map(
-                            lambda x: {
-                                "action": "play",
-                                "json": {
-                                    "download": 0,
-                                    "end": "playend",
-                                    "id": x,
-                                    "sourceId": "",
-                                    "time": 240,
-                                    "type": "song",
-                                    "wifi": 0,
-                                },
+        post_data = json.dumps({
+            "logs":
+            json.dumps(
+                list(
+                    map(
+                        lambda x: {
+                            "action": "play",
+                            "json": {
+                                "download": 0,
+                                "end": "playend",
+                                "id": x,
+                                "sourceId": "",
+                                "time": 240,
+                                "type": "song",
+                                "wifi": 0,
                             },
-                            random.sample(music_id, 420 if len(music_id) > 420 else len(music_id)),
-                        )
-                    )
-                )
-            }
-        )
-        res = session.post(url="http://music.163.com/weapi/feedback/weblog", data=self.encrypt(post_data))
+                        },
+                        random.sample(
+                            music_id,
+                            420 if len(music_id) > 420 else len(music_id)),
+                    )))
+        })
+        res = session.post(url="http://music.163.com/weapi/feedback/weblog",
+                           data=self.encrypt(post_data))
         ret = res.json()
         if ret["code"] == 200:
             return "刷听歌量成功"
@@ -148,13 +183,12 @@ class Music163CheckIn:
 
     def main(self):
         msg_all = ""
-        for music163_account in self.music163_account_list:
-            phone = music163_account.get("music163_phone")
-            password = music163_account.get("music163_password")
+        for check_item in self.check_items:
+            phone = check_item.get("phone")
+            password = check_item.get("password")
             session = requests.session()
             csrf, nickname, level, now_play_count, next_play_count, now_login_count, next_login_count = self.login(
-                session=session, phone=phone, password=password
-            )
+                session=session, phone=phone, password=password)
             res_sign = ""
             res_task = ""
             if csrf:
@@ -163,15 +197,14 @@ class Music163CheckIn:
             msg = (
                 f"帐号信息: {nickname}\n当前等级: {level}\n当前听歌数量: {now_play_count}\n"
                 f"升级需听歌数量: {next_play_count - now_play_count}\n升级需签到天数: {next_login_count - now_login_count}\n"
-                f"签到状态: {res_sign}\n刷歌状态: {res_task}"
-            )
+                f"签到状态: {res_sign}\n刷歌状态: {res_task}")
             msg_all += msg + '\n\n'
         return msg_all
 
 
 if __name__ == "__main__":
     data = get_data()
-    _music163_account_list = data.get("MUSIC163_ACCOUNT_LIST", [])
-    res = Music163CheckIn(music163_account_list=_music163_account_list).main()
+    _check_items = data.get("MUSIC163", [])
+    res = Music163CheckIn(check_items=_check_items).main()
     print(res)
     send('网易云音乐', res)

@@ -4,14 +4,22 @@ cron: 45 5 * * *
 new Env('哔咔漫画');
 """
 
-import hashlib, hmac, json, os, random, requests, string, time
-from utils import get_data
+import hashlib
+import hmac
+import json
+import random
+import string
+import time
+
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class PicacomicCheckIn:
-    def __init__(self, picacomic_account_list):
-        self.picacomic_account_list = picacomic_account_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
     def generate_headers(path: str, data: dict = None, token: str = None):
@@ -29,7 +37,8 @@ class PicacomicCheckIn:
             "image-quality": "original",
         }
         current_time = str(int(time.time()))
-        nonce = "".join(random.choices(string.ascii_lowercase + string.digits, k=32))
+        nonce = "".join(
+            random.choices(string.ascii_lowercase + string.digits, k=32))
         raw = path + current_time + nonce + "POST" + api_key
         raw = raw.lower()
         h = hmac.new(api_secret.encode(), digestmod=hashlib.sha256)
@@ -47,19 +56,26 @@ class PicacomicCheckIn:
     def sign(self, email, password):
         try:
             data = {"email": email, "password": password}
-            sign_headers = self.generate_headers(path="auth/sign-in", data=data)
+            sign_headers = self.generate_headers(path="auth/sign-in",
+                                                 data=data)
             sign_response = requests.post(
                 url="https://picaapi.picacomic.com/auth/sign-in",
-                data=json.dumps({"email": "sitoi", "password": "123456st"}),
+                data=json.dumps({
+                    "email": "sitoi",
+                    "password": "123456st"
+                }),
                 headers=sign_headers,
                 timeout=60,
             ).json()
             token = sign_response.get("data", {}).get("token")
-            punch_headers = self.generate_headers(path="users/punch-in", token=token)
+            punch_headers = self.generate_headers(path="users/punch-in",
+                                                  token=token)
             response = requests.post(
-                url="https://picaapi.picacomic.com/users/punch-in", headers=punch_headers, timeout=60
-            ).json()
-            if response.get("data", {}).get("res", {}).get("status", {}) == "ok":
+                url="https://picaapi.picacomic.com/users/punch-in",
+                headers=punch_headers,
+                timeout=60).json()
+            if response.get("data", {}).get("res", {}).get("status",
+                                                           {}) == "ok":
                 msg = "打卡成功"
             else:
                 msg = "重复签到"
@@ -69,18 +85,20 @@ class PicacomicCheckIn:
 
     def main(self):
         msg_all = ""
-        for picacomic_account in self.picacomic_account_list:
-            picacomic_email = picacomic_account.get("picacomic_email")
-            picacomic_password = picacomic_account.get("picacomic_password")
-            sign_msg = self.sign(email=picacomic_email, password=picacomic_password)
-            msg = f"帐号信息: {picacomic_email}\n签到状态: {sign_msg}"
+        for check_item in self.check_items:
+            email = check_item.get("email")
+            password = check_item.get("password")
+            sign_msg = self.sign(email=email,
+                                 password=password)
+            msg = f"帐号信息: {email}\n签到状态: {sign_msg}"
             msg_all += msg + '\n\n'
         return msg_all
 
 
 if __name__ == "__main__":
     data = get_data()
-    _picacomic_account_list = data.get("PICACOMIC_ACCOUNT_LIST", [])
-    res = PicacomicCheckIn(picacomic_account_list=_picacomic_account_list).main()
+    _check_items = data.get("PICACOMIC", [])
+    res = PicacomicCheckIn(
+        check_items=_check_items).main()
     print(res)
     send('哔咔漫画', res)

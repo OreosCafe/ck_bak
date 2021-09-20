@@ -4,9 +4,12 @@ cron: 30 7 * * *
 new Env('每日一句');
 """
 
-import json, requests
-from utils import get_data
+import json
+
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class Motto:
@@ -34,7 +37,7 @@ if __name__ == "__main__":
     except Exception as e:
         raise e
     if motto:
-        try: 
+        try:
             res = Motto().main()
             print(res)
             send('每日一句', res)

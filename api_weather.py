@@ -4,16 +4,19 @@ cron: 30 7 * * *
 new Env('天气预报');
 """
 
-import json, os, shutil, requests
+import json
+import os
 from datetime import datetime
-from utils import get_data
+
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class Weather:
-    def __init__(self, city_name_list):
-        self.city_name_list = city_name_list
-
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     def main(self):
         """
@@ -21,10 +24,14 @@ class Weather:
         :return:
         """
         try:
-            with open(os.path.join(os.path.dirname(__file__), "city.json"), "r", encoding="utf-8") as city_file:
+            with open(os.path.join(os.path.dirname(__file__), "city.json"),
+                      "r",
+                      encoding="utf-8") as city_file:
                 city_map = json.loads(city_file.read())
         except:
-            with open("/ql/repo/Oreomeow_checkinpanel_master/city.json", "r", encoding="utf-8") as city_file:
+            with open("/ql/repo/Oreomeow_checkinpanel_master/city.json",
+                      "r",
+                      encoding="utf-8") as city_file:
                 city_map = json.loads(city_file.read())
         msg_all = ""
         for city_name in self.city_name_list:
@@ -50,7 +57,7 @@ class Weather:
 
 if __name__ == "__main__":
     data = get_data()
-    _city_name_list = data.get("CITY_NAME_LIST", [])
-    res = Weather(city_name_list=_city_name_list).main()
+    _check_items = data.get("CITY", [])
+    res = Weather(check_items=_check_items).main()
     print(res)
     send('天气预报', res)

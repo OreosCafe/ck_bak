@@ -4,20 +4,22 @@ cron: 20 8 * * *
 new Env('网易云游戏');
 """
 
-import json, requests
-from utils import get_data
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class Game163CheckIn:
-    def __init__(self, game163_auth_list):
-        self.game163_auth_list = game163_auth_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
-    def game163(Authorization):
+    def game163(authorization):
         headers = {
-            'user-agent': 'Mozilla/5.0 (Linux; Android 10; Redmi K30 Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/85.0.4183.127 Mobile Safari/537.36',
-            'Authorization': Authorization
+            'user-agent':
+            'Mozilla/5.0 (Linux; Android 10; Redmi K30 Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/85.0.4183.127 Mobile Safari/537.36',
+            'authorization': authorization
         }
         url = 'http://n.cg.163.com/api/v2/sign-today'
         r = requests.post(url, headers=headers).text
@@ -28,18 +30,16 @@ class Game163CheckIn:
 
     def main(self):
         msg_all = ""
-        for game163_auth in self.game163_auth_list:
-            Authorization = str(game163_auth.get("Authorization"))
-            msg = self.game163(Authorization=Authorization)
+        for check_item in self.check_items:
+            authorization = str(check_item.get("authorization"))
+            msg = self.game163(authorization=authorization)
             msg_all += msg + '\n\n'
         return msg_all
 
-def start():
-    data = get_data()
-    _game163_auth_list = data.get("GAME163_AUTH_LIST", [])
-    res = Game163CheckIn(game163_auth_list=_game163_auth_list).main()
-    print(res)
-    send("网易云游戏", res)
 
 if __name__ == "__main__":
-    start()
+    data = get_data()
+    _check_items = data.get("GAME163", [])
+    res = Game163CheckIn(check_items=_check_items).main()
+    print(res)
+    send("网易云游戏", res)

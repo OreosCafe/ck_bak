@@ -4,25 +4,33 @@ cron: 3 0 * * *
 new Env('一加手机社区官方论坛');
 """
 
-import json, os, re, requests, time
+import re
+import time
 from urllib import parse
-from utils import get_data
+
+import requests
+
 from notify_mtr import send
+from utils import get_data
 
 
 class OnePlusBBSCheckIn:
-    def __init__(self, oneplusbbs_cookie_list):
-        self.oneplusbbs_cookie_list = oneplusbbs_cookie_list
+    def __init__(self, check_items):
+        self.check_items = check_items
 
     @staticmethod
     def sign(cookie):
         headers = {
             "Origin": "https://www.oneplusbbs.com",
             "Content-Type": "application/x-www-form-urlencoded",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.57",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "Referer": "https://www.oneplusbbs.com/plugin-dsu_paulsign:sign.html",
-            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,fr;q=0.5,pl;q=0.4",
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.57",
+            "Accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+            "Referer":
+            "https://www.oneplusbbs.com/plugin-dsu_paulsign:sign.html",
+            "Accept-Language":
+            "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,fr;q=0.5,pl;q=0.4",
             "cookie": cookie,
         }
         params = (
@@ -32,10 +40,16 @@ class OnePlusBBSCheckIn:
             ("inajax", "1"),
         )
         formhash = re.findall(r"bbs_formhash=(.*?);", cookie)[0]
-        data = {"formhash": formhash, "qdxq": "kx", "qdmode": "1", "todaysay": "努力奋斗"}
-        response = requests.post(
-            url="https://www.oneplusbbs.com/plugin.php", headers=headers, params=params, data=data
-        ).text
+        data = {
+            "formhash": formhash,
+            "qdxq": "kx",
+            "qdmode": "1",
+            "todaysay": "努力奋斗"
+        }
+        response = requests.post(url="https://www.oneplusbbs.com/plugin.php",
+                                 headers=headers,
+                                 params=params,
+                                 data=data).text
         msg = re.findall(r'<div class="c">(.*?)</div>', response, re.S)
         msg = msg[0].strip() if msg else "Cookie 可能过期"
         return msg
@@ -44,11 +58,13 @@ class OnePlusBBSCheckIn:
     def draw(cookie):
         headers = {
             "Accept": "application/json, text/javascript, */*; q=0.01",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.57",
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.57",
             "X-Requested-With": "XMLHttpRequest",
             "Origin": "https://www.oneplusbbs.com",
             "Referer": "https://www.oneplusbbs.com/plugin-choujiang.html",
-            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,fr;q=0.5,pl;q=0.4",
+            "Accept-Language":
+            "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,fr;q=0.5,pl;q=0.4",
             "cookie": cookie,
         }
         params = (
@@ -60,7 +76,10 @@ class OnePlusBBSCheckIn:
         error_count = 0
         for i in range(10):
             try:
-                data = requests.post(url="https://www.oneplusbbs.com/plugin.php", headers=headers, params=params).json()
+                data = requests.post(
+                    url="https://www.oneplusbbs.com/plugin.php",
+                    headers=headers,
+                    params=params).json()
                 if data["ret"] != "":
                     ret_map = {
                         "2": 18,
@@ -91,17 +110,18 @@ class OnePlusBBSCheckIn:
 
     def main(self):
         msg_all = ""
-        for oneplusbbs_cookie in self.oneplusbbs_cookie_list:
-            oneplusbbs_cookie = oneplusbbs_cookie.get("oneplusbbs_cookie")
-            bbs_uname = re.findall(r"bbs_uname=(.*?);", oneplusbbs_cookie)
-            bbs_uname = bbs_uname[0].split("%7C")[0] if bbs_uname else "未获取到用户信息"
+        for check_item in self.check_items:
+            cookie = check_item.get("cookie")
+            bbs_uname = re.findall(r"bbs_uname=(.*?);", cookie)
+            bbs_uname = bbs_uname[0].split(
+                "%7C")[0] if bbs_uname else "未获取到用户信息"
             try:
                 bbs_uname = parse.unquote(bbs_uname)
             except Exception as e:
                 print(f"bbs_uname 转换失败: {e}")
                 bbs_uname = bbs_uname
-            sign_msg = self.sign(cookie=oneplusbbs_cookie)
-            draw_msg = self.draw(cookie=oneplusbbs_cookie)
+            sign_msg = self.sign(cookie=cookie)
+            draw_msg = self.draw(cookie=cookie)
             msg = f"帐号信息: {bbs_uname}\n签到信息: {sign_msg}\n{draw_msg}"
             msg_all += msg + '\n\n'
         return msg_all
@@ -109,7 +129,7 @@ class OnePlusBBSCheckIn:
 
 if __name__ == "__main__":
     data = get_data()
-    _oneplusbbs_cookie_list = data.get("ONEPLUSBBS_COOKIE_LIST", [])
-    res = OnePlusBBSCheckIn(oneplusbbs_cookie_list=_oneplusbbs_cookie_list).main()
+    _check_items = data.get("ONEPLUSBBS", [])
+    res = OnePlusBBSCheckIn(check_items=_check_items).main()
     print(res)
     send('一加手机社区官方论坛', res)
