@@ -70,11 +70,11 @@ class SspanelQd(object):
             day = re.findall(r'\["Class_Expire", "(.*)"],', response.text)[0]
             rest = re.findall(r'\["Unused_Traffic", "(.*?)"]', response.text)[0]
             msg = (
-                url + "\n" +
-                "- 今日签到信息：" + str(msg) +
-                "\n- 用户等级：" + str(level) +
-                "\n- 到期时间：" + str(day) +
-                "\n- 剩余流量：" + str(rest)
+                url
+                + "\n- 今日签到信息：" + str(msg)
+                + "\n- 用户等级：" + str(level)
+                + "\n- 到期时间：" + str(day)
+                + "\n- 剩余流量：" + str(rest)
             )
             return msg
         except:

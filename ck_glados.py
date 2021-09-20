@@ -112,10 +112,12 @@ class GLaDOSCheckIn(object):
                 msg = (
                     "--------------------\n"
                     "GLaDOS CheckIn\n"
-                    "Msg: " + check_in_msg + "\n" + "Plan: " + plan +
-                    " Plan\n" + "Left days: " + str(left_days) + "\n" +
-                    "Usage: " + "%.3f" % used_gb + "GB\n" + "Total: " +
-                    str(total_gb) + "GB\n" + "--------------------"
+                    + "Msg: " + check_in_msg + "\n"
+                    + "Plan: " + plan + " Plan\n"
+                    + "Left days: " + str(left_days) + "\n"
+                    + "Usage: " + "%.3f" % used_gb + "GB\n"
+                    + "Total: " + str(total_gb) + "GB\n"
+                    "--------------------"
                 )
             except BaseException:
                 msg = (
