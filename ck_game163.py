@@ -16,12 +16,12 @@ class Game163CheckIn:
 
     @staticmethod
     def game163(authorization):
+        url = "http://n.cg.163.com/api/v2/sign-today"
         headers = {
             'user-agent':
-            'Mozilla/5.0 (Linux; Android 10; Redmi K30 Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/85.0.4183.127 Mobile Safari/537.36',
+                'Mozilla/5.0 (Linux; Android 10; Redmi K30 Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/85.0.4183.127 Mobile Safari/537.36',
             'authorization': authorization
         }
-        url = 'http://n.cg.163.com/api/v2/sign-today'
         r = requests.post(url, headers=headers).text
         if r[0] == "{":
             return "cookie 已失效"
@@ -33,7 +33,7 @@ class Game163CheckIn:
         for check_item in self.check_items:
             authorization = str(check_item.get("authorization"))
             msg = self.game163(authorization=authorization)
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 

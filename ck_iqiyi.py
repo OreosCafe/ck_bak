@@ -43,8 +43,7 @@ class IQIYICheckIn:
                 growthvalue = res_data.get("growthvalue", 0)  # 当前 VIP 成长值
                 distance = res_data.get("distance", 0)  # 升级需要成长值
                 deadline = res_data.get("deadline", "非 VIP 用户")  # VIP 到期时间
-                today_growth_value = res_data.get("todayGrowthValue",
-                                                  0)  # 今日成长值
+                today_growth_value = res_data.get("todayGrowthValue", 0)  # 今日成长值
                 msg = (
                     f"VIP 等级: {level}\n当前成长值: {growthvalue}\n"
                     f"升级需成长值: {distance}\n今日成长值: +{today_growth_value}\nVIP 到期时间: {deadline}"
@@ -67,8 +66,7 @@ class IQIYICheckIn:
         if res["code"] == "A00000":
             try:
                 growth = res["data"]["signInfo"]["data"]["rewardMap"]["growth"]
-                cumulate_sign_days_sum = res["data"]["signInfo"]["data"][
-                    "cumulateSignDaysSum"]
+                cumulate_sign_days_sum = res["data"]["signInfo"]["data"]["cumulateSignDaysSum"]
                 msg = f"+{growth}成长值\n当月签到: {cumulate_sign_days_sum}天"
             except Exception as e:
                 print(e)
@@ -89,14 +87,10 @@ class IQIYICheckIn:
         if res["code"] == "A00000":
             for item in res["data"]["tasks"]["daily"]:
                 task_list.append({
-                    "name":
-                    item["name"],
-                    "taskCode":
-                    item["taskCode"],
-                    "status":
-                    item["status"],
-                    "taskReward":
-                    item["taskReward"]["task_reward_growth"],
+                    "name": item["name"],
+                    "taskCode": item["taskCode"],
+                    "status": item["status"],
+                    "taskReward": item["taskReward"]["task_reward_growth"]
                 })
         return task_list
 
@@ -138,7 +132,8 @@ class IQIYICheckIn:
             elif item["status"] == 4:
                 requests.get(
                     url="https://tc.vip.iqiyi.com/taskCenter/task/notify",
-                    params=params)
+                    params=params
+                )
                 params["taskCode"] = item.get("taskCode")
                 requests.get(url=url, params=params)
             elif item["status"] == 1:
@@ -170,7 +165,7 @@ class IQIYICheckIn:
             "psp_status": 3,
             "secure_v": 1,
             "secure_p": "GPhone",
-            "req_sn": round(time.time() * 1000),
+            "req_sn": round(time.time() * 1000)
         }
         if draw_type == 1:
             del params["lottery_chance"]
@@ -190,8 +185,7 @@ class IQIYICheckIn:
     def main(self):
         msg_all = ""
         for check_item in self.check_items:
-            p00001, p00002, p00003 = self.parse_cookie(
-                check_item.get("cookie"))
+            p00001, p00002, p00003 = self.parse_cookie(check_item.get("cookie"))
             sign_msg = self.sign(p00001=p00001)
             chance = self.draw(0, p00001=p00001, p00003=p00003)["chance"]
             if chance:
@@ -206,8 +200,7 @@ class IQIYICheckIn:
                 task_list = self.query_user_task(p00001=p00001)
                 self.join_task(p00001=p00001, task_list=task_list)
                 time.sleep(10)
-                task_msg = self.get_task_rewards(p00001=p00001,
-                                                 task_list=task_list)
+                task_msg = self.get_task_rewards(p00001=p00001, task_list=task_list)
             try:
                 user_info = json.loads(unquote(p00002, encoding="utf-8"))
                 user_name = user_info.get("user_name")
@@ -218,9 +211,11 @@ class IQIYICheckIn:
                 nickname = "未获取到，请检查 Cookie 中 P00002 字段"
                 user_name = "未获取到，请检查 Cookie 中 P00002 字段"
             user_msg = self.user_information(p00001=p00001)
-            msg = (f"用户账号: {user_name}\n用户昵称: {nickname}\n{user_msg}\n"
-                   f"签到奖励: {sign_msg}\n任务奖励: {task_msg}\n抽奖奖励: {draw_msg}")
-            msg_all += msg + '\n\n'
+            msg = (
+                f"用户账号: {user_name}\n用户昵称: {nickname}\n{user_msg}\n"
+                f"签到奖励: {sign_msg}\n任务奖励: {task_msg}\n抽奖奖励: {draw_msg}"
+            )
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -229,7 +224,7 @@ def start():
     _check_items = data.get("IQIYI", [])
     res = IQIYICheckIn(check_items=_check_items).main()
     print(res)
-    send('爱奇艺', res)
+    send("爱奇艺", res)
 
 
 if __name__ == "__main__":

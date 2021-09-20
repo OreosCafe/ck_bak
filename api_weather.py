@@ -24,14 +24,10 @@ class Weather:
         :return:
         """
         try:
-            with open(os.path.join(os.path.dirname(__file__), "city.json"),
-                      "r",
-                      encoding="utf-8") as city_file:
+            with open(os.path.join(os.path.dirname(__file__), "city.json"), "r", encoding="utf-8") as city_file:
                 city_map = json.loads(city_file.read())
         except:
-            with open("/ql/repo/Oreomeow_checkinpanel_master/city.json",
-                      "r",
-                      encoding="utf-8") as city_file:
+            with open("/ql/repo/Oreomeow_checkinpanel_master/city.json", "r", encoding="utf-8") as city_file:
                 city_map = json.loads(city_file.read())
         msg_all = ""
         for city_name in self.check_items:
@@ -51,7 +47,7 @@ class Weather:
                 msg = f"城市: {city_name}\n时间: {today_time}\n{notice}\n{temperature}\n{wind}\n{aqi}\n"
             else:
                 msg = f"城市: {city_name}\n时间: {today_time}天气情况: 获取失败"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -60,4 +56,4 @@ if __name__ == "__main__":
     _check_items = data.get("CITY", [])
     res = Weather(check_items=_check_items).main()
     print(res)
-    send('天气预报', res)
+    send("天气预报", res)

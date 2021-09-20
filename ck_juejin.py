@@ -15,29 +15,29 @@ from utils import get_data
 class JuejinCheckIn:
     def __init__(self, check_items):
         self.check_items = check_items
+        self.base_url = "https://api.juejin.cn/"
         self.headers = {
             'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36'
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36'
         }
-        self.base_url = 'https://api.juejin.cn/'
 
     def sign(self, cookie):
-        sign_url = self.base_url + 'growth_api/v1/check_in'
-        res = requests.post(url=sign_url,
-                            headers=self.headers,
-                            cookies={
-                                'Cookie': cookie
-                            }).content
+        sign_url = self.base_url + "growth_api/v1/check_in"
+        res = requests.post(
+            url=sign_url,
+            headers=self.headers,
+            cookies={"Cookie": cookie}
+        ).content
         res = json.loads(res)
         return res
 
     def lottery(self, cookie):
-        lottery_url = self.base_url + 'growth_api/v1/lottery/draw'
-        res = requests.post(url=lottery_url,
-                            headers=self.headers,
-                            cookies={
-                                'Cookie': cookie
-                            }).content
+        lottery_url = self.base_url + "growth_api/v1/lottery/draw"
+        res = requests.post(
+            url=lottery_url,
+            headers=self.headers,
+            cookies={"Cookie": cookie}
+        ).content
         res = json.loads(res)
         return res
 
@@ -46,15 +46,16 @@ class JuejinCheckIn:
         i = 1
         for check_item in self.check_items:
             cookie = str(check_item.get("cookie"))
-            sign_msg = self.sign(cookie=cookie)['err_msg']
-            lottery_msg = self.lottery(cookie=cookie)['err_msg']
-            msg = f"账号 {i}\n------ 掘金签到结果 ------\n" + sign_msg + "\n------ 掘金抽奖结果 ------\n" + lottery_msg
+            sign_msg = self.sign(cookie=cookie)["err_msg"]
+            lottery_msg = self.lottery(cookie=cookie)["err_msg"]
+            msg = f"账号 {i}\n------ 掘金签到结果 ------\n" + sign_msg + \
+                "\n------ 掘金抽奖结果 ------\n" + lottery_msg
             i += 1
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("JUEJIN", [])
     res = JuejinCheckIn(check_items=_check_items).main()

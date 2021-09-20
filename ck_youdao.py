@@ -29,14 +29,12 @@ class YouDaoCheckIn:
                 cookies=cookies)
             for i in range(3):
                 ad_response = requests.post(
-                    url=
-                    "https://note.youdao.com/yws/mapi/user?method=adRandomPrompt",
+                    url="https://note.youdao.com/yws/mapi/user?method=adRandomPrompt",
                     cookies=cookies)
                 ad_space += ad_response.json().get("space", 0) // 1048576
             if "reward" in res.text:
                 sync_space = res.json().get("rewardSpace", 0) // 1048576
-                checkin_space = checkin_response.json().get("space",
-                                                            0) // 1048576
+                checkin_space = checkin_response.json().get("space", 0) // 1048576
                 space = sync_space + checkin_space + ad_space
                 youdao_message = "+{0}M".format(space)
             else:
@@ -60,7 +58,7 @@ class YouDaoCheckIn:
                 uid = "未获取到用户信息"
             msg = self.sign(cookies=cookie)
             msg = f"帐号信息: {uid}\n获取空间: {msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -69,4 +67,4 @@ if __name__ == "__main__":
     _check_items = data.get("YOUDAO", [])
     res = YouDaoCheckIn(check_items=_check_items).main()
     print(res)
-    send('有道云笔记', res)
+    send("有道云笔记", res)

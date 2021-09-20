@@ -48,9 +48,9 @@ class PojieCheckIn:
             cookie = check_item.get("cookie")
             headers = {
                 "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36",
                 "Cookie": cookie,
-                "ContentType": "text/html;charset=gbk",
+                "ContentType": "text/html;charset=gbk"
             }
             try:
                 uid = re.findall(r"htVD_2132_lastcheckfeed=(.*?);",
@@ -60,7 +60,7 @@ class PojieCheckIn:
                 uid = "未获取到用户 uid"
             sign_msg = self.sign(headers=headers)
             msg = f"帐号信息: {uid}\n签到状态: {sign_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -69,4 +69,4 @@ if __name__ == "__main__":
     _check_items = data.get("POJIE", [])
     res = PojieCheckIn(check_items=_check_items).main()
     print(res)
-    send('吾爱破解', res)
+    send("吾爱破解", res)

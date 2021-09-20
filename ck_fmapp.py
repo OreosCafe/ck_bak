@@ -26,7 +26,8 @@ class FMAPPCheckIn:
                 data = response.get("data", {})
                 msg = (
                     f"在坚持{data.get('nextDay')}天即可获得{data.get('nextNumber')}个发米粒\n"
-                    f"签到{data.get('lastDay')}天可获得{data.get('lastNumber')}个发米粒")
+                    f"签到{data.get('lastDay')}天可获得{data.get('lastNumber')}个发米粒"
+                )
             else:
                 msg = response.get("message")
         except Exception as e:
@@ -54,12 +55,11 @@ class FMAPPCheckIn:
     def mili_count(headers):
         try:
             url = "https://fmapp.chinafamilymart.com.cn/api/app/member/v1/mili/service/detail"
-            response = requests.post(url=url,
-                                     headers=headers,
-                                     data=json.dumps({
-                                         "pageSize": 10,
-                                         "pageNo": 1
-                                     })).json()
+            response = requests.post(
+                url=url,
+                headers=headers,
+                data=json.dumps({"pageSize": 10, "pageNo": 1})
+            ).json()
             code = response.get("code")
             if code == "200":
                 data = response.get("data", {})
@@ -94,13 +94,13 @@ class FMAPPCheckIn:
                 "User-Agent": useragent,
                 "os": os,
                 "cookie": cookie,
-                "blackBox": blackbox,
+                "blackBox": blackbox
             }
             sign_msg = self.sign(headers=headers)
             name_msg = self.user_info(headers=headers)
             mili_msg = self.mili_count(headers=headers)
             msg = f"帐号信息: {name_msg}\n签到状态: {sign_msg}\n米粒数量: {mili_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 

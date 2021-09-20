@@ -49,7 +49,8 @@ class WeiBoCheckIn:
             nickname = result.get("data").get("user").get("nickname")
             msg = (
                 f'用户昵称: {nickname}\n每日打卡: {result.get("data").get("signin").get("title").split("<")[0]}天\n'
-                f'积分总计: {result.get("data").get("user").get("energy")}')
+                f'积分总计: {result.get("data").get("user").get("energy")}'
+            )
         else:
             msg = f"每日打卡: 活动过期或失效"
         return msg
@@ -57,16 +58,12 @@ class WeiBoCheckIn:
     @staticmethod
     def pay(token):
         headers = {
-            "Accept-Encoding":
-            "gzip, deflate",
-            "Connection":
-            "keep-alive",
-            "Content-Type":
-            "application/x-www-form-urlencoded",
-            "Host":
-            "pay.sc.weibo.com",
+            "Accept-Encoding": "gzip, deflate",
+            "Connection": "keep-alive",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Host": "pay.sc.weibo.com",
             "User-Agent":
-            "Mozilla/5.0 (iPhone; CPU iPhone OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Weibo (iPhone10,1__weibo__11.2.1__iphone__os14.5)",
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Weibo (iPhone10,1__weibo__11.2.1__iphone__os14.5)"
         }
         data = token + "&lang=zh_CN&wm=3333_2001"
         response = requests.post(
@@ -98,15 +95,17 @@ class WeiBoCheckIn:
         for check_item in self.check_items:
             url = check_item.get("url")
             query_dict = dict(parse.parse_qsl(parse.urlsplit(url).query))
-            token = "&".join([
-                f"{key}={value}" for key, value in query_dict.items()
-                if key in ["from", "uid", "s", "gsid"]
-            ])
+            token = "&".join(
+                [
+                    f"{key}={value}" for key, value in query_dict.items()
+                    if key in ["from", "uid", "s", "gsid"]
+                ]
+            )
             sign_msg = self.sign(token=token)
             card_msg = self.card(token=token)
             pay_msg = self.pay(token=token)
             msg = f"{sign_msg}\n{card_msg}\n{pay_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -115,4 +114,4 @@ if __name__ == "__main__":
     _check_items_list = data.get("WEIBO", [])
     res = WeiBoCheckIn(check_items=_check_items_list).main()
     print(res)
-    send('微博', res)
+    send("微博", res)

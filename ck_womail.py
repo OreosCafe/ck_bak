@@ -22,7 +22,7 @@ class WoMailCheckIn:
             url = url
             headers = {
                 "User-Agent":
-                "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3868.400 QQBrowser/10.8.4394.400"
+                    "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3868.400 QQBrowser/10.8.4394.400"
             }
             res = requests.get(url=url, headers=headers, allow_redirects=False)
             set_cookie = res.headers["Set-Cookie"]
@@ -41,8 +41,8 @@ class WoMailCheckIn:
         msg = ""
         headers = {
             "User-Agent":
-            "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3868.400 QQBrowser/10.8.4394.400",
-            "Cookie": cookies,
+                "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3868.400 QQBrowser/10.8.4394.400",
+            "Cookie": cookies
         }
         try:
             url = "https://nyan.mail.wo.cn/cn/sign/index/userinfo.do?rand=0.8897817905278955"
@@ -79,7 +79,7 @@ class WoMailCheckIn:
                 },
                 "去用户俱乐部逛一逛": {
                     "taskName": "club"
-                },
+                }
             }
             for key, data in data_params.items():
                 try:
@@ -110,7 +110,7 @@ class WoMailCheckIn:
         url = "https://club.mail.wo.cn/clubwebservice/?" + userdata
         headers = {
             "User-Agent":
-            "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3868.400 QQBrowser/10.8.4394.400"
+                "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3868.400 QQBrowser/10.8.4394.400"
         }
         try:
             res = requests.get(url=url, headers=headers, allow_redirects=False)
@@ -119,11 +119,10 @@ class WoMailCheckIn:
             if "SESSION" in cookies:
                 headers = {
                     "User-Agent":
-                    "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3868.400 QQBrowser/10.8.4394.400",
-                    "Cookie":
-                    cookies,
+                        "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3868.400 QQBrowser/10.8.4394.400",
+                    "Cookie": cookies,
                     "Referer":
-                    "https://club.mail.wo.cn/clubwebservice/club-user/user-info/mine-task",
+                        "https://club.mail.wo.cn/clubwebservice/club-user/user-info/mine-task"
                 }
                 # 获取用户信息
                 try:
@@ -136,10 +135,8 @@ class WoMailCheckIn:
                     msg += userdata
                     integral_task_data = [
                         {
-                            "resourceName":
-                            "每日签到（积分）",
-                            "url":
-                            "https://club.mail.wo.cn/clubwebservice/club-user/user-sign/create",
+                            "resourceName": "每日签到（积分）",
+                            "url": "https://club.mail.wo.cn/clubwebservice/club-user/user-sign/create"
                         },
                         {
                             "irid": 539,
@@ -148,9 +145,8 @@ class WoMailCheckIn:
                             "taskState": 0,
                             "scoreNum": 1,
                             "scoreResourceType": "add",
-                            "attachData":
-                            '{"jumpLink":"/clubwebservice/club-index/activity-scope?currentPage=activityScope"}',
-                            "description": "Web端参与俱乐部活动+1积分",
+                            "attachData": '{"jumpLink":"/clubwebservice/club-index/activity-scope?currentPage=activityScope"}',
+                            "description": "Web端参与俱乐部活动+1积分"
                         },
                         {
                             "irid": 545,
@@ -161,8 +157,8 @@ class WoMailCheckIn:
                             "scoreResourceType": "add",
                             "attachData":
                             '{"jumpLink":"/clubwebservice/score-exchange/into-score-exchange?currentPage=js-hover"}',
-                            "description": "Web端积分兑换+1积分",
-                        },
+                            "description": "Web端积分兑换+1积分"
+                        }
                     ]
                     lenth = len(integral_task_data)
                     # msg+="--------积分任务--------\n"
@@ -196,10 +192,8 @@ class WoMailCheckIn:
                             msg += f"沃邮箱俱乐部执行任务【{resource_name}】错误"
                     growthtask_data = [
                         {
-                            "resourceName":
-                            "每日签到（积分）",
-                            "url":
-                            "https://club.mail.wo.cn/clubwebservice/club-user/user-sign/create",
+                            "resourceName": "每日签到（积分）",
+                            "url": "https://club.mail.wo.cn/clubwebservice/club-user/user-sign/create"
                         },
                         {
                             "irid": 539,
@@ -208,9 +202,8 @@ class WoMailCheckIn:
                             "taskState": 0,
                             "scoreNum": 1,
                             "scoreResourceType": "add",
-                            "attachData":
-                            '{"jumpLink":"/clubwebservice/club-index/activity-scope?currentPage=activityScope"}',
-                            "description": "Web端参与俱乐部活动+1积分",
+                            "attachData": '{"jumpLink":"/clubwebservice/club-index/activity-scope?currentPage=activityScope"}',
+                            "description": "Web端参与俱乐部活动+1积分"
                         },
                         {
                             "irid": 545,
@@ -219,10 +212,9 @@ class WoMailCheckIn:
                             "taskState": 0,
                             "scoreNum": 1,
                             "scoreResourceType": "add",
-                            "attachData":
-                            '{"jumpLink":"/clubwebservice/score-exchange/into-score-exchange?currentPage=js-hover"}',
-                            "description": "Web端积分兑换+1积分",
-                        },
+                            "attachData": '{"jumpLink":"/clubwebservice/score-exchange/into-score-exchange?currentPage=js-hover"}',
+                            "description": "Web端积分兑换+1积分"
+                        }
                     ]
                     lenth = len(growthtask_data)
                     for i in range(lenth):
@@ -276,7 +268,7 @@ class WoMailCheckIn:
             except Exception as e:
                 print(e)
                 msg = "登录失败"
-                msg_all += msg + '\n\n'
+                msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -285,4 +277,4 @@ if __name__ == "__main__":
     _check_items = data.get("WOMAIL", [])
     res = WoMailCheckIn(check_items=_check_items).main()
     print(res)
-    send('联通沃邮箱', res)
+    send("联通沃邮箱", res)

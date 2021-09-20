@@ -25,9 +25,9 @@ class Music163CheckIn:
         self.check_items = check_items
         self.headers = {
             "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
             "Referer": "http://music.163.com/",
-            "Accept-Encoding": "gzip, deflate",
+            "Accept-Encoding": "gzip, deflate"
         }
 
     @staticmethod
@@ -52,24 +52,20 @@ class Music163CheckIn:
 
     def encrypt(self, text):
         return {
-            "params":
-            self._encrypt("TA3YiYCfY2dDJQgg",
-                          self._encrypt("0CoJUm6Qyw8W8jud", text)),
+            "params": self._encrypt("TA3YiYCfY2dDJQgg", self._encrypt("0CoJUm6Qyw8W8jud", text)),
             "encSecKey":
-            "84ca47bca10bad09a6b04c5c927ef077d9b9f1e37098aa3eac6ea70eb59df0aa28b691b7e75e4f1f9831754919ea784c8f74fbfadf2898b0be17849fd656060162857830e241aba44991601f137624094c114ea8d17bce815b0cd4e5b8e2fbaba978c6d1d14dc3d1faf852bdd28818031ccdaaa13a6018e1024e2aae98844210",
+                "84ca47bca10bad09a6b04c5c927ef077d9b9f1e37098aa3eac6ea70eb59df0aa28b691b7e75e4f1f9831754919ea784c8f74fbfadf2898b0be17849fd656060162857830e241aba44991601f137624094c114ea8d17bce815b0cd4e5b8e2fbaba978c6d1d14dc3d1faf852bdd28818031ccdaaa13a6018e1024e2aae98844210"
         }
 
     def login(self, session, phone, password):
         login_url = "https://music.163.com/weapi/login/cellphone"
         headers = {
             "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
-            "Referer":
-            "http://music.163.com/",
-            "Accept-Encoding":
-            "gzip, deflate",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
+            "Referer": "http://music.163.com/",
+            "Accept-Encoding": "gzip, deflate",
             "Cookie":
-            "os=pc; osver=Microsoft-Windows-10-Professional-build-10586-64bit; appver=2.0.3.131777; channel=netease; __remember_me=true;",
+                "os=pc; osver=Microsoft-Windows-10-Professional-build-10586-64bit; appver=2.0.3.131777; channel=netease; __remember_me=true;"
         }
         hl = hashlib.md5()
         hl.update(password.encode(encoding="utf-8"))
@@ -80,7 +76,8 @@ class Music163CheckIn:
                 "countrycode": "86",
                 "password": md5_password,
                 "rememberLogin": "true"
-            }))
+            })
+        )
         res = session.post(url=login_url,
                            data=login_data,
                            headers=headers,
@@ -138,7 +135,8 @@ class Music163CheckIn:
                         "id": m,
                         "n": 1000,
                         "csrf_token": csrf
-                    })),
+                    })
+                ),
                 headers=self.headers,
                 verify=False,
             )
@@ -147,9 +145,8 @@ class Music163CheckIn:
                 music_id.append(i["id"])
         post_data = json.dumps({
             "logs":
-            json.dumps(
-                list(
-                    map(
+                json.dumps(
+                    list(map(
                         lambda x: {
                             "action": "play",
                             "json": {
@@ -159,8 +156,8 @@ class Music163CheckIn:
                                 "sourceId": "",
                                 "time": 240,
                                 "type": "song",
-                                "wifi": 0,
-                            },
+                                "wifi": 0
+                            }
                         },
                         random.sample(
                             music_id,
@@ -197,8 +194,9 @@ class Music163CheckIn:
             msg = (
                 f"帐号信息: {nickname}\n当前等级: {level}\n当前听歌数量: {now_play_count}\n"
                 f"升级需听歌数量: {next_play_count - now_play_count}\n升级需签到天数: {next_login_count - now_login_count}\n"
-                f"签到状态: {res_sign}\n刷歌状态: {res_task}")
-            msg_all += msg + '\n\n'
+                f"签到状态: {res_sign}\n刷歌状态: {res_task}"
+            )
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -207,4 +205,4 @@ if __name__ == "__main__":
     _check_items = data.get("MUSIC163", [])
     res = Music163CheckIn(check_items=_check_items).main()
     print(res)
-    send('网易云音乐', res)
+    send("网易云音乐", res)

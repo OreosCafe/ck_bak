@@ -22,26 +22,27 @@ class HiFiNiCheckIn(object):
         html_text = r1.text
         is_sign = False
         for line in html_text.splitlines():
-            if line.find('今天已经签过啦') != -1:
+            if line.find("今天已经签过啦") != -1:
                 msg = "今天已经签过啦"
                 is_sign = True
-        if not is_sign: msg = "签到成功!"
+        if not is_sign:
+            msg = "签到成功!"
         return msg
 
     def main(self):
-        msg_all = ''
+        msg_all = ""
         i = 1
         for check_item in self.check_items:
-            cookie = check_item.get('cookie')
-            msg = f'账号{i}\n{self.signin(cookie)}'
+            cookie = check_item.get("cookie")
+            msg = f"账号{i}\n{self.signin(cookie)}"
             i += 1
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("HIFINI", [])
     res = HiFiNiCheckIn(check_items=_check_items).main()
     print(res)
-    send('HiFiNi', res)
+    send("HiFiNi", res)

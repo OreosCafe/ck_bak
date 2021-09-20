@@ -24,14 +24,12 @@ class OnePlusBBSCheckIn:
             "Origin": "https://www.oneplusbbs.com",
             "Content-Type": "application/x-www-form-urlencoded",
             "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.57",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.57",
             "Accept":
-            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "Referer":
-            "https://www.oneplusbbs.com/plugin-dsu_paulsign:sign.html",
-            "Accept-Language":
-            "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,fr;q=0.5,pl;q=0.4",
-            "cookie": cookie,
+                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+            "Referer": "https://www.oneplusbbs.com/plugin-dsu_paulsign:sign.html",
+            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,fr;q=0.5,pl;q=0.4",
+            "cookie": cookie
         }
         params = (
             ("id", "dsu_paulsign:sign"),
@@ -59,13 +57,12 @@ class OnePlusBBSCheckIn:
         headers = {
             "Accept": "application/json, text/javascript, */*; q=0.01",
             "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.57",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.57",
             "X-Requested-With": "XMLHttpRequest",
             "Origin": "https://www.oneplusbbs.com",
             "Referer": "https://www.oneplusbbs.com/plugin-choujiang.html",
-            "Accept-Language":
-            "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,fr;q=0.5,pl;q=0.4",
-            "cookie": cookie,
+            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,fr;q=0.5,pl;q=0.4",
+            "cookie": cookie
         }
         params = (
             ("id", "choujiang"),
@@ -113,8 +110,7 @@ class OnePlusBBSCheckIn:
         for check_item in self.check_items:
             cookie = check_item.get("cookie")
             bbs_uname = re.findall(r"bbs_uname=(.*?);", cookie)
-            bbs_uname = bbs_uname[0].split(
-                "%7C")[0] if bbs_uname else "未获取到用户信息"
+            bbs_uname = bbs_uname[0].split("%7C")[0] if bbs_uname else "未获取到用户信息"
             try:
                 bbs_uname = parse.unquote(bbs_uname)
             except Exception as e:
@@ -123,7 +119,7 @@ class OnePlusBBSCheckIn:
             sign_msg = self.sign(cookie=cookie)
             draw_msg = self.draw(cookie=cookie)
             msg = f"帐号信息: {bbs_uname}\n签到信息: {sign_msg}\n{draw_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -132,4 +128,4 @@ if __name__ == "__main__":
     _check_items = data.get("ONEPLUSBBS", [])
     res = OnePlusBBSCheckIn(check_items=_check_items).main()
     print(res)
-    send('一加手机社区官方论坛', res)
+    send("一加手机社区官方论坛", res)

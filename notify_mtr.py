@@ -45,8 +45,8 @@ push_config = {
     'DD_BOT_TOKEN': '',                 # 钉钉机器人的 DD_BOT_TOKEN
     'DD_BOT_SECRET': '',                # 钉钉机器人的 DD_BOT_SECRET
 
-    'QMSG_TYPE': '',                      # qq 机器人的 QMSG_TYPE
-    'QMSG_KEY': '',                      # qq 机器人的 QMSG_KEY
+    'QMSG_TYPE': '',                    # qq 机器人的 QMSG_TYPE
+    'QMSG_KEY': '',                     # qq 机器人的 QMSG_KEY
 
     'QYWX_AM': '',                      # 企业微信
 
@@ -75,8 +75,8 @@ if os.path.exists(CONFIG_PATH):
     print(f'通知配置文件存在：{CONFIG_PATH}。')
     try:
         for k, v in dict(
-                json.load(open(CONFIG_PATH, mode='r',
-                               encoding='utf-8'))).items():
+            json.load(open(CONFIG_PATH, mode='r', encoding='utf-8'))
+        ).items():
             if k in push_config:
                 push_config[k] = v
     except ValueError:
@@ -152,8 +152,7 @@ def telegram_bot(title: str, content: str) -> None:
     """
     通过 telegram 发送一条通知。
     """
-    if not push_config.get('TG_BOT_TOKEN') or not push_config.get(
-            'TG_USER_ID'):
+    if not push_config.get('TG_BOT_TOKEN') or not push_config.get('TG_USER_ID'):
         print("tg 服务的 bot_token 或者 user_id 未设置!!\n取消推送")
         return
     print("tg 服务启动")
@@ -170,8 +169,10 @@ def telegram_bot(title: str, content: str) -> None:
     }
     proxies = None
     if push_config.get('TG_PROXY_IP') and push_config.get('TG_PROXY_PORT'):
-        proxyStr = "http://{}:{}".format(push_config.get('TG_PROXY_IP'),
-                                         push_config.get('TG_PROXY_PORT'))
+        proxyStr = "http://{}:{}".format(
+            push_config.get('TG_PROXY_IP'),
+            push_config.get('TG_PROXY_PORT')
+        )
         proxies = {"http": proxyStr, "https": proxyStr}
     response = requests.post(url=url,
                              headers=headers,
@@ -196,8 +197,10 @@ def dingding_bot(title: str, content: str) -> None:
 
     timestamp = str(round(time.time() * 1000))
     secret_enc = push_config.get('DD_BOT_SECRET').encode('utf-8')
-    string_to_sign = '{}\n{}'.format(timestamp,
-                                     push_config.get('DD_BOT_SECRET'))
+    string_to_sign = '{}\n{}'.format(
+        timestamp,
+        push_config.get('DD_BOT_SECRET')
+    )
     string_to_sign_enc = string_to_sign.encode('utf-8')
     hmac_code = hmac.new(secret_enc,
                          string_to_sign_enc,
@@ -338,14 +341,16 @@ class WeCom:
             'msgtype': 'mpnews',
             'agentid': self.AGENTID,
             'mpnews': {
-                'articles': [{
-                    'title': title,
-                    'thumb_media_id': media_id,
-                    'author': 'Author',
-                    'content_source_url': '',
-                    'content': message.replace('\n', '<br/>'),
-                    'digest': message
-                }]
+                'articles': [
+                    {
+                        'title': title,
+                        'thumb_media_id': media_id,
+                        'author': 'Author',
+                        'content_source_url': '',
+                        'content': message.replace('\n', '<br/>'),
+                        'digest': message
+                    }
+                ]
             }
         }
         send_msges = (bytes(json.dumps(send_values, quote_keys=True), 'utf-8'))
@@ -424,11 +429,9 @@ def send(title: str, content: str) -> None:
     text = one() if hitokoto else ''
     content += '\n\n' + text
 
-    ts = [
-        threading.Thread(target=mode,
-                         args=(title, content),
-                         name=mode.__name__) for mode in notify_function
-    ]
+    ts = [threading.Thread(target=mode,
+                           args=(title, content),
+                           name=mode.__name__) for mode in notify_function]
     [t.start() for t in ts]
     [t.join() for t in ts]
 

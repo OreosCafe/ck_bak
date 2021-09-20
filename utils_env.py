@@ -12,7 +12,8 @@ def get_env_str() -> str:
     :return: Windows / Linux / Mac / github / v2p / ql / 空
     """
     global ENV
-    if ENV: return ENV
+    if ENV:
+        return ENV
 
     v2p_file = '/usr/local/app/script/Lists/task.list'
     ql_file = '/ql/config/env.sh'
@@ -48,12 +49,18 @@ def get_env_int() -> int:
     :return: 空: -1 / Windows: 0 / Linux: 1 / Mac: 2 / github: 3 / v2p: 4 / ql: 5
     """
     env = get_env_str()
-    if env == 'Windows': return 0
-    if env == 'Linux': return 1
-    if env == 'Mac': return 2
-    if env == 'github': return 3
-    if env == 'v2p': return 4
-    if env == 'ql': return 5
+    if env == 'Windows':
+        return 0
+    if env == 'Linux':
+        return 1
+    if env == 'Mac':
+        return 2
+    if env == 'github':
+        return 3
+    if env == 'v2p':
+        return 4
+    if env == 'ql':
+        return 5
 
     return -1
 

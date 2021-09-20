@@ -19,7 +19,7 @@ from utils import get_data
 class Cloud189CheckIn:
     def __init__(self, check_items):
         self.check_items = check_items
-        self.b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+        self.b64map = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
 
     @staticmethod
     def int2char(a):
@@ -54,11 +54,10 @@ class Cloud189CheckIn:
         return d
 
     def rsa_encode(self, j_rsakey, string):
-        rsa_key = f"-----BEGIN PUBLIC KEY-----\n{j_rsakey}\n-----END PUBLIC KEY-----"
+        rsa_key = (f"-----BEGIN PUBLIC KEY-----\n{j_rsakey}\n-----END PUBLIC KEY-----")
         pubkey = rsa.PublicKey.load_pkcs1_openssl_pem(rsa_key.encode())
         result = self.b64tohex(
-            (base64.b64encode(rsa.encrypt(f"{string}".encode(),
-                                          pubkey))).decode())
+            (base64.b64encode(rsa.encrypt(f"{string}".encode(), pubkey))).decode())
         return result
 
     def login(self, session, username, password):
@@ -76,8 +75,8 @@ class Cloud189CheckIn:
         url = "https://open.e.189.cn/api/logbox/oauth2/loginSubmit.do"
         headers = {
             "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:74.0) Gecko/20100101 Firefox/76.0",
-            "Referer": "https://open.e.189.cn/",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:74.0) Gecko/20100101 Firefox/76.0",
+            "Referer": "https://open.e.189.cn/"
         }
         data = {
             "appKey": "cloud",
@@ -88,7 +87,7 @@ class Cloud189CheckIn:
             "captchaToken": captchatoken,
             "returnUrl": returnurl,
             "mailSuffix": "@189.cn",
-            "paramId": paramid,
+            "paramId": paramid
         }
         r = session.post(url, data=data, headers=headers, timeout=5)
         if r.json()["result"] == 0:
@@ -106,11 +105,11 @@ class Cloud189CheckIn:
         url2 = "https://m.cloud.189.cn/v2/drawPrizeMarketDetails.action?taskId=TASK_SIGNIN_PHOTOS&activityId=ACT_SIGNIN"
         headers = {
             "User-Agent":
-            "Mozilla/5.0 (Linux; Android 5.1.1; SM-G930K Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 Ecloud/8.6.3 Android/22 clientId/355325117317828 clientModel/SM-G930K imsi/460071114317824 clientChannelId/qq proVersion/1.0.6",
+                "Mozilla/5.0 (Linux; Android 5.1.1; SM-G930K Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 Ecloud/8.6.3 Android/22 clientId/355325117317828 clientModel/SM-G930K imsi/460071114317824 clientChannelId/qq proVersion/1.0.6",
             "Referer":
-            "https://m.cloud.189.cn/zhuanti/2016/sign/index.jsp?albumBackupOpened=1",
+                "https://m.cloud.189.cn/zhuanti/2016/sign/index.jsp?albumBackupOpened=1",
             "Host": "m.cloud.189.cn",
-            "Accept-Encoding": "gzip, deflate",
+            "Accept-Encoding": "gzip, deflate"
         }
         response = session.get(url=surl, headers=headers)
         netdiskbonus = response.json().get("netdiskBonus")
@@ -142,15 +141,13 @@ class Cloud189CheckIn:
             phone = check_item.get("phone")
             password = check_item.get("password")
             session = requests.Session()
-            flag = self.login(session=session,
-                              username=phone,
-                              password=password)
+            flag = self.login(session=session, username=phone, password=password)
             if flag is True:
                 sign_msg = self.sign(session=session)
             else:
                 sign_msg = flag
             msg = f"帐号信息: *******{phone[-4:]}\n{sign_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -159,4 +156,4 @@ if __name__ == "__main__":
     _check_items = data.get("CLOUD189", [])
     res = Cloud189CheckIn(check_items=_check_items).main()
     print(res)
-    send('天翼云盘', res)
+    send("天翼云盘", res)

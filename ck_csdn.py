@@ -15,15 +15,13 @@ class CSDNCheckIn:
         self.check_items = check_items
         self.headers = {
             "user-agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74"
         }
 
     def sign(self, cookies):
-        response = requests.get(
-            url="https://me.csdn.net/api/LuckyDraw_v2/signIn",
-            headers=self.headers,
-            cookies=cookies).json()
+        url = "https://me.csdn.net/api/LuckyDraw_v2/signIn"
+        response = requests.get(url=url, headers=self.headers, cookies=cookies).json()
         if response.get("code") == 200:
             msg = response.get("data").get("msg")
         else:
@@ -32,10 +30,8 @@ class CSDNCheckIn:
         return msg
 
     def draw(self, cookies):
-        response = requests.get(
-            url="https://me.csdn.net/api/LuckyDraw_v2/goodluck",
-            headers=self.headers,
-            cookies=cookies).json()
+        url = "https://me.csdn.net/api/LuckyDraw_v2/goodluck"
+        response = requests.get(url=url, headers=self.headers, cookies=cookies).json()
         if response.get("code") == 200:
             msg = response.get("data").get("msg")
         else:
@@ -57,7 +53,7 @@ class CSDNCheckIn:
             sign_msg = self.sign(cookies=cookie)
             draw_msg = self.draw(cookies=cookie)
             msg = f"帐号信息: {user_name}\n签到信息: {sign_msg}\n抽奖结果: {draw_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 

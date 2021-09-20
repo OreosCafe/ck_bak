@@ -20,8 +20,7 @@ class SmzdmCheckIn:
     def sign(session):
         try:
             current = session.get(
-                url="https://zhiyou.smzdm.com/user/info/jsonp_get_current"
-            ).json()
+                url="https://zhiyou.smzdm.com/user/info/jsonp_get_current").json()
             if current["checkin"]["has_checkin"]:
                 msg = (
                     f"用户信息: {current.get('nickname', '')}\n目前积分: {current.get('point', '')}\n"
@@ -55,31 +54,25 @@ class SmzdmCheckIn:
             }
             session = requests.session()
             requests.utils.add_dict_to_cookiejar(session.cookies, cookie)
-            session.headers.update({
-                "Accept":
-                "*/*",
-                "Accept-Encoding":
-                "gzip, deflate, br",
-                "Accept-Language":
-                "zh-CN,zh;q=0.9",
-                "Connection":
-                "keep-alive",
-                "Host":
-                "zhiyou.smzdm.com",
-                "Referer":
-                "https://www.smzdm.com/",
-                "Sec-Fetch-Dest":
-                "script",
-                "Sec-Fetch-Mode":
-                "no-cors",
-                "Sec-Fetch-Site":
-                "same-site",
-                "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36",
-            })
+
+            session.headers.update(
+                {
+                    "Accept": "*/*",
+                    "Accept-Encoding": "gzip, deflate, br",
+                    "Accept-Language": "zh-CN,zh;q=0.9",
+                    "Connection": "keep-alive",
+                    "Host": "zhiyou.smzdm.com",
+                    "Referer": "https://www.smzdm.com/",
+                    "Sec-Fetch-Dest": "script",
+                    "Sec-Fetch-Mode": "no-cors",
+                    "Sec-Fetch-Site": "same-site",
+                    "User-Agent":
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36"
+                }
+            )
             sign_msg = self.sign(session=session)
             msg = f"{sign_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -88,4 +81,4 @@ if __name__ == "__main__":
     _check_items = data.get("SMZDM", [])
     res = SmzdmCheckIn(check_items=_check_items).main()
     print(res)
-    send('什么值得买', res)
+    send("什么值得买", res)

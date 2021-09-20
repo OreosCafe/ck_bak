@@ -25,7 +25,8 @@ class WWW2nzzCheckIn:
                                verify=False)
         formhash = re.findall(
             r'<input type="hidden" name="formhash" value="(.*?)"',
-            response.text)[0]
+            response.text
+        )[0]
         params = (
             ("id", "dsu_paulsign:sign"),
             ("operation", "qiandao"),
@@ -50,8 +51,10 @@ class WWW2nzzCheckIn:
         if "您今天已经签到过了或者签到时间还未开始" in response.text:
             msg = f"用户信息: {uid}\n签到信息: 您今天已经签到过了或者签到时间还未开始"
         else:
-            check_msg = re.findall(r"<div class=\"c\">(.*?)</div>",
-                                   response.text, re.S)
+            check_msg = re.findall(
+                r"<div class=\"c\">(.*?)</div>",
+                response.text, re.S
+            )
             check_msg = check_msg[0].strip() if check_msg else "签到失败"
             msg = f"用户信息: {uid}\n签到信息: {check_msg}"
         return msg
@@ -64,22 +67,18 @@ class WWW2nzzCheckIn:
                 for item in check_item.get("cookie").split("; ")
             }
             session = requests.session()
-            requests.utils.add_dict_to_cookiejar(session.cookies,
-                                                 cookie)
+            requests.utils.add_dict_to_cookiejar(session.cookies, cookie)
             session.headers.update({
-                "Origin":
-                "http://www.2nzz.com",
+                "Origin": "http://www.2nzz.com",
                 "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.74",
                 "Accept":
-                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                "Referer":
-                "http://www.2nzz.com/index.php",
-                "Accept-Language":
-                "zh-CN,zh;q=0.9,en;q=0.8",
+                    "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "Referer": "http://www.2nzz.com/index.php",
+                "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
             })
             msg = self.sign(session=session)
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -88,4 +87,4 @@ if __name__ == "__main__":
     _check_items = data.get("WWW2NZZ", [])
     res = WWW2nzzCheckIn(check_items=_check_items).main()
     print(res)
-    send('咔叽网单', res)
+    send("咔叽网单", res)

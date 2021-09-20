@@ -33,20 +33,19 @@ class MgtvCheckIn:
             "src": "mgtv",
             "testversion": "",
             "ticket": params.get("ticket"),
-            "uuid": params.get("uuid"),
+            "uuid": params.get("uuid")
         }
         try:
-            user_info = requests.get(
-                url="https://homepage.bz.mgtv.com/v2/user/userInfo",
-                params=user_params).json()
+            user_info = requests.get(url="https://homepage.bz.mgtv.com/v2/user/userInfo",
+                                     params=user_params).json()
             username = user_info.get("data", {}).get("nickName")
         except Exception as e:
             print("获取用户信息失败", e)
             username = params.get("uuid")
         res = requests.get(url=url, params=params)
         res_json = json.loads(
-            res.text.replace(f"{params.get('callback')}(",
-                             "").replace(");", ""))
+            res.text.replace(f"{params.get('callback')}(", "").replace(");", "")
+        )
         if res_json["code"] == 200:
             cur_day = res_json["data"]["curDay"]
             _credits = res_json["data"]["credits"]

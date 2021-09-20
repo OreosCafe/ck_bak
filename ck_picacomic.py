@@ -34,11 +34,12 @@ class PicacomicCheckIn:
             "app-platform": "android",
             "app-build-version": "44",
             "User-Agent": "okhttp/3.8.1",
-            "image-quality": "original",
+            "image-quality": "original"
         }
         current_time = str(int(time.time()))
         nonce = "".join(
-            random.choices(string.ascii_lowercase + string.digits, k=32))
+            random.choices(string.ascii_lowercase + string.digits, k=32)
+        )
         raw = path + current_time + nonce + "POST" + api_key
         raw = raw.lower()
         h = hmac.new(api_secret.encode(), digestmod=hashlib.sha256)
@@ -56,26 +57,25 @@ class PicacomicCheckIn:
     def sign(self, email, password):
         try:
             data = {"email": email, "password": password}
-            sign_headers = self.generate_headers(path="auth/sign-in",
-                                                 data=data)
+            sign_headers = self.generate_headers(path="auth/sign-in", data=data)
             sign_response = requests.post(
                 url="https://picaapi.picacomic.com/auth/sign-in",
-                data=json.dumps({
-                    "email": "sitoi",
-                    "password": "123456st"
-                }),
+                data=json.dumps(
+                    {
+                        "email": "sitoi",
+                        "password": "123456st"
+                    }
+                ),
                 headers=sign_headers,
                 timeout=60,
             ).json()
             token = sign_response.get("data", {}).get("token")
-            punch_headers = self.generate_headers(path="users/punch-in",
-                                                  token=token)
+            punch_headers = self.generate_headers(path="users/punch-in", token=token)
             response = requests.post(
                 url="https://picaapi.picacomic.com/users/punch-in",
                 headers=punch_headers,
                 timeout=60).json()
-            if response.get("data", {}).get("res", {}).get("status",
-                                                           {}) == "ok":
+            if response.get("data", {}).get("res", {}).get("status", {}) == "ok":
                 msg = "打卡成功"
             else:
                 msg = "重复签到"
@@ -88,10 +88,9 @@ class PicacomicCheckIn:
         for check_item in self.check_items:
             email = check_item.get("email")
             password = check_item.get("password")
-            sign_msg = self.sign(email=email,
-                                 password=password)
+            sign_msg = self.sign(email=email, password=password)
             msg = f"帐号信息: {email}\n签到状态: {sign_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -101,4 +100,4 @@ if __name__ == "__main__":
     res = PicacomicCheckIn(
         check_items=_check_items).main()
     print(res)
-    send('哔咔漫画', res)
+    send("哔咔漫画", res)

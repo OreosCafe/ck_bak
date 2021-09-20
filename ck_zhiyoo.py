@@ -26,7 +26,8 @@ class ZhiyooCheckIn:
             verify=False)
         formhash = re.findall(
             r'<input type="hidden" name="formhash" value="(.*?)"',
-            response.text)[0]
+            response.text
+        )[0]
         params = (
             ("id", "dsu_paulsign:sign"),
             ("operation", "qiandao"),
@@ -44,8 +45,10 @@ class ZhiyooCheckIn:
         if "今日已经签到" in response.text:
             msg = f"用户信息: {uid}\n签到信息: 您今日已经签到，请明天再来！"
         else:
-            check_msg = re.findall(r"恭喜你签到成功!获得随机奖励 金币 (\d+) 元.",
-                                   response.text, re.S)
+            check_msg = re.findall(
+                r"恭喜你签到成功!获得随机奖励 金币 (\d+) 元.",
+                response.text, re.S
+            )
             check_msg = check_msg[0].strip() if check_msg else "签到失败"
             msg = f"用户信息: {uid}\n签到信息: 恭喜你签到成功!获得随机奖励 金币 {check_msg} 元."
         return msg
@@ -58,24 +61,19 @@ class ZhiyooCheckIn:
                 for item in check_item.get("cookie").split("; ")
             }
             session = requests.session()
-            requests.utils.add_dict_to_cookiejar(session.cookies,
-                                                 cookie)
+            requests.utils.add_dict_to_cookiejar(session.cookies, cookie)
             session.headers.update({
-                "Origin":
-                "http://bbs.zhiyoo.net",
-                "Content-Type":
-                "application/x-www-form-urlencoded",
+                "Origin": "http://bbs.zhiyoo.net",
+                "Content-Type": "application/x-www-form-urlencoded",
                 "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.54",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36 Edg/89.0.774.54",
                 "Accept":
-                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                "Referer":
-                "http://bbs.zhiyoo.net/plugin.php?id=dsu_paulsign:sign",
-                "Accept-Language":
-                "zh-CN,zh;q=0.9,en;q=0.8",
+                    "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "Referer": "http://bbs.zhiyoo.net/plugin.php?id=dsu_paulsign:sign",
+                "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
             })
             msg = self.sign(session=session)
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -84,4 +82,4 @@ if __name__ == "__main__":
     _check_items = data.get("ZHIYOO", [])
     res = ZhiyooCheckIn(check_items=_check_items).main()
     print(res)
-    send('智友邦', res)
+    send("智友邦", res)

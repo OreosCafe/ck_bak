@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# 消息推送
 send_message() {
     echo -e "\n通知结果："
     # Server 酱通知
@@ -86,7 +85,6 @@ send_message() {
             echo -e "钉钉机器人推送结果：失败"
         fi
     fi
-
 
     # Qmsg 酱通知
     if [ "${QMSG_KEY}" ]; then

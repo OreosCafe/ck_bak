@@ -41,8 +41,11 @@ class TiebaCheckIn:
                               allow_redirects=False)
         try:
             pn = int(
-                re.match(r".*/f/like/mylike\?&pn=(.*?)\">尾页.*", content.text,
-                         re.S | re.I).group(1))
+                re.match(
+                    r".*/f/like/mylike\?&pn=(.*?)\">尾页.*",
+                    content.text,
+                    re.S | re.I).group(1)
+            )
         except Exception as e:
             pn = 1
         next_page = 1
@@ -104,7 +107,7 @@ class TiebaCheckIn:
                 msg = f"帐号信息: {user_name}\n{msg}"
             else:
                 msg = f"帐号信息: {user_name}\n签到状态: Cookie 可能过期"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -113,4 +116,4 @@ if __name__ == "__main__":
     _check_items = data.get("TIEBA", [])
     res = TiebaCheckIn(check_items=_check_items).main()
     print(res)
-    send('百度贴吧', res)
+    send("百度贴吧", res)

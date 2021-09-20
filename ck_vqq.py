@@ -55,8 +55,8 @@ class VQQCheckIn:
     @staticmethod
     def sign_twice(headers, cookies):
         this_time = int(round(time.time() * 1000))
-        url = "https://vip.video.qq.com/fcgi-bin/comm_cgi?name=hierarchical_task_system&cmd=2&_=" + str(
-            this_time)
+        url = "https://vip.video.qq.com/fcgi-bin/comm_cgi?name=hierarchical_task_system&cmd=2&_=" + \
+            str(this_time)
         res = requests.get(url=url, headers=headers, cookies=cookies)
         res.encoding = "utf8"
         if "Account Verify Error" in res.text:
@@ -109,10 +109,9 @@ class VQQCheckIn:
                 for item in check_item.get("cookie").split("; ")
             }
             headers = {
-                "Referer":
-                "https://v.qq.com",
+                "Referer": "https://v.qq.com",
                 "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.204 Safari/537.36",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.204 Safari/537.36"
             }
             login_cookie, nick = self.refresh_cookie(url=auth_refresh,
                                                      headers=headers,
@@ -126,7 +125,7 @@ class VQQCheckIn:
             sign_twice_msg = self.sign_twice(headers=headers, cookies=cookie)
             task_msg = self.tasks(headers=headers, cookies=cookie)
             msg = f"用户信息: {nick}\n签到奖励1: {sign_once_msg}\n签到奖励2: {sign_twice_msg}\n{task_msg}"
-            msg_all += msg + '\n\n'
+            msg_all += msg + "\n\n"
         return msg_all
 
 
@@ -135,4 +134,4 @@ if __name__ == "__main__":
     _check_items = data.get("VQQ", [])
     res = VQQCheckIn(check_items=_check_items).main()
     print(res)
-    send('腾讯视频', res)
+    send("腾讯视频", res)
