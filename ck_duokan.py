@@ -224,7 +224,8 @@ class DuoKanCheckIn:
             "J18UK6YYAY",
             "1BJGW140U5",
         ]
-        self.headers = {"Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
+        self.headers = {
+            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"}
 
     @staticmethod
     def get_data(cookies):
@@ -240,7 +241,8 @@ class DuoKanCheckIn:
     def sign(self, cookies):
         url = "https://www.duokan.com/checkin/v0/checkin"
         data = self.get_data(cookies=cookies)
-        response = requests.post(url=url, data=data, cookies=cookies, headers=self.headers)
+        response = requests.post(
+            url=url, data=data, cookies=cookies, headers=self.headers)
         result = response.json()
         msg = result.get("msg")
         return msg
@@ -248,7 +250,8 @@ class DuoKanCheckIn:
     def info(self, cookies):
         url = "https://www.duokan.com/store/v0/award/coin/list"
         data = f"sandbox=0&{self.get_data(cookies=cookies)}&withid=1"
-        response = requests.post(url=url, data=data, cookies=cookies, headers=self.headers)
+        response = requests.post(
+            url=url, data=data, cookies=cookies, headers=self.headers)
         result = response.json()
         if "尚未登录" not in result.get("msg"):
             coin = sum([one.get('coin')
@@ -265,7 +268,8 @@ class DuoKanCheckIn:
         bid = response.json().get("items")[0].get("data").get("book_id")
         data = f"payment_name=BC&ch=VSZUVB&book_id={bid}&price=0&allow_discount=1"
         free_url = "https://www.duokan.com/store/v0/payment/book/create"
-        response = requests.post(url=free_url, data=data, cookies=cookies, headers=self.headers)
+        response = requests.post(
+            url=free_url, data=data, cookies=cookies, headers=self.headers)
         result = response.json()
         if "尚未登录" not in result.get("msg"):
             book_title = result.get("book").get("title")
@@ -278,7 +282,8 @@ class DuoKanCheckIn:
     def gift(self, cookies):
         url = "https://www.duokan.com/events/common_task_gift_check"
         data = f"code=KYKJF7LL0G&{self.get_data(cookies=cookies)}&withid=1"
-        response = requests.post(url=url, data=data, cookies=cookies, headers=self.headers)
+        response = requests.post(
+            url=url, data=data, cookies=cookies, headers=self.headers)
         result = response.json()
         if result.get("chances") == 0:
             msg = "体验任务: 已经做完啦"
@@ -287,7 +292,8 @@ class DuoKanCheckIn:
             for gift_code in self.gift_code_list:
                 url = "https://www.duokan.com/events/common_task_gift"
                 data = f"code=KYKJF7LL0G&chances=1&sign={gift_code}&{self.get_data(cookies=cookies)}&withid=1"
-                response = requests.post(url=url, data=data, cookies=cookies, headers=self.headers)
+                response = requests.post(
+                    url=url, data=data, cookies=cookies, headers=self.headers)
                 result = response.json()
                 if result.get("msg") == "成功":
                     num += 30
@@ -304,7 +310,8 @@ class DuoKanCheckIn:
         for one in range(6):
             url = "https://www.duokan.com/store/v0/event/chances/add"
             data = f"code=8ulcky4bknbe_f&count=1&{self.get_data(cookies=cookies)}&withid=1"
-            response = requests.post(url=url, data=data, cookies=cookies, headers=self.headers)
+            response = requests.post(
+                url=url, data=data, cookies=cookies, headers=self.headers)
             result = response.json()
             if result.get("result") == 0:
                 success_count += 1
@@ -316,7 +323,8 @@ class DuoKanCheckIn:
         for one in range(6):
             url = "https://www.duokan.com/store/v0/event/drawing"
             data = f"code=8ulcky4bknbe_f&{self.get_data(cookies=cookies)}&withid=1"
-            response = requests.post(url=url, data=data, cookies=cookies, headers=self.headers)
+            response = requests.post(
+                url=url, data=data, cookies=cookies, headers=self.headers)
             result = response.json()
             if result.get("result") == 0:
                 success_count += 1
@@ -326,7 +334,8 @@ class DuoKanCheckIn:
     def download(self, cookies):
         url = "https://www.duokan.com/events/common_task_gift"
         data = f"code=J18UK6YYAY&chances=17&{self.get_data(cookies=cookies)}&withid=1"
-        response = requests.post(url=url, data=data, cookies=cookies, headers=self.headers)
+        response = requests.post(
+            url=url, data=data, cookies=cookies, headers=self.headers)
         result = response.json()
         msg = "下载任务: " + result.get("msg")
         return msg
@@ -336,7 +345,8 @@ class DuoKanCheckIn:
         url = "https://www.duokan.com/events/tasks_gift"
         for code in self.code_list:
             data = f"code={code}&chances=3&{self.get_data(cookies=cookies)}&withid=1"
-            response = requests.post(url=url, data=data, cookies=cookies, headers=self.headers)
+            response = requests.post(
+                url=url, data=data, cookies=cookies, headers=self.headers)
             result = response.json()
             if result.get("result") == 0:
                 success_count += 1

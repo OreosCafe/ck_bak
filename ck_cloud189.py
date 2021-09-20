@@ -19,7 +19,8 @@ from utils import get_data
 class Cloud189CheckIn:
     def __init__(self, check_items):
         self.check_items = check_items
-        self.b64map = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
+        self.b64map = (
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
 
     @staticmethod
     def int2char(a):
@@ -54,7 +55,8 @@ class Cloud189CheckIn:
         return d
 
     def rsa_encode(self, j_rsakey, string):
-        rsa_key = (f"-----BEGIN PUBLIC KEY-----\n{j_rsakey}\n-----END PUBLIC KEY-----")
+        rsa_key = (
+            f"-----BEGIN PUBLIC KEY-----\n{j_rsakey}\n-----END PUBLIC KEY-----")
         pubkey = rsa.PublicKey.load_pkcs1_openssl_pem(rsa_key.encode())
         result = self.b64tohex(
             (base64.b64encode(rsa.encrypt(f"{string}".encode(), pubkey))).decode())
@@ -141,7 +143,8 @@ class Cloud189CheckIn:
             phone = check_item.get("phone")
             password = check_item.get("password")
             session = requests.Session()
-            flag = self.login(session=session, username=phone, password=password)
+            flag = self.login(session=session, username=phone,
+                              password=password)
             if flag is True:
                 sign_msg = self.sign(session=session)
             else:

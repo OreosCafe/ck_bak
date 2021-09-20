@@ -53,8 +53,10 @@ class KGQQCheckIn:
         url_15 = "https://node.kg.qq.com/webapp/proxy?t_stReward%3Aobject=%7B%22uInteractiveType%22%3A0%2C%22uRewardType%22%3A0%2C%22uFlowerNum%22%3A10%7D&ns=proto_music_station&cmd=message.get_reward&mapExt=JTdCJTIyY21kTmFtZSUyMiUzQSUyMkdldFJld2FyZFJlcSUyMiUyQyUyMmZpbGUlMjIlM0ElMjJwcm90b19tdXNpY19zdGF0aW9uSmNlJTIyJTJDJTIyd25zRGlzcGF0Y2hlciUyMiUzQXRydWUlN0Q&t_uUid={0}&t_strUgcId="\
             .format(t_uuid)
         try:
-            old_proto_profile_response = requests.get(url=proto_profile_url, headers=headers)
-            old_num = old_proto_profile_response.json()["data"]["profile.getProfile"]["uFlowerNum"]
+            old_proto_profile_response = requests.get(
+                url=proto_profile_url, headers=headers)
+            old_num = old_proto_profile_response \
+                .json()["data"]["profile.getProfile"]["uFlowerNum"]
             nickname = old_proto_profile_response \
                 .json()["data"]["profile.getProfile"]["stPersonInfo"]["sKgNick"]
             for url in url_list:
@@ -97,12 +99,13 @@ class KGQQCheckIn:
                     .json()["data"]["vip.get_vip_info"]["stVipCoreInfo"]["uStatus"]
                 if vip_status == 1:
                     vipurl = (
-                            "https://node.kg.qq.com/webapp/proxy?t_uUid=" +
-                            t_uuid +
-                            "&ns=proto_vip_webapp&cmd=vip.get_vip_day_reward&ns_inbuf=&nocache=1613719349184&mapExt=JTdCJTIyY21kTmFtZSUyMiUzQSUyMkdldFZpcERheVJld2FyZCUyMiU3RA%3D%3D&g_tk_openkey=642424811"
+                        "https://node.kg.qq.com/webapp/proxy?t_uUid=" +
+                        t_uuid +
+                        "&ns=proto_vip_webapp&cmd=vip.get_vip_day_reward&ns_inbuf=&nocache=1613719349184&mapExt=JTdCJTIyY21kTmFtZSUyMiUzQSUyMkdldFZpcERheVJld2FyZCUyMiU3RA%3D%3D&g_tk_openkey=642424811"
                     )
                     viprequest = requests.get(url=vipurl, headers=headers)
-                    str_tips = viprequest.json()["data"]["vip.get_vip_day_reward"]["strTips"]
+                    str_tips = viprequest \
+                        .json()["data"]["vip.get_vip_day_reward"]["strTips"]
                     u_cur_reward_num = viprequest \
                         .json()["data"]["vip.get_vip_day_reward"]["uCurRewardNum"]
                     vip_message = f"{str_tips} 获取VIP福利道具：{u_cur_reward_num}个"
@@ -114,7 +117,8 @@ class KGQQCheckIn:
             new_proto_profile_response = requests.get(
                 url=proto_profile_url,
                 headers=headers)
-            new_num = new_proto_profile_response.json()["data"]["profile.getProfile"]["uFlowerNum"]
+            new_num = new_proto_profile_response \
+                .json()["data"]["profile.getProfile"]["uFlowerNum"]
             get_num = int(new_num) - int(old_num)
             kg_message = f"帐号信息: {nickname}\n获取鲜花: {get_num}朵\n当前鲜花: {new_num}朵\nVIP签到: {vip_message}"
         except Exception as e:

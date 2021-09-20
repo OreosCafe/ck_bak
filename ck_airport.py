@@ -55,7 +55,8 @@ class SspanelQd(object):
             "Referer": url + "/user"
         }
 
-        response = session.post(url + "/user/checkin", headers=headers, verify=False)
+        response = session.post(
+            url + "/user/checkin", headers=headers, verify=False)
         # print(response.text)
         msg = url + "\n" + (response.json()).get("msg")
 

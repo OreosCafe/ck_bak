@@ -110,7 +110,8 @@ class OnePlusBBSCheckIn:
         for check_item in self.check_items:
             cookie = check_item.get("cookie")
             bbs_uname = re.findall(r"bbs_uname=(.*?);", cookie)
-            bbs_uname = bbs_uname[0].split("%7C")[0] if bbs_uname else "未获取到用户信息"
+            bbs_uname = bbs_uname[0].split("%7C")[0] \
+                if bbs_uname else "未获取到用户信息"
             try:
                 bbs_uname = parse.unquote(bbs_uname)
             except Exception as e:

@@ -23,7 +23,9 @@ class BiliBiliCheckIn(object):
         is_login = ret.get("data", {}).get("isLogin")
         coin = ret.get("data", {}).get("money")
         vip_type = ret.get("data", {}).get("vipType")
-        current_exp = ret.get("data", {}).get("level_info", {}).get("current_exp")
+        current_exp = ret.get("data", {}) \
+            .get("level_info", {}) \
+            .get("current_exp")
         return uname, uid, is_login, coin, vip_type, current_exp
 
     @staticmethod
@@ -265,24 +267,29 @@ class BiliBiliCheckIn(object):
                 "Connection": "keep-alive"
             })
             success_count = 0
-            uname, uid, is_login, coin, vip_type, current_exp = self.get_nav(session=session)
+            uname, uid, is_login, coin, vip_type, current_exp = \
+                self.get_nav(session=session)
             if is_login:
                 manhua_msg = self.manga_sign(session=session)
                 live_msg = self.live_sign(session=session)
                 aid_list = self.get_region(session=session)
                 reward_ret = self.reward(session=session)
-                coins_av_count = reward_ret.get("data", {}).get("coins_av") // 10
+                coins_av_count = \
+                    reward_ret.get("data", {}).get("coins_av") // 10
                 coin_num = coin_num - coins_av_count
                 coin_num = coin_num if coin_num < coin else coin
                 if coin_type == 1 and coin_num:
-                    following_list = self.get_followings(session=session, uid=uid)
+                    following_list = self.get_followings(session=session,
+                                                         uid=uid)
                     for following in following_list.get("data", {}).get("list"):
                         mid = following.get("mid")
                         if mid:
-                            aid_list += self.space_arc_search(session=session, uid=mid)
+                            aid_list += self.space_arc_search(session=session,
+                                                              uid=mid)
                 if coin_num > 0:
                     for aid in aid_list[::-1]:
-                        ret = self.coin_add(session=session, aid=aid.get("aid"), bili_jct=bili_jct)
+                        ret = self.coin_add(session=session,
+                                            aid=aid.get("aid"), bili_jct=bili_jct)
                         if ret["code"] == 0:
                             coin_num -= 1
                             print(f'成功给{aid.get("title")}投一个币')
@@ -292,7 +299,8 @@ class BiliBiliCheckIn(object):
                             continue
                             # -104 硬币不够了 -111 csrf 失败 34005 投币达到上限
                         else:
-                            print(f'投币{aid.get("title")}失败，原因为{ret["message"]}，跳过投币')
+                            print(
+                                f'投币{aid.get("title")}失败，原因为{ret["message"]}，跳过投币')
                             break
                         if coin_num <= 0:
                             break
@@ -311,14 +319,16 @@ class BiliBiliCheckIn(object):
                 else:
                     report_msg = f"任务失败"
                     print(report_msg)
-                share_ret = self.share_task(session=session, bili_jct=bili_jct, aid=aid)
+                share_ret = self.share_task(session=session,
+                                            bili_jct=bili_jct, aid=aid)
                 if share_ret.get("code") == 0:
                     share_msg = f"分享《{title}》成功"
                 else:
                     share_msg = f"分享失败"
                     print(share_msg)
                 if silver2coin:
-                    silver2coin_ret = self.silver2coin(session=session, bili_jct=bili_jct)
+                    silver2coin_ret = self.silver2coin(session=session,
+                                                       bili_jct=bili_jct)
                     if silver2coin_ret["code"] == 0:
                         silver2coin_msg = "成功将银瓜子兑换为1个硬币"
                     else:
@@ -333,9 +343,12 @@ class BiliBiliCheckIn(object):
                 watch_av = reward_ret.get("data", {}).get("watch_av")
                 coins_av = reward_ret.get("data", {}).get("coins_av", 0)
                 share_av = reward_ret.get("data", {}).get("share_av")
-                today_exp = len([one for one in [login, watch_av, share_av] if one]) * 5
+                today_exp = 5 * len([one
+                                     for one in [login, watch_av, share_av]
+                                     if one])
                 today_exp += coins_av
-                update_data = (28800 - new_current_exp) // (today_exp if today_exp else 1)
+                update_data = (28800 - new_current_exp) // (
+                    today_exp if today_exp else 1)
                 msg = (
                     f"帐号信息: {uname}\n漫画签到: {manhua_msg}\n直播签到: {live_msg}\n"
                     f"登陆任务: 今日已登陆\n观看视频: {report_msg}\n分享任务: {share_msg}\n投币任务: {coin_msg}\n"

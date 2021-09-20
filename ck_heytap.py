@@ -42,8 +42,10 @@ class Heytap:
             app_param = json.loads(app_param)
             self.sa_device_id = app_param["sa_device_id"]
             self.brand = app_param["brand"]
-            self.sa_distinct_id = re.findall("sa_distinct_id=(.*?);", self.HT_cookies)[0]
-            self.source_type = re.findall("source_type=(.*?);", self.HT_cookies)[0]
+            self.sa_distinct_id = re.findall(
+                "sa_distinct_id=(.*?);", self.HT_cookies)[0]
+            self.source_type = re.findall(
+                "source_type=(.*?);", self.HT_cookies)[0]
             self.s_version = re.findall("s_version=(.*?);", self.HT_cookies)[0]
             self.s_channel = re.findall("s_channel=(.*?);", self.HT_cookies)[0]
         except Exception as e:
@@ -140,11 +142,14 @@ class Heytap:
                         qd = data
                         if not qd["today"]:
                             data = "amount=" + str(qd["credits"])
-                            res1 = self.client.post(url=url, data=data, headers=headers)
+                            res1 = self.client.post(
+                                url=url, data=data, headers=headers)
                             res1 = res1.json()
                             if res1["code"] == 200:
-                                self.log += "【每日签到成功】: " + res1["data"]["message"] + "\n"
-                                print("【每日签到成功】: " + res1["data"]["message"] + "\n")
+                                self.log += "【每日签到成功】: " + \
+                                    res1["data"]["message"] + "\n"
+                                print("【每日签到成功】: " +
+                                      res1["data"]["message"] + "\n")
                             else:
                                 self.log += "【每日签到失败】: " + res1 + "\n"
                                 print("【每日签到失败】: " + res1 + "\n")
@@ -162,8 +167,10 @@ class Heytap:
                                 data=data)
                             res1 = res1.json()
                             if res1["code"] == 200:
-                                self.log += "【每日签到成功】: " + res1["data"]["message"] + "\n"
-                                print("【每日签到成功】: " + res1["data"]["message"] + "\n")
+                                self.log += "【每日签到成功】: " + \
+                                            res1["data"]["message"] + "\n"
+                                print("【每日签到成功】: " +
+                                      res1["data"]["message"] + "\n")
                             else:
                                 self.log += "【每日签到失败】: " + str(res1) + "\n"
                                 print("【每日签到失败】: " + str(res1) + "\n")
@@ -218,8 +225,10 @@ class Heytap:
                                 data["marking"], data["type"], data["credits"]
                             )
                             if res2:
-                                self.log += "【每日浏览商品】：" + "任务完成！积分领取+" + str(data["credits"]) + "\n"
-                                print("【每日浏览商品】：" + "任务完成！积分领取+" + str(data["credits"]) + "\n")
+                                self.log += "【每日浏览商品】：" + "任务完成！积分领取+" + \
+                                            str(data["credits"]) + "\n"
+                                print("【每日浏览商品】：" + "任务完成！积分领取+" +
+                                      str(data["credits"]) + "\n")
                             else:
                                 self.log += "【每日浏览商品】：" + "领取积分奖励出错！\n"
                                 print("【每日浏览商品】：" + "领取积分奖励出错！\n")
@@ -231,8 +240,10 @@ class Heytap:
                             data["marking"], data["type"], data["credits"]
                         )
                         if res2:
-                            self.log += "【每日浏览商品】：" + "任务完成！积分领取+" + str(data["credits"]) + "\n"
-                            print("【每日浏览商品】：" + "任务完成！积分领取+" + str(data["credits"]) + "\n")
+                            self.log += "【每日浏览商品】：" + "任务完成！积分领取+" + \
+                                        str(data["credits"]) + "\n"
+                            print("【每日浏览商品】：" + "任务完成！积分领取+" +
+                                  str(data["credits"]) + "\n")
                         else:
                             self.log += "【每日浏览商品】：" + "领取积分奖励出错！\n"
                             print("【每日浏览商品】：" + "领取积分奖励出错！\n")
@@ -275,8 +286,10 @@ class Heytap:
                     qd["marking"], qd["type"], qd["credits"]
                 )
                 if res2:
-                    self.log += "【每日分享商品】：" + "任务完成！积分领取+" + str(qd["credits"]) + "\n"
-                    print("【每日分享商品】：" + "任务完成！积分领取+" + str(qd["credits"]) + "\n")
+                    self.log += "【每日分享商品】：" + "任务完成！积分领取+" + \
+                                str(qd["credits"]) + "\n"
+                    print("【每日分享商品】：" + "任务完成！积分领取+" +
+                          str(qd["credits"]) + "\n")
                 else:
                     self.log += "【每日分享商品】：" + "领取积分奖励出错！\n"
                     print("【每日分享商品】：" + "领取积分奖励出错！\n")
@@ -285,8 +298,10 @@ class Heytap:
                     qd["marking"], qd["type"], qd["credits"]
                 )
                 if res2:
-                    self.log += "【每日分享商品】：" + "任务完成！积分领取+" + str(qd["credits"]) + "\n"
-                    print("【每日分享商品】：" + "任务完成！积分领取+" + str(qd["credits"]) + "\n")
+                    self.log += "【每日分享商品】：" + "任务完成！积分领取+" + \
+                                str(qd["credits"]) + "\n"
+                    print("【每日分享商品】：" + "任务完成！积分领取+" +
+                          str(qd["credits"]) + "\n")
                 else:
                     self.log += "【每日分享商品】：" + "领取积分奖励出错！\n"
                     print("【每日分享商品】：" + "领取积分奖励出错！\n")
@@ -329,8 +344,10 @@ class Heytap:
                     qd["marking"], qd["type"], qd["credits"]
                 )
                 if res2:
-                    self.log += "【每日点推送】: " + "任务完成！积分领取+" + str(qd["credits"]) + "\n"
-                    print("【每日点推送】: " + "任务完成！积分领取+" + str(qd["credits"]) + "\n")
+                    self.log += "【每日点推送】: " + "任务完成！积分领取+" + \
+                                str(qd["credits"]) + "\n"
+                    print("【每日点推送】: " + "任务完成！积分领取+" +
+                          str(qd["credits"]) + "\n")
                 else:
                     self.log += "【每日点推送】: " + "领取积分奖励出错！\n"
                     print("【每日点推送】: " + "领取积分奖励出错！\n")
@@ -339,8 +356,10 @@ class Heytap:
                     qd["marking"], qd["type"], qd["credits"]
                 )
                 if res2:
-                    self.log += "【每日点推送】: " + "任务完成！积分领取+" + str(qd["credits"]) + "\n"
-                    print("【每日点推送】: " + "任务完成！积分领取+" + str(qd["credits"]) + "\n")
+                    self.log += "【每日点推送】: " + "任务完成！积分领取+" + \
+                                str(qd["credits"]) + "\n"
+                    print("【每日点推送】: " + "任务完成！积分领取+" +
+                          str(qd["credits"]) + "\n")
                 else:
                     self.log += "【每日点推送】: " + "领取积分奖励出错！\n"
                     print("【每日点推送】: " + "领取积分奖励出错！\n")
@@ -457,7 +476,8 @@ class Heytap:
                 "Referer": referer
             }
             dated = int(time.time())
-            end_time = time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S"))  # 设置活动结束日期
+            end_time = time.mktime(time.strptime(
+                end_time, "%Y-%m-%d %H:%M:%S"))  # 设置活动结束日期
 
             if dated < end_time:
                 if if_task:

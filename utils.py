@@ -35,5 +35,6 @@ def get_data() -> dict:
         DATA = json.load(open(check_config, "r", encoding="utf-8"))
         return DATA
     except ValueError:
-        print(f'错误：配置文件 {check_config} 格式不对，请在 https://verytoolz.com/json5-validator.html 中检查格式')
+        print(
+            f'错误：配置文件 {check_config} 格式不对，请在 https://verytoolz.com/json5-validator.html 中检查格式')
         exit(1)

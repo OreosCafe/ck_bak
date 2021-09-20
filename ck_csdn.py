@@ -21,7 +21,8 @@ class CSDNCheckIn:
 
     def sign(self, cookies):
         url = "https://me.csdn.net/api/LuckyDraw_v2/signIn"
-        response = requests.get(url=url, headers=self.headers, cookies=cookies).json()
+        response = requests.get(
+            url=url, headers=self.headers, cookies=cookies).json()
         if response.get("code") == 200:
             msg = response.get("data").get("msg")
         else:
@@ -31,7 +32,8 @@ class CSDNCheckIn:
 
     def draw(self, cookies):
         url = "https://me.csdn.net/api/LuckyDraw_v2/goodluck"
-        response = requests.get(url=url, headers=self.headers, cookies=cookies).json()
+        response = requests.get(
+            url=url, headers=self.headers, cookies=cookies).json()
         if response.get("code") == 200:
             msg = response.get("data").get("msg")
         else:

@@ -70,7 +70,8 @@ class PicacomicCheckIn:
                 timeout=60,
             ).json()
             token = sign_response.get("data", {}).get("token")
-            punch_headers = self.generate_headers(path="users/punch-in", token=token)
+            punch_headers = self.generate_headers(
+                path="users/punch-in", token=token)
             response = requests.post(
                 url="https://picaapi.picacomic.com/users/punch-in",
                 headers=punch_headers,

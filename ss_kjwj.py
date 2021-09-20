@@ -66,7 +66,8 @@ class KJWJCheckIn:
         for check_item in self.check_items:
             username = str(check_item.get("username"))
             password = str(check_item.get("password"))
-            login_stat, id, coin, level, sign_info = self.login(usr=username, pwd=password)
+            login_stat, id, coin, level, sign_info = self.login(
+                usr=username, pwd=password)
             msg = (
                 f"===> 账号{i} 开始 <==="
                 f"\n{login_stat}"

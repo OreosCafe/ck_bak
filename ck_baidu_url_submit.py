@@ -47,7 +47,8 @@ class BaiduUrlSubmit:
             submit_url = check_item.get("submit_url")
             times = int(check_item.get("times", 100))
             if data_url and submit_url:
-                msg = self.url_submit(data_url=data_url, submit_url=submit_url, times=times)
+                msg = self.url_submit(
+                    data_url=data_url, submit_url=submit_url, times=times)
             else:
                 msg = "配置错误"
             msg_all += msg + "\n\n"

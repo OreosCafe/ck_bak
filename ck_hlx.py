@@ -88,7 +88,8 @@ class HLXCheckIn:
                 "cat_id": IDS
             }
             try:
-                experienceVal = r.get(url=url, params=params).json()["experienceVal"]
+                experienceVal = r.get(url=url, params=params) \
+                    .json()["experienceVal"]
             except:
                 experienceVal = 0
             finally:

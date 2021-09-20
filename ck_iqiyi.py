@@ -43,7 +43,8 @@ class IQIYICheckIn:
                 growthvalue = res_data.get("growthvalue", 0)  # 当前 VIP 成长值
                 distance = res_data.get("distance", 0)  # 升级需要成长值
                 deadline = res_data.get("deadline", "非 VIP 用户")  # VIP 到期时间
-                today_growth_value = res_data.get("todayGrowthValue", 0)  # 今日成长值
+                today_growth_value = res_data \
+                    .get("todayGrowthValue", 0)  # 今日成长值
                 msg = (
                     f"VIP 等级: {level}\n当前成长值: {growthvalue}\n"
                     f"升级需成长值: {distance}\n今日成长值: +{today_growth_value}\nVIP 到期时间: {deadline}"
@@ -200,7 +201,8 @@ class IQIYICheckIn:
                 task_list = self.query_user_task(p00001=p00001)
                 self.join_task(p00001=p00001, task_list=task_list)
                 time.sleep(10)
-                task_msg = self.get_task_rewards(p00001=p00001, task_list=task_list)
+                task_msg = self.get_task_rewards(p00001=p00001,
+                                                 task_list=task_list)
             try:
                 user_info = json.loads(unquote(p00002, encoding="utf-8"))
                 user_name = user_info.get("user_name")
