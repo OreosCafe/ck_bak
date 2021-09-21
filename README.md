@@ -220,7 +220,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 登录后抓取签到请求（一般请求的请求头也有这个字段）
 
-[![hLvtfO.png](https://z3.ax1x.com/2021/09/09/hLvtfO.png)](https://imgtu.com/i/hLvtfO)
+[![hLvtfO.md.png](https://z3.ax1x.com/2021/09/09/hLvtfO.md.png)](https://imgtu.com/i/hLvtfO)
 
 ### 3. **Shell 脚本配置**
 
@@ -234,6 +234,10 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 - [欢太商城 HttpCanary 抓包教程](https://github.com/hwkxk/HeytapTask/wiki/%E6%AC%A2%E5%A4%AA%E5%95%86%E5%9F%8EHttpCanary%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B)
 - 部分域名屏蔽境外 IP 访问，所以本项目不适于在 非中国 IP 代理网络下 / Github Actions / 境外 VPS 上运行!
 - 从未在欢太商城做过任务，请先手动进入任务中心完成一下任务再使用，否则可能无法获取到任务列表数据导致出错！@YYplus
+
+### 5. **添加了时光相册的签到配置**
+
+[![4ty6eg.md.png](https://z3.ax1x.com/2021/09/21/4ty6eg.md.png)](https://imgtu.com/i/4ty6eg)
 
 ## 其他说明
 
@@ -265,15 +269,15 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 | --- | --- | --- | --- |
 - [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | api | LeetCode 每日一题 | 每日一句 | 天气预报
 - [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | AcFun | 百度搜索资源平台 | Bilibili | 天翼云盘 | CSDN | 多看阅读 | 恩山论坛 | Fa米家 | 网易云游戏 | 葫芦侠 | 爱奇艺 | 全民K歌 | MEIZU 社区 | 芒果 TV | 小米运动 | 网易云音乐 | 一加手机社区官方论坛 | 哔咔漫画 | 吾爱破解 | 什么值得买 | 百度贴吧 | V2EX | 腾讯视频 | 微博 | 联通沃邮箱 | 哔咔网单 | 王者营地 | 有道云笔记 | 智友邦
-- [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到 | 欢太商城 | NGA | 掘金 | GLaDOS | HiFiNi
+- [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到 | 欢太商城 | NGA | 掘金 | GLaDOS | HiFiNi | 时光相册 | 联通营业厅
 - [x] 𝑺𝒉𝒆𝒍𝒍 | 多账号 | SSPanel 签到
 
 ### 测试情况
 
 | 状态 | 名称 |
 | --- | --- |
-| ✅ | LeetCode 每日一题 \| 每日一句 \| 天气预报 \| AcFun \| 机场签到 \| Bilibili \| 天翼云盘 \| CSDN \| 多看阅读 \| 恩山论坛 \| GLaDOS \| 欢太商城 \| HiFiNi \| 爱奇艺 \| 掘金 \| 全民K歌 \| MEIZU 社区 \| 小米运动 \| 网易云音乐 \| NGA \| 一加手机社区官方论坛 \| 吾爱破解 \| 什么值得买 \| SSPanel 签到 \| 百度贴吧 \| 微博 \| 王者营地 \| 有道云笔记 |
-| ❔ | 百度搜索资源平台 \| Fa米家 \| 网易云游戏 \| 葫芦侠 \| 芒果 TV \| 哔咔漫画 \| V2EX \| 联通沃邮箱 \| 哔咔网单 \| 智友邦 |
+| ✅ | LeetCode 每日一题 \| 每日一句 \| 天气预报 \| AcFun \| 机场签到 \| Bilibili \| 天翼云盘 \| CSDN \| 多看阅读 \| 恩山论坛 \| 时光相册 \| GLaDOS \| 欢太商城 \| HiFiNi \| 爱奇艺 \| 掘金 \| 全民K歌 \| MEIZU 社区 \| 小米运动 \| 网易云音乐 \| NGA \| 一加手机社区官方论坛 \| 吾爱破解 \| 什么值得买 \| SSPanel 签到 \| 百度贴吧 \| 微博 \| 王者营地 \| 有道云笔记 |
+| ❔ | 百度搜索资源平台 \| Fa米家 \| 网易云游戏 \| 葫芦侠 \| 芒果 TV \| 哔咔漫画 \| 联通营业厅 \| V2EX \| 联通沃邮箱 \| 哔咔网单 \| 智友邦 |
 | 💨 | 腾讯视频 |
 
 ## 致谢

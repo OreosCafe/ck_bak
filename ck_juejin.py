@@ -48,8 +48,12 @@ class JuejinCheckIn:
             cookie = str(check_item.get("cookie"))
             sign_msg = self.sign(cookie=cookie)["err_msg"]
             lottery_msg = self.lottery(cookie=cookie)["err_msg"]
-            msg = f"账号 {i}\n------ 掘金签到结果 ------\n" + sign_msg
-            + "\n------ 掘金抽奖结果 ------\n" + lottery_msg
+            msg = (
+                f"账号 {i}\n------ 掘金签到结果 ------\n"
+                + sign_msg
+                + "\n------ 掘金抽奖结果 ------\n"
+                + lottery_msg
+            )
             i += 1
             msg_all += msg + "\n\n"
         return msg_all

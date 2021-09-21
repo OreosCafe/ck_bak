@@ -2,6 +2,9 @@
 
 {
 
+// 青龙随机定时
+   QL_RANDOM_TIME: false,
+
 // 天气预报
    CITY: [
      '上海',
@@ -111,6 +114,18 @@
 //      cookie: '',
 //    },
   ],
+
+// 时光相册
+   EVERPHOTO: [
+     {
+       mobile: '+86188xxxxxxxx',
+       password: 'c63xxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+     },
+//     {
+//       mobile: '',    // 请求 URL: https://web.everphoto.cn/api/auth 最下方表单数据，带区号
+//       password: '',  // 同上，不是原始密码
+//     },
+   ],
 
 // Fa米家
    FMAPP: [
@@ -331,6 +346,20 @@
      },
 //     {
 //       cookie: '',
+//     },
+   ],
+
+// 联通营业厅
+   UNICOM: [
+     {
+       mobile: '18888xxxxxx',
+       password: '',
+       app_id: '',
+     },
+//     {
+//       mobile: '',  
+//       password: '',
+//       app_id: '',    // 抓包 APP 中域名为 https://m.client.10010.com/mobileService/login.htm 请求内容的 appId
 //     },
    ],
 
