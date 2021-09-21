@@ -5,6 +5,7 @@ $exec(`python3 https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/${
     cwd: './script/Shell/checkinpanel',
     timeout: 0,
     env: {
+        NOTIFY_CONFIG_PATH: $store.get('NOTIFY_CONFIG_PATH', 'string'),           // 自定义通知配置文件路径，如 /usr/locallocal/app/script/Lists/notify_config.json5
         HITOKOTO: $store.get('HITOKOTO', 'boolean'),                              // 一言，true 为开启，false 为关闭，默认关闭
         BARK: $store.get('BARK', 'string'),                                       // bark 服务，此参数如果以 http 或者 https 开头则判定为自建 bark 服务；secrets 可填
         PUSH_KEY: $store.get('PUSH_KEY', 'string'),                               // Server酱的 PUSH_KEY；secrets 可填

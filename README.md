@@ -97,7 +97,7 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 使用了配置文件后，你可以将配置文件放在持久化位置，不受脚本更新、重置容器的影响。
 
-如果想自定义配置文件的位置和文件名，请设置通知环境变量 `NOTIFY_CONFIG_PATH` ， 例如 `/etc/notify/config.json5` 。建议保持 `json5` 的后缀，防止编辑器的误解。
+如果想自定义配置文件的位置和文件名，请设置通知环境变量 `NOTIFY_CONFIG_PATH` ， 例如 `/usr/local/app/script/notify_config.json5` 。建议保持 `json5` 的后缀，防止编辑器的误解。
 
 关于 json5 的语法参考：
 
