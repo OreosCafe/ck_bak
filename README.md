@@ -220,7 +220,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 登录后抓取签到请求（一般请求的请求头也有这个字段）
 
-[![hLvtfO.png](https://z3.ax1x.com/2021/09/09/hLvtfO.png)](https://imgtu.com/i/hLvtfO)
+[![4tfx5F.png](https://z3.ax1x.com/2021/09/22/4tfx5F.png)](https://imgtu.com/i/4tfx5F)
 
 ### 3. **Shell 脚本配置**
 
