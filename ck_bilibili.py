@@ -137,7 +137,7 @@ class BiliBiliCheckIn(object):
             "order": order,
             "order_type": order_type
         }
-        url = f"https://api.bilibili.com/x/relation/followings"
+        url = "https://api.bilibili.com/x/relation/followings"
         ret = session.get(url=url, params=params).json()
         return ret
 
@@ -160,7 +160,7 @@ class BiliBiliCheckIn(object):
             "order": order,
             "keyword": keyword
         }
-        url = f"https://api.bilibili.com/x/space/arc/search"
+        url = "https://api.bilibili.com/x/space/arc/search"
         ret = session.get(url=url, params=params).json()
         data_list = [{"aid": one.get("aid"), "cid": 0, "title": one.get("title"), "owner": one.get("author")}
                      for one in ret.get("data", {}).get("list", {}).get("vlist", [])]
@@ -260,7 +260,8 @@ class BiliBiliCheckIn(object):
             requests.utils.add_dict_to_cookiejar(session.cookies, cookie)
             session.headers.update({
                 "user-agent":
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.64",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) \
+                     Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.64",
                 "Referer": "https://www.bilibili.com/",
                 "accept-language":
                     "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
@@ -317,14 +318,14 @@ class BiliBiliCheckIn(object):
                 if report_ret.get("code") == 0:
                     report_msg = f"观看《{title}》300秒"
                 else:
-                    report_msg = f"任务失败"
+                    report_msg = "任务失败"
                     print(report_msg)
                 share_ret = self.share_task(session=session,
                                             bili_jct=bili_jct, aid=aid)
                 if share_ret.get("code") == 0:
                     share_msg = f"分享《{title}》成功"
                 else:
-                    share_msg = f"分享失败"
+                    share_msg = "分享失败"
                     print(share_msg)
                 if silver2coin:
                     silver2coin_ret = self.silver2coin(session=session,
@@ -334,7 +335,7 @@ class BiliBiliCheckIn(object):
                     else:
                         silver2coin_msg = silver2coin_ret["message"]
                 else:
-                    silver2coin_msg = f"未开启银瓜子兑换硬币功能"
+                    silver2coin_msg = "未开启银瓜子兑换硬币功能"
                 live_stats = self.live_status(session=session)
                 uname, uid, is_login, new_coin, vip_type, new_current_exp = self.get_nav(
                     session=session)
