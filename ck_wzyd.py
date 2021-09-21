@@ -12,7 +12,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class WZYDCheckIn:
+class WZYD:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -26,7 +26,7 @@ class WZYDCheckIn:
                 msg = "签到成功"
             else:
                 msg = response["returnMsg"]
-        except:
+        except Exception:
             msg = "请求失败,请检查接口"
         return msg
 
@@ -49,6 +49,6 @@ class WZYDCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("WZYD", [])
-    res = WZYDCheckIn(check_items=_check_items).main()
+    res = WZYD(check_items=_check_items).main()
     print(res)
     send('王者营地', res)

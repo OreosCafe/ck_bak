@@ -12,7 +12,7 @@ from utils import get_data
 r = requests.Session()
 
 
-class HLXCheckIn:
+class HLX:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -111,7 +111,7 @@ class HLXCheckIn:
 def start():
     data = get_data()
     _check_items = data.get("HLX", [])
-    res = HLXCheckIn(check_items=_check_items).main()
+    res = HLX(check_items=_check_items).main()
     print(res)
     send("葫芦侠", res)
 

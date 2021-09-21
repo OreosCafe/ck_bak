@@ -10,7 +10,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class Game163CheckIn:
+class Game163:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -40,6 +40,6 @@ class Game163CheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("GAME163", [])
-    res = Game163CheckIn(check_items=_check_items).main()
+    res = Game163(check_items=_check_items).main()
     print(res)
     send("网易云游戏", res)

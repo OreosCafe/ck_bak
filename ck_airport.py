@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@Auth: Icrons
-@Modifier: Oreo
+:author @Icrons
 cron: 20 10 * * *
 new Env('机场签到');
 """
@@ -36,7 +35,7 @@ class SspanelQd(object):
         except requests.exceptions.ChunkedEncodingError:
             msg = url + "\n" + "分块编码错误"
             return msg
-        except:
+        except Exception:
             msg = url + "\n" + "未知错误"
             return msg
 
@@ -77,7 +76,7 @@ class SspanelQd(object):
                 + "\n- 剩余流量：" + str(rest)
             )
             return msg
-        except:
+        except Exception:
             return msg
 
     def main(self):

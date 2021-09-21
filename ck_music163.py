@@ -20,7 +20,7 @@ from utils import get_data
 urllib3.disable_warnings()
 
 
-class Music163CheckIn:
+class Music163:
     def __init__(self, check_items):
         self.check_items = check_items
         self.headers = {
@@ -203,6 +203,6 @@ class Music163CheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("MUSIC163", [])
-    res = Music163CheckIn(check_items=_check_items).main()
+    res = Music163(check_items=_check_items).main()
     print(res)
     send("网易云音乐", res)

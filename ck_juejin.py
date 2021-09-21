@@ -12,7 +12,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class JuejinCheckIn:
+class Juejin:
     def __init__(self, check_items):
         self.check_items = check_items
         self.base_url = "https://api.juejin.cn/"
@@ -62,6 +62,6 @@ class JuejinCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("JUEJIN", [])
-    res = JuejinCheckIn(check_items=_check_items).main()
+    res = Juejin(check_items=_check_items).main()
     print(res)
     send("掘金", res)

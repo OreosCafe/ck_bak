@@ -13,7 +13,7 @@ from utils import get_data
 urllib3.disable_warnings()
 
 
-class AcFunCheckIn:
+class AcFun:
     def __init__(self, check_items):
         self.check_items = check_items
         self.contentid = "27259341"
@@ -165,6 +165,6 @@ class AcFunCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("ACFUN", [])
-    res = AcFunCheckIn(check_items=_check_items).main()
+    res = AcFun(check_items=_check_items).main()
     print(res)
     send("AcFun", res)

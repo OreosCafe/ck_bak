@@ -12,7 +12,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class WoMailCheckIn:
+class WoMail:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -62,7 +62,7 @@ class WoMailCheckIn:
             if result == -2:
                 msg += "每日签到: 已签到\n"
             elif result is None:
-                msg += f"每日签到: 签到失败\n"
+                msg += "每日签到: 签到失败\n"
             else:
                 msg += f"每日签到: 签到成功~已签到{result}天！\n"
         except Exception as e:
@@ -275,6 +275,6 @@ class WoMailCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("WOMAIL", [])
-    res = WoMailCheckIn(check_items=_check_items).main()
+    res = WoMail(check_items=_check_items).main()
     print(res)
     send("联通沃邮箱", res)

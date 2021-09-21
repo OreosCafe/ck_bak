@@ -14,7 +14,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class VQQCheckIn:
+class VQQ:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -42,7 +42,7 @@ class VQQCheckIn:
         if "isMultiple" in res.text:
             try:
                 value = match.group(1)
-            except Exception as e:
+            except Exception:
                 print(res.text)
                 value = "数据获取失败"
             msg = f"成长值x{value}"
@@ -87,7 +87,7 @@ class VQQCheckIn:
             res = requests.get(url=url, headers=headers, cookies=cookies)
             res.encoding = "utf8"
             if "score" in res.text:
-                msg = f"获得+10成长值"
+                msg = "获得+10成长值"
             elif "已发过货" in res.text:
                 msg = "任务已完成"
             elif "任务未完成" in res.text:
@@ -132,6 +132,6 @@ class VQQCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("VQQ", [])
-    res = VQQCheckIn(check_items=_check_items).main()
+    res = VQQ(check_items=_check_items).main()
     print(res)
     send("腾讯视频", res)

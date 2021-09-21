@@ -376,7 +376,7 @@ def feishu(title: str, content: str) -> None:
     if response.get('StatusCode') == 0:
         print('飞书 推送成功！')
     else:
-        print(f'飞书 推送失败！错误信息如下：\n', response)
+        print('飞书 推送失败！错误信息如下：\n', response)
 
 
 def one() -> str:

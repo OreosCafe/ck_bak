@@ -14,7 +14,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class TiebaCheckIn:
+class Tieba:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -114,6 +114,6 @@ class TiebaCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("TIEBA", [])
-    res = TiebaCheckIn(check_items=_check_items).main()
+    res = Tieba(check_items=_check_items).main()
     print(res)
     send("百度贴吧", res)

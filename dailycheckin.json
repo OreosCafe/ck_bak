@@ -2,7 +2,7 @@
     "name": "签到项目",
     "author": "Leon",
     "desc": "该订阅适用于 elecV2P，与其他软件并不兼容。相关说明参考：https://github.com/elecV2/elecV2P-dei/tree/master/docs/06-task.md",
-    "date": "2021-09-20 15:30:00",
+    "date": "2021-09-22 5:10:00",
     "list": [
         {
             "name": "签到仓库",
@@ -205,6 +205,16 @@
             "running": true
         },
         {
+            "name": "FreeNom",
+            "type": "cron",
+            "time": "25 7 */10 * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_freenom.py"
+            },
+            "running": true
+        },
+        {
             "name": "网易云游戏",
             "type": "cron",
             "time": "20 8 * * *",
@@ -261,6 +271,16 @@
             "job": {
                 "type": "runjs",
                 "target": "checkin.js -env PYNAME=ck_iqiyi.py"
+            },
+            "running": true
+        },
+        {
+            "name": "无忧行",
+            "type": "cron",
+            "time": "21 21 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_jegotrip.py"
             },
             "running": true
         },

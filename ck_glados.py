@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@author: XFY9326
+:author @XFY9326
 cron: 11 6 * * *
 new Env('GLaDOS');
 """
@@ -16,7 +16,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class GLaDOSCheckIn(object):
+class GLaDOS(object):
     def __init__(self, check_items):
         self.check_items = check_items
         self.original_url = "https://glados.rocks"
@@ -95,7 +95,7 @@ class GLaDOSCheckIn(object):
                 if check_in_msg == "\u6ca1\u6709\u6743\u9650":
                     msg = (
                         "--------------------\n"
-                        "GLaDOS CheckIn\n"
+                        "GLaDOS \n"
                         "Msg: Your cookies are expired!\n"
                         "--------------------"
                     )
@@ -111,7 +111,7 @@ class GLaDOSCheckIn(object):
                 plan = user_budget["level"]
                 msg = (
                     "--------------------\n"
-                    "GLaDOS CheckIn\n"
+                    "GLaDOS \n"
                     + "Msg: " + check_in_msg + "\n"
                     + "Plan: " + plan + " Plan\n"
                     + "Left days: " + str(left_days) + "\n"
@@ -122,7 +122,7 @@ class GLaDOSCheckIn(object):
             except BaseException:
                 msg = (
                     "--------------------\n"
-                    "GLaDOS CheckIn\n"
+                    "GLaDOS \n"
                     "Msg: Check in error!\n"
                     "Error:\n"
                     f"{traceback.format_exc()}"
@@ -136,6 +136,6 @@ class GLaDOSCheckIn(object):
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("GLADOS", [])
-    res = GLaDOSCheckIn(check_items=_check_items).main()
+    res = GLaDOS(check_items=_check_items).main()
     print(res)
     send("GLaDOS", res)

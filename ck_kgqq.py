@@ -10,7 +10,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class KGQQCheckIn:
+class KGQQ:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -137,6 +137,6 @@ class KGQQCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("KGQQ", [])
-    res = KGQQCheckIn(check_items=_check_items).main()
+    res = KGQQ(check_items=_check_items).main()
     print(res)
     send("全民K歌", res)

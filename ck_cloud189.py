@@ -16,7 +16,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class Cloud189CheckIn:
+class Cloud189:
     def __init__(self, check_items):
         self.check_items = check_items
         self.b64map = (
@@ -158,6 +158,6 @@ class Cloud189CheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("CLOUD189", [])
-    res = Cloud189CheckIn(check_items=_check_items).main()
+    res = Cloud189(check_items=_check_items).main()
     print(res)
     send("天翼云盘", res)

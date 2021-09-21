@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-@author: CAB233
-@url: https://github.com/CAB233/everphoto_checkin
+:author @CAB233
+:url https://github.com/CAB233/everphoto_checkin
 cron: 3 22 * * *
 new Env('时光相册');
 """
@@ -14,7 +14,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class EverPhotoCheckIn:
+class EverPhoto:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -33,8 +33,8 @@ class EverPhotoCheckIn:
 
             response = requests.post(url, headers=header)
             data = json.loads(response.text)
-            checkin_result = data['data']['checkin_result']
-            continuity = data['data']['continuity']
+            checkin_result = data["data"]["checkin_result"]
+            continuity = data["data"]["continuity"]
 
             msg = (
                 "是否为今日第一次签到："
@@ -47,9 +47,9 @@ class EverPhotoCheckIn:
         return msg_all
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("EVERPHOTO", [])
-    res = EverPhotoCheckIn(check_items=_check_items).main()
+    res = EverPhoto(check_items=_check_items).main()
     print(res)
     send("时光相册", res)

@@ -14,7 +14,7 @@ from utils import get_data
 requests.packages.urllib3.disable_warnings()
 
 
-class NGACheckIn:
+class NGA:
     def __init__(self, check_items):
         self.check_items = check_items
         self.url = "https://ngabbs.com/nuke.php"
@@ -283,6 +283,6 @@ class NGACheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("NGA", [])
-    res = NGACheckIn(check_items=_check_items).main()
+    res = NGA(check_items=_check_items).main()
     print(res)
     send("NGA", res)

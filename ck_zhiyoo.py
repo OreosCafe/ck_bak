@@ -15,7 +15,7 @@ from utils import get_data
 urllib3.disable_warnings()
 
 
-class ZhiyooCheckIn:
+class Zhiyoo:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -80,6 +80,6 @@ class ZhiyooCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("ZHIYOO", [])
-    res = ZhiyooCheckIn(check_items=_check_items).main()
+    res = Zhiyoo(check_items=_check_items).main()
     print(res)
     send("智友邦", res)

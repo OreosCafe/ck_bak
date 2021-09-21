@@ -15,7 +15,7 @@ from utils import get_data
 urllib3.disable_warnings()
 
 
-class WeiBoCheckIn:
+class WeiBo:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -30,11 +30,11 @@ class WeiBoCheckIn:
         if result.get("status") == 10000:
             msg = f'连续签到: {result.get("data").get("continuous")}天\n本次收益: {result.get("data").get("desc")}'
         elif result.get("errno") == 30000:
-            msg = f"每日签到: 已签到"
+            msg = "每日签到: 已签到"
         elif result.get("status") == 90005:
             msg = f'每日签到: {result.get("msg")}'
         else:
-            msg = f"每日签到: 签到失败"
+            msg = "每日签到: 签到失败"
         return msg
 
     @staticmethod
@@ -52,7 +52,7 @@ class WeiBoCheckIn:
                 f'积分总计: {result.get("data").get("user").get("energy")}'
             )
         else:
-            msg = f"每日打卡: 活动过期或失效"
+            msg = "每日打卡: 活动过期或失效"
         return msg
 
     @staticmethod
@@ -67,7 +67,7 @@ class WeiBoCheckIn:
         }
         data = token + "&lang=zh_CN&wm=3333_2001"
         response = requests.post(
-            url=f"https://pay.sc.weibo.com/aj/mobile/home/welfare/signin/do",
+            url="https://pay.sc.weibo.com/aj/mobile/home/welfare/signin/do",
             headers=headers,
             data=data,
             verify=False)
@@ -76,7 +76,7 @@ class WeiBoCheckIn:
             if result.get("status") == 1:
                 msg = f'微博钱包: {result.get("score")} 积分'
             elif result.get("status") == 2:
-                msg = f"微博钱包: 已签到"
+                msg = "微博钱包: 已签到"
                 info_response = requests.post(
                     url="https://pay.sc.weibo.com/api/client/sdk/app/balance",
                     headers=headers,
@@ -84,10 +84,10 @@ class WeiBoCheckIn:
                 info_result = info_response.json()
                 msg += f"\n当前现金: {info_result.get('data').get('balance')} 元"
             else:
-                msg = f"微博钱包: Cookie失效"
+                msg = "微博钱包: Cookie失效"
             return msg
-        except Exception as e:
-            msg = f"微博钱包: Cookie失效"
+        except Exception:
+            msg = "微博钱包: Cookie失效"
             return msg
 
     def main(self):
@@ -112,6 +112,6 @@ class WeiBoCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items_list = data.get("WEIBO", [])
-    res = WeiBoCheckIn(check_items=_check_items_list).main()
+    res = WeiBo(check_items=_check_items_list).main()
     print(res)
     send("微博", res)

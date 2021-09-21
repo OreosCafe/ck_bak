@@ -15,7 +15,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class IQIYICheckIn:
+class IQIYI:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -224,7 +224,7 @@ class IQIYICheckIn:
 def start():
     data = get_data()
     _check_items = data.get("IQIYI", [])
-    res = IQIYICheckIn(check_items=_check_items).main()
+    res = IQIYI(check_items=_check_items).main()
     print(res)
     send("爱奇艺", res)
 

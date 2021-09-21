@@ -14,7 +14,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class MgtvCheckIn:
+class Mgtv:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -69,6 +69,6 @@ class MgtvCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("MGTV", [])
-    res = MgtvCheckIn(check_items=_check_items).main()
+    res = Mgtv(check_items=_check_items).main()
     print(res)
     send("芒果 TV", res)

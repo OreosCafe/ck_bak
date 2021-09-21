@@ -270,28 +270,29 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 | --- | --- | --- | --- |
 * [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | api | LeetCode 每日一题 | 每日一句 | 天气预报
 * [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | AcFun | 百度搜索资源平台 | Bilibili | 天翼云盘 | CSDN | 多看阅读 | 恩山论坛 | Fa米家 | 网易云游戏 | 葫芦侠 | 爱奇艺 | 全民K歌 | MEIZU 社区 | 芒果 TV | 小米运动 | 网易云音乐 | 一加手机社区官方论坛 | 哔咔漫画 | 吾爱破解 | 什么值得买 | 百度贴吧 | V2EX | 腾讯视频 | 微博 | 联通沃邮箱 | 哔咔网单 | 王者营地 | 有道云笔记 | 智友邦
-* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到 | 欢太商城 | NGA | 掘金 | GLaDOS | HiFiNi | 时光相册 | 联通营业厅
+* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到 | 欢太商城 | NGA | 掘金 | GLaDOS | HiFiNi | 时光相册 | 联通营业厅 | 无忧行 | FreeNom
 * [x] 𝑺𝒉𝒆𝒍𝒍 | 多账号 | SSPanel 签到
 
 ### 测试情况
 
 | 状态 | 名称 |
 | --- | --- |
-| ✅ | LeetCode 每日一题 \| 每日一句 \| 天气预报 \| AcFun \| 机场签到 \| Bilibili \| 天翼云盘 \| CSDN \| 多看阅读 \| 恩山论坛 \| 时光相册 \| GLaDOS \| 欢太商城 \| HiFiNi \| 爱奇艺 \| 掘金 \| 全民K歌 \| MEIZU 社区 \| 小米运动 \| 网易云音乐 \| NGA \| 一加手机社区官方论坛 \| 吾爱破解 \| 什么值得买 \| SSPanel 签到 \| 百度贴吧 \| 微博 \| 王者营地 \| 有道云笔记 |
-| ❔ | 百度搜索资源平台 \| Fa米家 \| 网易云游戏 \| 葫芦侠 \| 芒果 TV \| 哔咔漫画 \| 联通营业厅 \| V2EX \| 联通沃邮箱 \| 哔咔网单 \| 智友邦 |
-| 💨 | 腾讯视频 |
+| ✅ | LeetCode 每日一题 \| 每日一句 \| 天气预报 \| AcFun \| 机场签到 \| Bilibili \| 天翼云盘 \| CSDN \| 多看阅读 \| 恩山论坛 \| 时光相册 \| FreeNom \| GLaDOS \| 网易云游戏 \| 欢太商城 \| HiFiNi \| 爱奇艺 \| 掘金 \| 全民K歌 \| MEIZU 社区 \| 小米运动 \| 网易云音乐 \| NGA \| 一加手机社区官方论坛 \| 吾爱破解 \| 什么值得买 \| SSPanel 签到 \| 百度贴吧 \| 腾讯视频 \| 微博 \| 王者营地 \| 有道云笔记 |
+| ❔ | 百度搜索资源平台 \| Fa米家 \| 葫芦侠 \| 无忧行 \| 芒果 TV \| 哔咔漫画 \| 联通营业厅 \| V2EX \| 联通沃邮箱 \| 哔咔网单 \| 智友邦 |
 
 ## 致谢
 
-[@𝐰𝐞𝐧𝐦𝐨𝐮𝐱](https://github.com/Wenmoux/)  
+[@𝐰𝐞𝐧𝐦𝐨𝐮𝐱](https://github.com/Wenmoux/) -------- 𝗰𝗵𝗲𝗰𝗸𝗯𝗼𝘅
 
-[@𝐒𝐢𝐭𝐨𝐢](https://github.com/Sitoi)
+[@𝐒𝐢𝐭𝐨𝐢](https://github.com/Sitoi) ----------- 𝗱𝗮𝗶𝗹𝘆𝗰𝗵𝗲𝗰𝗸𝗶𝗻
 
-[@𝐲𝐮𝐱𝐢𝐚𝐧𝟏𝟓𝟖](https://github.com/yuxian158)
+[@𝐲𝐮𝐱𝐢𝐚𝐧𝟏𝟓𝟖](https://github.com/yuxian158) ---- 𝗾𝗹-𝗰𝗵𝗲𝗰𝗸𝗯𝗼𝘅
 
-[@𝐢𝐬𝐞𝐜𝐫𝐞𝐭](https://github.com/isecret)
+[@𝐢𝐬𝐞𝐜𝐫𝐞𝐭](https://github.com/isecret) ------- 𝗦𝗦𝗣𝗮𝗻𝗲𝗹 𝗦𝗵𝗲𝗹𝗹
 
-[@𝐡𝐰𝐤𝐱𝐤](https://github.com/hwkxk)
+[@𝐡𝐰𝐤𝐱𝐤](https://github.com/hwkxk) -------------- 𝗛𝗲𝘆𝗧𝗮𝗽
+
+@𝑶𝒕𝒉𝒆𝒓𝒔 ----- 𝔰𝔠𝔯𝔦𝔭𝔱 𝔠𝔬𝔪𝔪𝔢𝔫𝔱𝔰
 
 ## 历史 Star 数
 

@@ -19,16 +19,16 @@ def change_db():
     lines = []
     first = True
     with open("/ql/db/crontab.db", "r", encoding="UTF-8") as f:
-        for l in f.readlines():
-            if l.find("Oreomeow_checkinpanel_master") != -1:
-                record = json.loads(l)
+        for i in f.readlines():
+            if i.find("Oreomeow_checkinpanel_master") != -1:
+                record = json.loads(i)
                 if record.get("isDisabled") == 0:
                     record["schedule"] = change_time(record["schedule"], first)
                 if first:
                     first = False
                 lines.append(json.dumps(record, ensure_ascii=False) + "\n")
             else:
-                lines.append(l)
+                lines.append(i)
 
     time_str = time.strftime("%Y-%m-%d", time.localtime())
     os.system(f"copy /ql/db/crontab.db /ql/db/crontab.db.{time_str}.back")

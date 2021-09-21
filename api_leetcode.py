@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@author: wangwangit
+:author @wangwangit
 cron: 10 10 * * *
 new Env('LeetCode 每日一题');
 """

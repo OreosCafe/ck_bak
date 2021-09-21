@@ -15,7 +15,7 @@ from utils import get_data
 urllib3.disable_warnings()
 
 
-class V2exCheckIn:
+class V2ex:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -98,6 +98,6 @@ class V2exCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("V2EX", [])
-    res = V2exCheckIn(check_items=_check_items).main()
+    res = V2ex(check_items=_check_items).main()
     print(res)
     send("V2EX", res)

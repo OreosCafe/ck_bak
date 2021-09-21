@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+
 import re
 import time
 
 import requests
 
 
-__version__ = '20210922-2-001'
+__version__ = '20210922-2-012'
 ONLINE_VERSION = ''
 ver_re = re.compile('__version__ = .(\\d+-\\d+-...).')
 

@@ -12,7 +12,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class SmzdmCheckIn:
+class Smzdm:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -79,6 +79,6 @@ class SmzdmCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("SMZDM", [])
-    res = SmzdmCheckIn(check_items=_check_items).main()
+    res = Smzdm(check_items=_check_items).main()
     print(res)
     send("什么值得买", res)

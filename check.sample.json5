@@ -149,6 +149,18 @@
 //     },
    ],
 
+// FreeNom
+   FREEENOM: [
+     {
+       username: '',
+       password: '',
+     },
+//     {
+//       username: '',
+//       password: '',
+//     },
+   ],
+
 // 网易云游戏
    GAME163: [
      {
@@ -212,6 +224,16 @@
      },
 //     {
 //       cookie: '',
+//     },
+   ],
+
+// 无忧行
+   JEGOTRIP: [
+     {
+       user_id:''
+     },
+//     {
+//       user_id: '',  // 利用 stream 通过 mitm 在无忧行 app 抓包，获取 payload 中的 user_id
 //     },
    ],
 
@@ -398,7 +420,7 @@
    ],
 
 // 联通沃邮箱
-   WOMAIL_URL_LIST: [
+   WOMAIL: [
      {
        url: 'https://nyan.mail.wo.cn/cn/sign/index/index?mobile=xxxxxx&userName=&openId=xxxxxx',
      },
@@ -418,7 +440,7 @@
    ],
 
 // 王者营地
-   WZYD_DATA_LIST: [
+   WZYD: [
      {
        data: 'areaId=xxxxxx&roleId=xxxxxx&gameId=xxxxxx&serverId=xxxxxx&gameOpenid=xxxxxx&userId=xxxxxx&appVersion=xxxxxx&cClientVersionName=xxxxxx&platid=xxxxxx&source=xxxxxx&algorithm=xxxxxx&version=xxxxxx×tamp=xxxxxx&appid=xxxxxx&openid=xxxxxx&sig=xxxxxx&encode=2&msdkEncodeParam=xxxxxx&cSystem=xxxxxx&h5Get=xxxxxx&msdkToken=&appOpenid=xxxxxx',
      },

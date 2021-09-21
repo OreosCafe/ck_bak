@@ -17,7 +17,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class PicacomicCheckIn:
+class Picacomic:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -98,7 +98,7 @@ class PicacomicCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("PICACOMIC", [])
-    res = PicacomicCheckIn(
+    res = Picacomic(
         check_items=_check_items).main()
     print(res)
     send("哔咔漫画", res)

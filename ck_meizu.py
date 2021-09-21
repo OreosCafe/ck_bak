@@ -12,7 +12,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class MeizuCheckIn:
+class Meizu:
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -109,6 +109,6 @@ class MeizuCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("MEIZU", [])
-    res = MeizuCheckIn(check_items=_check_items).main()
+    res = Meizu(check_items=_check_items).main()
     print(res)
     send("MEIZU 社区", res)

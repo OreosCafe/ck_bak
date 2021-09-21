@@ -10,7 +10,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class CSDNCheckIn:
+class CSDN:
     def __init__(self, check_items):
         self.check_items = check_items
         self.headers = {
@@ -62,6 +62,6 @@ class CSDNCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("CSDN", [])
-    res = CSDNCheckIn(check_items=_check_items).main()
+    res = CSDN(check_items=_check_items).main()
     print(res)
     send("CSDN", res)

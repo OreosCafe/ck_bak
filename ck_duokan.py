@@ -12,7 +12,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class DuoKanCheckIn:
+class DuoKan:
     def __init__(self, check_items):
         self.check_items = check_items
         self.gift_code_list = [
@@ -378,6 +378,6 @@ class DuoKanCheckIn:
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("DUOKAN", [])
-    res = DuoKanCheckIn(check_items=_check_items).main()
+    res = DuoKan(check_items=_check_items).main()
     print(res)
     send("多看阅读", res)

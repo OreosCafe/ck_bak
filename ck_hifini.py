@@ -10,7 +10,7 @@ from notify_mtr import send
 from utils import get_data
 
 
-class HiFiNiCheckIn(object):
+class HiFiNi(object):
     def __init__(self, check_items):
         self.check_items = check_items
 
@@ -43,6 +43,6 @@ class HiFiNiCheckIn(object):
 if __name__ == "__main__":
     data = get_data()
     _check_items = data.get("HIFINI", [])
-    res = HiFiNiCheckIn(check_items=_check_items).main()
+    res = HiFiNi(check_items=_check_items).main()
     print(res)
     send("HiFiNi", res)
