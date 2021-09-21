@@ -5,7 +5,7 @@ PATH="/usr/local/bin:/usr/bin:/bin"
 # 初始化变量
 V2P_FILE='/usr/local/app/script/Lists/task.list'
 QL_FILE='/ql/config/env.sh'
-IS_MACOS=$(uname | grep 'Darwin' | wc -l)
+IS_MACOS=$(uname | grep -c 'Darwin')
 IS_DISPLAY_CONTEXT=1
 
 # 检查环境：面板先于系统
@@ -16,19 +16,19 @@ check_env() {
         pannel="qinglong"
     elif [[ -f /etc/redhat-release ]]; then
         release="centos"
-    elif [ ${IS_MACOS} -eq 1 ]; then
+    elif [ "${IS_MACOS}" -eq 1 ]; then
         release="macos"
-    elif cat /etc/issue | grep -q -E -i "debian"; then
+    elif < /etc/issue grep -q -E -i "debian"; then
         release="debian"
-    elif cat /etc/issue | grep -q -E -i "ubuntu"; then
+    elif < /etc/issue grep -q -E -i "ubuntu"; then
         release="ubuntu"
-    elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
+    elif < /etc/issue grep -q -E -i "centos|red hat|redhat"; then
         release="centos"
-    elif cat /proc/version | grep -q -E -i "debian"; then
+    elif < /proc/version grep -q -E -i "debian"; then
         release="debian"
-    elif cat /proc/version | grep -q -E -i "ubuntu"; then
+    elif < /proc/version grep -q -E -i "ubuntu"; then
         release="ubuntu"
-    elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
+    elif < /proc/version grep -q -E -i "centos|red hat|redhat"; then
         release="centos"
     fi
 }
@@ -37,13 +37,13 @@ check_env() {
 source_config() {
     check_env
     if [ "${ENV_PATH}" ]; then
-        source ${ENV_PATH}
+        source "${ENV_PATH}"
     elif [ "${pannel}" == "elecv2p" ]; then
         source "/usr/local/app/script/Lists/.env"
     elif [ "${pannel}" == "qinglong" ]; then
         source "/ql/config/.env"
     else
-        source "$(dirname $0)/.env"
+        source "$(dirname "$0")/.env"
     fi
     # 是否显示上下文 默认是
     if [ "${DISPLAY_CONTEXT}" == "0" ]; then
@@ -62,7 +62,7 @@ check_root() {
 
 # 检查 jq 依赖
 check_jq_installed_status() {
-    if [ -z $(command -v jq) ]; then
+    if [ -z "$(command -v jq)" ]; then
         echo -e "jq 依赖没有安装，开始安装..."
         check_root
         if [ ${pannel} ]; then
@@ -74,7 +74,7 @@ check_jq_installed_status() {
         else
             apt-get update && apt-get install jq -y
         fi
-        if [ -z $(command -v jq) ]; then
+        if [ -z "$(command -v jq)" ]; then
             echo -e "jq 依赖安装失败，请检查！" && exit 1
         else
             echo -e "jq 依赖安装成功！"

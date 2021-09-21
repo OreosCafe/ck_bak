@@ -5,8 +5,8 @@ cron: 28 11 * * *
 new Env('SSPanel 签到');
 COMMENT
 
-source "$(dirname $0)/utils_env.sh"
-source "$(dirname $0)/notify.sh"
+source "$(dirname "$0")/utils_env.sh"
+source "$(dirname "$0")/notify.sh"
 source_config
 check_jq_installed_status
 
@@ -19,17 +19,17 @@ COOKIE_PATH="./.ss-autocheckin.cook"
 PUSH_TMP_PATH="./.ss-autocheckin.tmp"
 
 # 加载用户组配置
-users_array=($(echo ${SS_USERS} | tr ';' ' '))
+mapfile -t -d ';' users_array < <(echo "${SS_USERS}" | tr -d ' \r\n')
 
 # 签到
 ssp_autochenkin() {
     echo -e "${TITLE}"
-    if [ "${users_array}" ]; then
+    if [ "${users_array[*]}" ]; then
         user_count=1
-        for user in ${users_array[@]}; do
-            domain=$(echo ${user} | awk -F'----' '{print $1}')
-            username=$(echo ${user} | awk -F'----' '{print $2}')
-            passwd=$(echo ${user} | awk -F'----' '{print $3}')
+        for user in "${users_array[@]}"; do
+            domain=$(echo "${user}" | awk -F'----' '{print $1}')
+            username=$(echo "${user}" | awk -F'----' '{print $2}')
+            passwd=$(echo "${user}" | awk -F'----' '{print $3}')
 
             # 邮箱、域名脱敏处理
             username_prefix="${username%%@*}"
@@ -49,8 +49,8 @@ ssp_autochenkin() {
             login=$(curl "${domain}/auth/login" -d "email=${username}&passwd=${passwd}&code=" -c ${COOKIE_PATH} -L -k -s)
 
             start_time=$(date '+%Y-%m-%d %H:%M:%S')
-            login_code=$(echo ${login} | jq -r '.ret' 2>&1)
-            login_status=$(echo ${login} | jq -r '.msg' 2>&1)
+            login_code=$(echo "${login}" | jq -r '.ret' 2>&1)
+            # login_status=$(echo "${login}" | jq -r '.msg' 2>&1)
 
             login_log_text="\n用户 ${user_count}\n"
             login_log_text="${login_log_text}签到站点: ${domain_text}\n"
@@ -59,36 +59,36 @@ ssp_autochenkin() {
 
             if [ "${login_code}" == "1" ]; then
                 userinfo=$(curl -k -s -G -b ${COOKIE_PATH} "${domain}/getuserinfo")
-                user=$(echo ${userinfo} | tr '\r\n' ' ' | jq -r ".info.user" 2>&1)
+                user=$(echo "${userinfo}" | tr '\r\n' ' ' | jq -r ".info.user" 2>&1)
 
                 if [ "${user}" ]; then
                     # 用户等级
-                    clasx=$(echo ${user} | jq -r ".class" 2>&1)
+                    clasx=$(echo "${user}" | jq -r ".class" 2>&1)
                     # 等级过期时间
-                    class_expire=$(echo ${user} | jq -r ".class_expire" 2>&1)
+                    class_expire=$(echo "${user}" | jq -r ".class_expire" 2>&1)
                     # 账户过期时间
-                    expire_in=$(echo ${user} | jq -r ".expire_in" 2>&1)
+                    expire_in=$(echo "${user}" | jq -r ".expire_in" 2>&1)
                     # 上次签到时间
-                    last_check_in_time=$(echo ${user} | jq -r ".last_check_in_time" 2>&1)
+                    last_check_in_time=$(echo "${user}" | jq -r ".last_check_in_time" 2>&1)
                     # 用户余额
-                    money=$(echo ${user} | jq -r ".money" 2>&1)
+                    money=$(echo "${user}" | jq -r ".money" 2>&1)
                     # 用户限速
-                    node_speedlimit=$(echo ${user} | jq -r ".node_speedlimit" 2>&1)
+                    node_speedlimit=$(echo "${user}" | jq -r ".node_speedlimit" 2>&1)
                     # 总流量
-                    transfer_enable=$(echo ${user} | jq -r ".transfer_enable" 2>&1)
+                    transfer_enable=$(echo "${user}" | jq -r ".transfer_enable" 2>&1)
                     # 总共使用流量
-                    last_day_t=$(echo ${user} | jq -r ".last_day_t" 2>&1)
+                    last_day_t=$(echo "${user}" | jq -r ".last_day_t" 2>&1)
                     # 剩余流量
-                    transfer_used=$(expr ${transfer_enable} - ${last_day_t})
+                    transfer_used=$(("${transfer_enable}" - "${last_day_t}"))
                     # 转换 GB
-                    transfer_enable_text=$(echo ${transfer_enable} | awk '{ byte =$1 /1024/1024**2 ; print byte " GB" }')
-                    last_day_t_text=$(echo ${last_day_t} | awk '{ byte =$1 /1024/1024**2 ; print byte " GB" }')
-                    transfer_used_text=$(echo ${transfer_used} | awk '{ byte =$1 /1024/1024**2 ; print byte " GB" }')
+                    transfer_enable_text=$(echo "${transfer_enable}" | awk '{ byte =$1 /1024/1024**2 ; print byte " GB" }')
+                    last_day_t_text=$(echo "${last_day_t}" | awk '{ byte =$1 /1024/1024**2 ; print byte " GB" }')
+                    transfer_used_text=$(echo "${transfer_used}" | awk '{ byte =$1 /1024/1024**2 ; print byte " GB" }')
                     # 转换上次签到时间
-                    if [ ${IS_MACOS} -eq 0 ]; then
+                    if [ "${IS_MACOS}" -eq 0 ]; then
                         last_check_in_time_text=$(date -d "1970-01-01 UTC ${last_check_in_time} seconds" "+%F %T")
                     else
-                        last_check_in_time_text=$(date -r ${last_check_in_time} '+%Y-%m-%d %H:%M:%S')
+                        last_check_in_time_text=$(date -r "${last_check_in_time}" '+%Y-%m-%d %H:%M:%S')
                     fi
 
                     user_log_text="\n用户等级: VIP${clasx}\n"
@@ -105,8 +105,8 @@ ssp_autochenkin() {
                 fi
 
                 checkin=$(curl -k -s -d "" -b ${COOKIE_PATH} "${domain}/user/checkin")
-                chechin_code=$(echo ${checkin} | jq -r ".ret" 2>&1)
-                checkin_status=$(echo ${checkin} | jq -r ".msg" 2>&1)
+                # chechin_code=$(echo "${checkin}" | jq -r ".ret" 2>&1)
+                checkin_status=$(echo "${checkin}" | jq -r ".msg" 2>&1)
 
                 if [ "${checkin_status}" ]; then
                     checkin_log_text="签到状态: ${checkin_status}"
@@ -120,18 +120,18 @@ ssp_autochenkin() {
                 result_log_text="${login_log_text}签到状态: 登录失败, 请检查配置"
             fi
 
-            if [ ${IS_DISPLAY_CONTEXT} == 1 ]; then
-                echo -e ${result_log_text}
-            else 
+            if [ "${IS_DISPLAY_CONTEXT}" == 1 ]; then
+                echo -e "${result_log_text}"
+            else
                 echo -e "\nHidden the logs, please view notify messages."
             fi
 
             log_text="${log_text}\n${result_log_text}"
 
-            user_count=$(expr ${user_count} + 1)
+            user_count=$((user_count + 1))
         done
 
-        log_text="${log_text}\n\n免费使用自: https://github.com/isecret/sspanel-autocheckin\n适配青龙自: Oreo"
+        log_text="${log_text}\n\n免费使用自: isecret（已被删库）\n适配青龙自: Oreo"
 
         send_message
 
