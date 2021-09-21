@@ -93,7 +93,7 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 #### 4.2 另一种通知配置方式（当和 4.1 中值重复时，以 4.1 值为准）
 
-下载项目中的 [推送配置文件](https://github.com/Oreomeow/checkinpanel/blob/master/notify_config.json5) 到**配置文件夹**，按照上述说明修改配置文件中的值，你可以**自由地删除**该文件中某些不需要的值（注意语法）。
+下载项目中的 [推送配置文件](https://github.com/Oreomeow/checkinpanel/blob/master/notify.json5) 到**配置文件夹**，按照上述说明修改配置文件中的值，你可以**自由地删除**该文件中某些不需要的值（注意语法）。
 
 使用了配置文件后，你可以将配置文件放在持久化位置，不受脚本更新、重置容器的影响。
 
