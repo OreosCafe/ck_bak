@@ -261,12 +261,12 @@
 // 网易云音乐
    MUSIC163: [
      {
-       music163_phone: '18888xxxxxx',
-       music163_password: 'Sitoi',
+       phone: '18888xxxxxx',
+       password: 'Sitoi',
      },
 //     {
-//       music163_phone: '',
-//       music163_password: '',
+//       phone: '',
+//       password: '',
 //     },
    ],
 
