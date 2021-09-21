@@ -185,6 +185,16 @@
             "running": true
         },
         {
+            "name": "时光相册",
+            "type": "cron",
+            "time": "3 22 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_everphoto.py"
+            },
+            "running": true
+        },
+        {
             "name": "Fa米家",
             "type": "cron",
             "time": "30 14 * * *",
@@ -381,6 +391,16 @@
             "job": {
                 "type": "runjs",
                 "target": "checkin.js -env PYNAME=ck_tieba.py"
+            },
+            "running": true
+        },
+        {
+            "name": "联通营业厅",
+            "type": "cron",
+            "time": "18 16 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_unicom.py"
             },
             "running": true
         },

@@ -18,19 +18,19 @@
 
 ## 特别声明
 
-- 本仓库发布的脚本及其中涉及的任何解锁和解密分析脚本，仅用于测试和学习研究，禁止用于商业用途，不能保证其合法性，准确性，完整性和有效性，请根据情况自行判断。
+* 本仓库发布的脚本及其中涉及的任何解锁和解密分析脚本，仅用于测试和学习研究，禁止用于商业用途，不能保证其合法性，准确性，完整性和有效性，请根据情况自行判断。
 
-- 本项目内所有资源文件，禁止任何公众号、自媒体进行任何形式的转载、发布。
+* 本项目内所有资源文件，禁止任何公众号、自媒体进行任何形式的转载、发布。
 
-- 本人对任何脚本问题概不负责，包括但不限于由任何脚本错误导致的任何损失或损害。
+* 本人对任何脚本问题概不负责，包括但不限于由任何脚本错误导致的任何损失或损害。
 
-- 间接使用脚本的任何用户，包括但不限于建立 VPS 或在某些行为违反国家/地区法律或相关法规的情况下进行传播，本人对于由此引起的任何隐私泄漏或其他后果概不负责。
+* 间接使用脚本的任何用户，包括但不限于建立 VPS 或在某些行为违反国家/地区法律或相关法规的情况下进行传播，本人对于由此引起的任何隐私泄漏或其他后果概不负责。
 
-- 请勿将本仓库的任何内容用于商业或非法目的，否则后果自负。
+* 请勿将本仓库的任何内容用于商业或非法目的，否则后果自负。
 
-- 如果任何单位或个人认为该项目的脚本可能涉嫌侵犯其权利，则应及时通知并提供身份证明、所有权证明，我们将在收到认证文件后删除相关脚本。
+* 如果任何单位或个人认为该项目的脚本可能涉嫌侵犯其权利，则应及时通知并提供身份证明、所有权证明，我们将在收到认证文件后删除相关脚本。
 
-- 任何以任何方式查看此项目的人或直接或间接使用该项目的任何脚本的使用者都应仔细阅读此声明。本人保留随时更改或补充此免责声明的权利。一旦使用并复制了任何相关脚本或 Script 项目的规则，则视为您已接受此免责声明。
+* 任何以任何方式查看此项目的人或直接或间接使用该项目的任何脚本的使用者都应仔细阅读此声明。本人保留随时更改或补充此免责声明的权利。一旦使用并复制了任何相关脚本或 Script 项目的规则，则视为您已接受此免责声明。
 
 **您必须在下载后的24小时内从计算机或手机中完全删除以上内容**
 
@@ -44,7 +44,7 @@ TASK -> 添加订阅任务 -> 修改名称、更新方式、任务 -> 获取内�
 
 名称：签到项目
 
-同名任务更新方式：`替换`
+同名任务更新方式： `替换`
 
 任务：
 
@@ -60,9 +60,9 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹
 
-- OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json5` -> 开始上传
+* OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json5` -> 开始上传
 
-- elecV2P 3.4.6 已支持在线编辑，右键文件即可
+* elecV2P 3.4.6 已支持在线编辑，右键文件即可
 
 ### 4. 配置通知
 
@@ -71,25 +71,25 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 | 变量 / key | 描述 | 参考 / value |
 | --- | --- |  --- |
 | HITOKOTO | 一言（一句话） | True（启用）or False（不启用） |
-| BARK | bark 服务 | BARK 推送[使用](https://github.com/Sitoi/dailycheckin/issues/29)，填写 `BARK_URL` 即可，例如：`https://api.day.app/DxHcxxxxxRxxxxxxcm/`，此参数如果以 `http` 或者 `https` 开头则判定为自建 bark 服务 |
+| BARK | bark 服务 | BARK 推送[使用](https://github.com/Sitoi/dailycheckin/issues/29)，填写 `BARK_URL` 即可，例如： `https://api.day.app/DxHcxxxxxRxxxxxxcm/` ，此参数如果以 `http` 或者 `https` 开头则判定为自建 bark 服务 |
 | PUSH_KEY | Server 酱 | server 酱推送[官方文档](https://sc.ftqq.com/3.version)，填写 `SCKEY` 代码即可|
 | TG_BOT_TOKEN | tg 机器人 | 申请 [@BotFather](https://t.me/BotFather) 的 Token，如 `10xxx4:AAFcqxxxxgER5uw` |
 | TG_USER_ID | tg 机器人 | 给 [@getidsbot](https://t.me/getidsbot) 发送 /start 获取到的纯数字 ID，如 `1434078534` |
 | TG_API_HOST | * tg 代理 api | Telegram api 自建的反向代理地址 例子：反向代理地址 `http://aaa.bbb.ccc` 则填写 aaa.bbb.ccc [简略搭建教程](https://shimo.im/docs/JD38CJDQtYy3yTd8/read) |
-| TG_PROXY_IP | * tg 机器人代理 IP 地址 | 代理类型为 http，比如您代理是 `http://127.0.0.1:1080`，则填写 `127.0.0.1`，有密码例子: `username:password@127.0.0.1` |
-| TG_PROXY_PORT | * tg 机器人代理端口 | 代理端口号，代理类型为 http，比如您代理是 `http://127.0.0.1:1080`，则填写 `1080` |
+| TG_PROXY_IP | * tg 机器人代理 IP 地址 | 代理类型为 http，比如您代理是 `http://127.0.0.1:1080` ，则填写 `127.0.0.1` ，有密码例子: `username:password@127.0.0.1` |
+| TG_PROXY_PORT | * tg 机器人代理端口 | 代理端口号，代理类型为 http，比如您代理是 `http://127.0.0.1:1080` ，则填写 `1080` |
 | DD_BOT_TOKEN | 钉钉机器人 | 钉钉推送[官方文档](https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq)，只需 `https://oapi.dingtalk.com/robot/send?access_token=XXX` 等于符号后面的 `XXX` |
-| DD_BOT_SECRET | 钉钉机器人 | 钉钉推送[官方文档](https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq)密钥，机器人安全设置页面，加签一栏下面显示的 `SEC` 开头的字符串, 注:填写了 `DD_BOT_TOKEN` 和 `DD_BOT_SECRET`，钉钉机器人安全设置只需勾选加签即可，其他选项不要勾选 |
-| QMSG_KEY | qmsg 酱 | qmsg 酱推送[官方文档](https://qmsg.zendee.cn/index.html) ,填写 `KEY` 代码即可 |
-| QMSG_TYPE | qmsg 酱 | qmsg 酱推送[官方文档](https://qmsg.zendee.cn/index.html)，如果需要推送到群填写 `group`，其他的都推送到 QQ |
+| DD_BOT_SECRET | 钉钉机器人 | 钉钉推送[官方文档](https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq)密钥，机器人安全设置页面，加签一栏下面显示的 `SEC` 开头的字符串，注：填写了 `DD_BOT_TOKEN` 和 `DD_BOT_SECRET` ，钉钉机器人安全设置只需勾选加签即可，其他选项不要勾选 |
+| QMSG_KEY | qmsg 酱 | qmsg 酱推送[官方文档](https://qmsg.zendee.cn/index.html)，填写 `KEY` 代码即可 |
+| QMSG_TYPE | qmsg 酱 | qmsg 酱推送[官方文档](https://qmsg.zendee.cn/index.html)，如果需要推送到群填写 `group` ，其他的都推送到 QQ |
 | QYWX_AM | 企业微信应用 | 参考 http://note.youdao.com/s/HMiudGkb |
-| PUSH_PLUS_TOKEN | pushplus | 用户令牌，可直接加到请求地址后，如：`http://www.pushplus.plus/send/{token}` [官方文档](https://www.pushplus.plus/doc/) |
-| GOBOT_URL | go-cqhttp | 例如：推送到个人QQ：`http://127.0.0.1/send_private_msg` 群：`http://127.0.0.1/send_group_msg` |
+| PUSH_PLUS_TOKEN | pushplus | 用户令牌，可直接加到请求地址后，如： `http://www.pushplus.plus/send/{token}` [官方文档](https://www.pushplus.plus/doc/) |
+| GOBOT_URL | go-cqhttp | 例如：推送到个人QQ： `http://127.0.0.1/send_private_msg` 群： `http://127.0.0.1/send_group_msg` |
 | GOBOT_TOKEN | * go-cqhttp 的 access_token | go-cqhttp 文件设置的访问密钥 |
 | GOBOT_QQ | go-cqhttp 的推送群或者用户 | `GOBOT_URL` 设置 `/send_private_msg` 则需要填入 `user_id=个人QQ` 相反如果是 `/send_group_msg` 则需要填入 `group_id=QQ群` |
 | FSKEY | 飞书 | 飞书[官方文档](https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN)，只需 `https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxx` 的 `xxxxxx` 部分 |
 
-*\*表示选填*
+*\* 表示选填*
 
 #### 4.2 另一种通知配置方式（当和 4.1 中值重复时，以 4.1 值为准）
 
@@ -97,13 +97,13 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 使用了配置文件后，你可以将配置文件放在持久化位置，不受脚本更新、重置容器的影响。
 
-如果想自定义配置文件的位置和文件名，请设置通知环境变量 `NOTIFY_CONFIG_PATH`， 例如 `/etc/notify/config.json5`。建议保持`json5` 的后缀，防止编辑器的误解。
+如果想自定义配置文件的位置和文件名，请设置通知环境变量 `NOTIFY_CONFIG_PATH` ， 例如 `/etc/notify/config.json5` 。建议保持 `json5` 的后缀，防止编辑器的误解。
 
 关于 json5 的语法参考：
 
-- [官方说明](https://json5.org/)
-- [中文网友博客说明](https://zhuanlan.zhihu.com/p/108119490)
-- [json5语法验证](https://verytoolz.com/json5-validator.html)
+* [官方说明](https://json5.org/)
+* [中文网友博客说明](https://zhuanlan.zhihu.com/p/108119490)
+* [json5语法验证](https://verytoolz.com/json5-validator.html)
 
 #### 4.3 通知说明
 
@@ -117,20 +117,21 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 ### 1. ssh 进入容器
 
-``` sh
+```sh
 docker exec -it qinglong bash
 ```
+
 修改 `qinglong` 为你的青龙容器名称
 
 ### 2. 安装依赖
 
-``` sh
+```sh
 apk add gcc libffi-dev musl-dev openssl-dev python3-dev && pip3 install cryptography~=3.2.1 json5 requests rsa
 ```
 
 **依赖持久化配置**
 
-``` sh
+```sh
 requirement_name="cryptography~=3.2.1 json5 requests rsa"
 
 install_requirements() {
@@ -170,7 +171,7 @@ ql repo https://github.com/Oreomeow/checkinpanel.git "api_|ck_" "^checkin" "^not
 
 **解决 Shell 脚本无法拉取问题**
 
-``` sh
+```sh
 ## ql repo命令拉取脚本时需要拉取的文件后缀，直接写文件后缀名即可
 RepoFileExtensions="js py sh ts"
 ```
@@ -179,7 +180,7 @@ RepoFileExtensions="js py sh ts"
 
 ### 4. 拷贝文件
 
-``` sh
+```sh
 cp /ql/repo/Oreomeow_checkinpanel_master/check.sample.json5 /ql/config/check.json5
 ```
 
@@ -195,10 +196,10 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 特别的：
 
-- **如果你已经配置了 `config.sh`， 那么你可以不需要做任何改变。**
-- 如果使用环境变量，请在 qinglong 面板中配置。
-- 如果使用配置文件，请修改 `/ql/config/notify.json5` 文件。
-- 当然你也可以在 qinglong 面板中配置 `NOTIFY_CONFIG_PATH` 环境变量为配置文件指定其他位置。
+* **如果你已经配置了 `config.sh`， 那么你可以不需要做任何改变。**
+* 如果使用环境变量，请在 qinglong 面板中配置。
+* 如果使用配置文件，请修改 `/ql/config/notify.json5` 文件。
+* 当然你也可以在 qinglong 面板中配置 `NOTIFY_CONFIG_PATH` 环境变量为配置文件指定其他位置。
 
 ### 6. 抓包配置
 
@@ -210,13 +211,13 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 ### 1. **添加了葫芦侠的签到配置**
 
-​	参数说明：`HLX.username`：用户名 `HLX.password`：密码的 MD5 32 位小写加密[生成](https://md5jiami.bmcx.com/)
+​	参数说明： `HLX.username` ：用户名 `HLX.password` ：密码的 MD5 32 位小写加密[生成](https://md5jiami.bmcx.com/)
 
 ### 2. **添加了网易云游戏的签到配置**
 
 [官网](https://cg.163.com/#/mobile)
 
-参数说明：`game163.authorization`
+参数说明： `GAME163.authorization`
 
 登录后抓取签到请求（一般请求的请求头也有这个字段）
 
@@ -224,16 +225,16 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 ### 3. **Shell 脚本配置**
 
-- 目前 Shell 脚本只有一个 SSPanel 签到，如需使用请参考 `env.sample` 配置 `.env` 后放入 `script/Lists` 或 `/ql/config` 文件夹
-- 支持自定义配置文件路径
+* 目前 Shell 脚本只有一个 SSPanel 签到，如需使用请参考 `env.sample` 配置 `.env` 后放入 `script/Lists` 或 `/ql/config` 文件夹
+* 支持自定义配置文件路径
     - 环境变量 / store KEY 名称：`ENV_PATH`
     - 参考值 / VALUE：`/usr/local/app/script/.env`
 
 ### 4. **添加了欢太商城的签到配置**
 
-- [欢太商城 HttpCanary 抓包教程](https://github.com/hwkxk/HeytapTask/wiki/%E6%AC%A2%E5%A4%AA%E5%95%86%E5%9F%8EHttpCanary%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B)
-- 部分域名屏蔽境外 IP 访问，所以本项目不适于在 非中国 IP 代理网络下 / Github Actions / 境外 VPS 上运行!
-- 从未在欢太商城做过任务，请先手动进入任务中心完成一下任务再使用，否则可能无法获取到任务列表数据导致出错！@YYplus
+* [欢太商城 HttpCanary 抓包教程](https://github.com/hwkxk/HeytapTask/wiki/%E6%AC%A2%E5%A4%AA%E5%95%86%E5%9F%8EHttpCanary%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B)
+* 部分域名屏蔽境外 IP 访问，所以本项目不适于在 非中国 IP 代理网络下 / Github Actions / 境外 VPS 上运行!
+* 从未在欢太商城做过任务，请先手动进入任务中心完成一下任务再使用，否则可能无法获取到任务列表数据导致出错！@YYplus
 
 ### 5. **添加了时光相册的签到配置**
 
@@ -251,26 +252,26 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 5. 项目完成情况
 
-- [x] 多账号补全
-- [x] 配置文件由严格的 `.json` 向支持注释的 `.json5` 过渡
-- [x] 更多环境适配
-- [x] 配置文件支持自定义路径
-- [x] 通知多线程
-- [x] 通知输出优化
-- [x] 通知方式增加，如飞书
-- [x] Shell 消息推送、环境检查单列
-- [ ] cron 随机
-- [ ] elecV2P 任务列表自动更新
-- [ ] 任务多合一执行
+* [x] 多账号补全
+* [x] 配置文件由严格的 `.json` 向支持注释的 `.json5` 过渡
+* [x] 更多环境适配
+* [x] 配置文件支持自定义路径
+* [x] 通知多线程
+* [x] 通知输出优化
+* [x] 通知方式增加，如飞书
+* [x] Shell 消息推送、环境检查单列
+* [ ] cron 随机
+* [ ] elecV2P 任务列表自动更新
+* [ ] 任务多合一执行
 
 ## 计划说明
 
 | 状态 | \*语言 | \*备注 | 名称 |
 | --- | --- | --- | --- |
-- [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | api | LeetCode 每日一题 | 每日一句 | 天气预报
-- [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | AcFun | 百度搜索资源平台 | Bilibili | 天翼云盘 | CSDN | 多看阅读 | 恩山论坛 | Fa米家 | 网易云游戏 | 葫芦侠 | 爱奇艺 | 全民K歌 | MEIZU 社区 | 芒果 TV | 小米运动 | 网易云音乐 | 一加手机社区官方论坛 | 哔咔漫画 | 吾爱破解 | 什么值得买 | 百度贴吧 | V2EX | 腾讯视频 | 微博 | 联通沃邮箱 | 哔咔网单 | 王者营地 | 有道云笔记 | 智友邦
-- [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到 | 欢太商城 | NGA | 掘金 | GLaDOS | HiFiNi | 时光相册 | 联通营业厅
-- [x] 𝑺𝒉𝒆𝒍𝒍 | 多账号 | SSPanel 签到
+* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | api | LeetCode 每日一题 | 每日一句 | 天气预报
+* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | AcFun | 百度搜索资源平台 | Bilibili | 天翼云盘 | CSDN | 多看阅读 | 恩山论坛 | Fa米家 | 网易云游戏 | 葫芦侠 | 爱奇艺 | 全民K歌 | MEIZU 社区 | 芒果 TV | 小米运动 | 网易云音乐 | 一加手机社区官方论坛 | 哔咔漫画 | 吾爱破解 | 什么值得买 | 百度贴吧 | V2EX | 腾讯视频 | 微博 | 联通沃邮箱 | 哔咔网单 | 王者营地 | 有道云笔记 | 智友邦
+* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 | 多账号 | 机场签到 | 欢太商城 | NGA | 掘金 | GLaDOS | HiFiNi | 时光相册 | 联通营业厅
+* [x] 𝑺𝒉𝒆𝒍𝒍 | 多账号 | SSPanel 签到
 
 ### 测试情况
 
