@@ -220,7 +220,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 登录后抓取签到请求（一般请求的请求头也有这个字段）
 
-[![hLvtfO.md.png](https://z3.ax1x.com/2021/09/09/hLvtfO.md.png)](https://imgtu.com/i/hLvtfO)
+[![hLvtfO.png](https://z3.ax1x.com/2021/09/09/hLvtfO.png)](https://imgtu.com/i/hLvtfO)
 
 ### 3. **Shell 脚本配置**
 
@@ -237,7 +237,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 
 ### 5. **添加了时光相册的签到配置**
 
-[![4ty6eg.md.png](https://z3.ax1x.com/2021/09/21/4ty6eg.md.png)](https://imgtu.com/i/4ty6eg)
+[![4tWaFg.png](https://z3.ax1x.com/2021/09/22/4tWaFg.png)](https://imgtu.com/i/4tWaFg)
 
 ## 其他说明
 
