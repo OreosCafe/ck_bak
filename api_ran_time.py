@@ -23,7 +23,10 @@ def change_db():
             if i.find("Oreomeow_checkinpanel_master") != -1:
                 record = json.loads(i)
                 if record.get("isDisabled") == 0:
-                    record["schedule"] = change_time(record["schedule"], first)
+                    if i.find("motto") != -1 or i.find("leetcode") != -1 or i.find("weather") != -1:
+                        record["schedule"] = change_time(record["schedule"], True)
+                    else:
+                        record["schedule"] = change_time(record["schedule"], first)
                 if first:
                     first = False
                 lines.append(json.dumps(record, ensure_ascii=False) + "\n")
@@ -40,8 +43,8 @@ def change_db():
 def change_time(time_str: str, first: bool):
     words = re.sub("\\s+", " ", time_str).split()
     if first:
-        words[0] = str(random.randrange(60))
-        words[1] = "9"
+        words[0] = str(random.randrange(0, 60, step=5))
+        words[1] = str(random.randrange(8, 9))
     else:
         words[0] = str(random.randrange(60))
         words[1] = str(random.randrange(22))
